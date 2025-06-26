@@ -2,9 +2,9 @@ const UsersModel = require("../model/users.model");
 const UsersErrors = require("../factories/errors/users");
 const UsersResponses = require("../factories/responses/users");
 const UsersService = require("../services/users.service");
-const { hashPassword } = require("../utils/passwordUtils");
 const GeneralServices = require("../services/general.service");
 const PasswordUtils = require("../utils/passwordUtils");
+const { hashPassword } = require("../utils/passwordUtils");
 const { generateToken } = require("../utils/jwtUtils");
 
 const UsersController = {
