@@ -39,3 +39,11 @@ module.exports.validateLoginRequest = ({ data: user }) => {
 
 	return validate(schema, user);
 };
+
+module.exports.validateForgotPasswordRequest = ({ data: user }) => {
+	const schema = Yup.object().shape({
+		email: Yup.string().email().required("Email is required"),
+	});
+
+	return validate(schema, user);
+};
