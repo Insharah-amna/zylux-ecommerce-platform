@@ -6,6 +6,15 @@ const UsersResponses = {
 			user,
 		});
 	},
+
+	userLoggedInSuccessfully: ({ res, user, loginToken }) => {
+		return res.status(200).json({
+			statusCode: 200,
+			message: "User Logged in Successfully",
+			user,
+			loginToken,
+		});
+	},
 };
 
 module.exports = UsersResponses;
