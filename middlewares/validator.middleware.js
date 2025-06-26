@@ -14,7 +14,7 @@ module.exports =
 			error,
 		} = await asyncTryCatch(() => validateFunction({ data: source, context }));
 
-		if (!success) return res.status(500).send(error);
+		if (!success) return GeneralErrors.internalServerError({ res });
 
 		if (validationResult?.errors)
 			return GeneralErrors.badRequestError({
