@@ -5,11 +5,11 @@ const UsersService = require("../services/users.service");
 const GeneralServices = require("../services/general.service");
 const PasswordUtils = require("../utils/passwordUtils");
 const { hashPassword } = require("../utils/passwordUtils");
-const { generateToken } = require("../utils/jwtUtils");
-const { sendEmail } = require("../utils/email/send");
+const { generateToken, verifyToken } = require("../utils/jwtUtils");
 const {
 	sendResetPasswordLink,
 } = require("../utils/email/processes/sendResetPasswordLink");
+const { getDateTimeInMillis } = require("../utils/datesUtils");
 
 const UsersController = {
 	signupUser: async (req, res) => {
@@ -81,6 +81,37 @@ const UsersController = {
 		await sendResetPasswordLink({ user: existedUser });
 
 		return UsersResponses.emailSentSuccessfully({ res });
+	},
+
+	resetPassword: async (req, res) => {
+		const { token } = req.params;
+		const data = req.body;
+
+		const { decodedData, error: decodedError } = verifyToken({ token });
+
+		if (decodedError || !decodedData) return tokenVerificationErr({ res });
+
+		const currentDateTime = getDateTimeInMillis();
+
+		if (decodedData.exp > currentDateTime)
+			return UsersErrors.tokenVerificationErr({ res });
+
+		const hashedPassword = await hashPassword({ password: data.password });
+
+		data.password = hashedPassword;
+
+		const { updatedDoc: updatedUser } = await GeneralServices.findByIdAndUpdate(
+			{
+				model: UsersModel,
+				data,
+				id: decodedData._id,
+			}
+		);
+
+		let user = updatedUser.toObject();
+		user.password = undefined;
+
+		return UsersResponses.passwordResetSuccessfully({ res, user });
 	},
 };
 

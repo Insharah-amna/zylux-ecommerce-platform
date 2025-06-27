@@ -10,6 +10,14 @@ const jwtUtils = {
 
 		return { error, token: response };
 	},
+
+	verifyToken: ({ token }) => {
+		const { error, response } = tryCatch(() =>
+			jwtToken.verify(token, JWT_TOKEN_SECRET)
+		);
+
+		return { error, decodedData: response };
+	},
 };
 
 module.exports = jwtUtils;

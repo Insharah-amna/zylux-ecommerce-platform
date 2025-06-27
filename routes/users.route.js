@@ -1,12 +1,14 @@
 const router = require("express").Router();
 const { UsersController } = require("../controllers");
 const validatorMiddleware = require("../middlewares/validator.middleware");
+const catchAsync = require("../utils/asyncCatchUtils");
 const {
 	validateCreateUserRequest,
 	validateLoginRequest,
 	validateForgotPasswordRequest,
+	validateResetPasswordRequest,
+	validateTokenParamsRequest,
 } = require("../schemas/userSchema");
-const catchAsync = require("../utils/asyncCatchUtils");
 
 router.post(
 	"/signup",
@@ -14,16 +16,26 @@ router.post(
 	catchAsync(UsersController.signupUser)
 );
 
-router.get(
+router.post(
 	"/login",
 	validatorMiddleware({ validateFunction: validateLoginRequest }),
 	catchAsync(UsersController.loginUser)
 );
 
-router.get(
+router.post(
 	"/forgot-password",
 	validatorMiddleware({ validateFunction: validateForgotPasswordRequest }),
 	catchAsync(UsersController.forgotPassword)
+);
+
+router.patch(
+	"/reset-password/:token",
+	validatorMiddleware({
+		validateFunction: validateTokenParamsRequest,
+		reqProperty: "params",
+	}),
+	validatorMiddleware({ validateFunction: validateResetPasswordRequest }),
+	catchAsync(UsersController.resetPassword)
 );
 
 module.exports = router;

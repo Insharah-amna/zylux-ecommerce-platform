@@ -21,6 +21,19 @@ const GeneralServices = {
 
 		return { success, error, doc };
 	},
+
+	findByIdAndUpdate: async ({ model, data, id }) => {
+		const {
+			success,
+			error,
+			response: updatedDoc,
+		} = await asyncTryCatch(
+			async () =>
+				await MongoFactoryService.findByIdAndUpdate({ model, data, id })
+		);
+
+		return { success, error, updatedDoc };
+	},
 };
 
 module.exports = GeneralServices;
