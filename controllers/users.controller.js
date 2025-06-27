@@ -9,7 +9,7 @@ const { generateToken, verifyToken } = require("../utils/jwtUtils");
 const {
 	sendResetPasswordLink,
 } = require("../utils/email/processes/sendResetPasswordLink");
-const { DateTime } = require("luxon");
+const { getDateTimeInMillis } = require("../utils/datesUtils");
 
 const UsersController = {
 	signupUser: async (req, res) => {
@@ -91,11 +91,9 @@ const UsersController = {
 
 		if (decodedError || !decodedData) return tokenVerificationErr({ res });
 
-		const now = DateTime.local();
+		const currentDateTime = getDateTimeInMillis();
 
-		const milliseconds = now.toMillis();
-
-		if (decodedData.exp > milliseconds)
+		if (decodedData.exp > currentDateTime)
 			return UsersErrors.tokenVerificationErr({ res });
 
 		const hashedPassword = await hashPassword({ password: data.password });

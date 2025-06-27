@@ -65,10 +65,10 @@ module.exports.validateResetPasswordRequest = ({ data: user }) => {
 	return validate(schema, user);
 };
 
-module.exports.validateTokenParamsRequest = ({ data: user }) => {
+module.exports.validateTokenParamsRequest = ({ data: token }) => {
 	const schema = Yup.object().shape({
-		token: Yup.object().string(),
+		token: Yup.string().required("Token is missing"),
 	});
 
-	return validate(schema, user);
+	return validate(schema, token);
 };
