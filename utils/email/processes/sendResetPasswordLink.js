@@ -3,10 +3,18 @@ const { generateToken } = require("../../jwtUtils");
 const { sendEmail } = require("../send");
 
 exports.sendResetPasswordLink = async ({ user }) => {
-	const { token } = generateToken({ payLoad: user, expiresIn: "1h" });
+	const tokenPayload = {
+		_id: user._id,
+		firstName: user.firstName,
+		lastName: user.lastName,
+		email: user.email,
+	};
+	const { token } = generateToken({
+		payLoad: tokenPayload,
+		expiresIn: "1h",
+	});
 
 	const resetUrl = generateFrontendUrl({ path: "auth/reset-password", token });
-	console.log(resetUrl);
 
 	const subject = "Reset Password";
 

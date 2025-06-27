@@ -26,6 +26,13 @@ const UsersErrors = {
 			message: "User Not Found",
 		});
 	},
+
+	tokenVerificationErr: ({ res }) => {
+		return res.status(401).json({
+			statusCode: 401,
+			message: "Token is invalid or has been expired",
+		});
+	},
 };
 
 module.exports = UsersErrors;

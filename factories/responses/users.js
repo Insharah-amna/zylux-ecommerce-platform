@@ -22,6 +22,14 @@ const UsersResponses = {
 			message: "Reset password link has been sent successfully",
 		});
 	},
+
+	passwordResetSuccessfully: ({ res, updatedUser }) => {
+		return res.status(200).json({
+			statusCode: 200,
+			message: "Password has been reset successfully",
+			updatedUser,
+		});
+	},
 };
 
 module.exports = UsersResponses;

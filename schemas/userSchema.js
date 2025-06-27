@@ -47,3 +47,28 @@ module.exports.validateForgotPasswordRequest = ({ data: user }) => {
 
 	return validate(schema, user);
 };
+
+module.exports.validateResetPasswordRequest = ({ data: user }) => {
+	const schema = Yup.object().shape({
+		password: Yup.string()
+			.required("Password is required")
+			.min(
+				8,
+				"Must contain at least 8 characters and at least 1 uppercase letter"
+			)
+			.matches(
+				/[A-Z]/,
+				"Must contain at least 8 characters and at least 1 uppercase letter"
+			),
+	});
+
+	return validate(schema, user);
+};
+
+module.exports.validateTokenParamsRequest = ({ data: user }) => {
+	const schema = Yup.object().shape({
+		token: Yup.object().string(),
+	});
+
+	return validate(schema, user);
+};
