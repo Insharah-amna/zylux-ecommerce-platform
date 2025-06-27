@@ -19,6 +19,13 @@ const UsersErrors = {
 			message: "Wrong Credentials",
 		});
 	},
+
+	userNotFoundErr: ({ res }) => {
+		return res.status(404).json({
+			statusCode: 404,
+			message: "User Not Found",
+		});
+	},
 };
 
 module.exports = UsersErrors;

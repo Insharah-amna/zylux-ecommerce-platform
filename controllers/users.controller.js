@@ -6,6 +6,10 @@ const GeneralServices = require("../services/general.service");
 const PasswordUtils = require("../utils/passwordUtils");
 const { hashPassword } = require("../utils/passwordUtils");
 const { generateToken } = require("../utils/jwtUtils");
+const { sendEmail } = require("../utils/email/send");
+const {
+	sendResetPasswordLink,
+} = require("../utils/email/processes/sendResetPasswordLink");
 
 const UsersController = {
 	signupUser: async (req, res) => {
@@ -61,6 +65,22 @@ const UsersController = {
 			res,
 			user: { ...user, loginToken: token },
 		});
+	},
+
+	forgotPassword: async (req, res) => {
+		const data = req.body;
+
+		const { user: existedUser } = await UsersService.findUserByEmail({
+			email: data.email,
+		});
+
+		if (!existedUser) return UsersErrors.userNotFoundErr({ res });
+
+		existedUser.password = undefined;
+
+		await sendResetPasswordLink({ user: existedUser });
+
+		return UsersResponses.emailSentSuccessfully({ res });
 	},
 };
 
