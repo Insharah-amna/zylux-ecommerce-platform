@@ -30,7 +30,14 @@ const UsersErrors = {
 	tokenVerificationErr: ({ res }) => {
 		return res.status(401).json({
 			statusCode: 401,
-			message: "Token is invalid or has been expired",
+			message: "Token is invalid or expired",
+		});
+	},
+
+	unAuthorizedUserErr: ({ res }) => {
+		return res.status(401).json({
+			statusCode: 401,
+			message: "UnAuthorization Error",
 		});
 	},
 };

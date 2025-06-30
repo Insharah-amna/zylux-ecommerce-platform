@@ -10,6 +10,14 @@ const GeneralServices = {
 		return { success, error, response };
 	},
 
+	findById: async ({ model, id }) => {
+		const { success, error, response } = await asyncTryCatch(
+			async () => await MongoFactoryService.findById({ model, id })
+		);
+
+		return { success, error, response };
+	},
+
 	create: async ({ model, data }) => {
 		const {
 			success,

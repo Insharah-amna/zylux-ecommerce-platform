@@ -113,6 +113,12 @@ const UsersController = {
 
 		return UsersResponses.passwordResetSuccessfully({ res, user });
 	},
+
+	getProfile: async (req, res) => {
+		const user = req.user;
+
+		return UsersResponses.loggedInProfileFetchedSuccessfully({ res, user });
+	},
 };
 
 module.exports = UsersController;
