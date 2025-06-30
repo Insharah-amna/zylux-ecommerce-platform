@@ -40,6 +40,13 @@ const UsersErrors = {
 			message: "UnAuthorization Error",
 		});
 	},
+
+	verificationFailedErr: ({ res }) => {
+		return res.status(401).json({
+			statusCode: 401,
+			message: "User Verification Failed",
+		});
+	},
 };
 
 module.exports = UsersErrors;

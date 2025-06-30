@@ -2,7 +2,6 @@ const UsersErrors = require("../factories/errors/users");
 const UsersModel = require("../model/users.model");
 const GeneralServices = require("../services/general.service");
 const jwtUtils = require("../utils/jwtUtils");
-const { tryCatch } = require("../utils/tryCatchUtils");
 
 module.exports = async (req, res, next) => {
 	const authHeader = req.headers["authorization"];

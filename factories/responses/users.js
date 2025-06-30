@@ -38,6 +38,13 @@ const UsersResponses = {
 			user,
 		});
 	},
+
+	userVerifiedSuccessfully: ({ res }) => {
+		return res.status(200).json({
+			statusCode: 200,
+			message: "User has been verified successfully",
+		});
+	},
 };
 
 module.exports = UsersResponses;
