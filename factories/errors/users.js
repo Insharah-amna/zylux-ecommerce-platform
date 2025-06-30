@@ -47,6 +47,13 @@ const UsersErrors = {
 			message: "User Verification Failed",
 		});
 	},
+
+	unVerifiedUserErr: ({ res }) => {
+		return res.status(403).json({
+			statusCode: 403,
+			message: "User is not verified",
+		});
+	},
 };
 
 module.exports = UsersErrors;

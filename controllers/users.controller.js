@@ -18,8 +18,6 @@ const UsersController = {
 	signupUser: async (req, res) => {
 		const data = req.body;
 
-		await sendEmailVerificationLink({ userEmail: data.email });
-
 		const { user: existedUser } = await UsersService.findUserByEmail({
 			email: data.email,
 		});
@@ -39,6 +37,8 @@ const UsersController = {
 
 		if (error) return UsersErrors.userCreationErr({ res });
 
+		await sendEmailVerificationLink({ userEmail: data.email });
+
 		return UsersResponses.userCreatedSuccessfully({
 			res,
 			user: { ...user, password: undefined },
@@ -48,7 +48,7 @@ const UsersController = {
 	loginUser: async (req, res) => {
 		const data = req.body;
 
-		if (!data.isUserVerified) return UsersErrors.unAuthorizedUserErr({ res });
+		if (!data.isUserVerified) return UsersErrors.unVerifiedUserErr({ res });
 
 		const { user: existedUser } = await UsersService.findUserByEmail({
 			email: data.email,
