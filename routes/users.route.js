@@ -1,6 +1,7 @@
 const router = require("express").Router();
 const { UsersController } = require("../controllers");
 const validatorMiddleware = require("../middlewares/validator.middleware");
+const authMiddleware = require("../middlewares/auth.middleware");
 const catchAsync = require("../utils/asyncCatchUtils");
 const {
 	validateCreateUserRequest,
@@ -9,6 +10,8 @@ const {
 	validateResetPasswordRequest,
 	validateTokenParamsRequest,
 } = require("../schemas/userSchema");
+
+router.get("/me", authMiddleware, catchAsync(UsersController.getProfile));
 
 router.post(
 	"/signup",

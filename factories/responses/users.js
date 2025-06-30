@@ -30,6 +30,14 @@ const UsersResponses = {
 			updatedUser,
 		});
 	},
+
+	loggedInProfileFetchedSuccessfully: ({ res, user }) => {
+		return res.status(200).json({
+			statusCode: 200,
+			message: "Logged in profile fetched successfully",
+			user,
+		});
+	},
 };
 
 module.exports = UsersResponses;
