@@ -41,4 +41,13 @@ router.patch(
 	catchAsync(UsersController.resetPassword)
 );
 
+router.get(
+	"/verify-email/:token",
+	validatorMiddleware({
+		validateFunction: validateTokenParamsRequest,
+		reqProperty: "params",
+	}),
+	catchAsync(UsersController.verifyEmail)
+);
+
 module.exports = router;

@@ -6,10 +6,13 @@ const GeneralServices = require("../services/general.service");
 const PasswordUtils = require("../utils/passwordUtils");
 const { hashPassword } = require("../utils/passwordUtils");
 const { generateToken, verifyToken } = require("../utils/jwtUtils");
+const { getDateTimeInMillis } = require("../utils/datesUtils");
+const {
+	sendEmailVerificationLink,
+} = require("../utils/email/processes/sendEmailVerificationLink");
 const {
 	sendResetPasswordLink,
 } = require("../utils/email/processes/sendResetPasswordLink");
-const { getDateTimeInMillis } = require("../utils/datesUtils");
 
 const UsersController = {
 	signupUser: async (req, res) => {
@@ -25,7 +28,7 @@ const UsersController = {
 
 		data.password = hashedPassword;
 
-		const { doc: newUser, error } = await GeneralServices.create({
+		const { doc: newUser } = await GeneralServices.create({
 			model: UsersModel,
 			data,
 		});
@@ -33,6 +36,8 @@ const UsersController = {
 		let user = newUser.toObject();
 
 		if (error) return UsersErrors.userCreationErr({ res });
+
+		await sendEmailVerificationLink({ userEmail: data.email });
 
 		return UsersResponses.userCreatedSuccessfully({
 			res,
@@ -42,6 +47,8 @@ const UsersController = {
 
 	loginUser: async (req, res) => {
 		const data = req.body;
+
+		if (!data.isUserVerified) return UsersErrors.unVerifiedUserErr({ res });
 
 		const { user: existedUser } = await UsersService.findUserByEmail({
 			email: data.email,
@@ -118,6 +125,35 @@ const UsersController = {
 		const user = req.user;
 
 		return UsersResponses.loggedInProfileFetchedSuccessfully({ res, user });
+	},
+
+	verifyEmail: async (req, res) => {
+		const { token } = req.params;
+
+		const { decodedData, error: decodedError } = verifyToken({ token });
+
+		if (decodedError || !decodedData)
+			return UsersErrors.tokenVerificationErr({ res });
+
+		const currentDateTime = getDateTimeInMillis();
+
+		if (decodedData.exp > currentDateTime)
+			return UsersErrors.tokenVerificationErr({ res });
+
+		const { user: existedUser } = await UsersService.findUserByEmail({
+			email: decodedData.email,
+		});
+
+		const { error, updatedDoc: updatedUser } =
+			await GeneralServices.findByIdAndUpdate({
+				model: UsersModel,
+				id: existedUser._id,
+				data: { isUserVerified: true },
+			});
+
+		if (error) return UsersErrors.verificationFailedErr({ res });
+
+		return UsersResponses.userVerifiedSuccessfully({ res });
 	},
 };
 
