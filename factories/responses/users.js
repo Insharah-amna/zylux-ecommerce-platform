@@ -11,8 +11,7 @@ const UsersResponses = {
 		return res.status(200).json({
 			statusCode: 200,
 			message: "User Logged in Successfully",
-			user,
-			loginToken,
+			body: { user, loginToken },
 		});
 	},
 
