@@ -3,7 +3,7 @@ const UsersResponses = {
 		return res.status(201).json({
 			statusCode: 201,
 			message: "User Created Successfully",
-			body: user,
+			body: { user },
 		});
 	},
 
@@ -19,7 +19,7 @@ const UsersResponses = {
 		return res.status(200).json({
 			statusCode: 200,
 			message: "Reset password link has been sent successfully",
-			body: null,
+			body: {},
 		});
 	},
 
@@ -27,7 +27,7 @@ const UsersResponses = {
 		return res.status(200).json({
 			statusCode: 200,
 			message: "Password has been reset successfully",
-			body: updatedUser,
+			body: { updatedUser },
 		});
 	},
 
@@ -35,7 +35,7 @@ const UsersResponses = {
 		return res.status(200).json({
 			statusCode: 200,
 			message: "Logged in profile fetched successfully",
-			body: user,
+			body: { user },
 		});
 	},
 
@@ -43,7 +43,7 @@ const UsersResponses = {
 		return res.status(200).json({
 			statusCode: 200,
 			message: "User has been verified successfully",
-			body: null,
+			body: {},
 		});
 	},
 };
