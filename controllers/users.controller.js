@@ -28,7 +28,7 @@ const UsersController = {
 
 		data.password = hashedPassword;
 
-		const { doc: newUser } = await GeneralServices.create({
+		const { doc: newUser, error } = await GeneralServices.create({
 			model: UsersModel,
 			data,
 		});
@@ -53,6 +53,9 @@ const UsersController = {
 		const { user: existedUser } = await UsersService.findUserByEmail({
 			email: data.email,
 		});
+
+		if (!existedUser.isUserVerified)
+			return UsersErrors.unVerifiedUserErr({ res });
 
 		if (!existedUser) return UsersErrors.wrongCredentialsErr({ res });
 
