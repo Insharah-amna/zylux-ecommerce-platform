@@ -52,6 +52,7 @@ const UsersErrors = {
 		return res.status(403).json({
 			statusCode: 403,
 			message: "User is not verified",
+			type: "USER_NOT_VERIFIED",
 		});
 	},
 };

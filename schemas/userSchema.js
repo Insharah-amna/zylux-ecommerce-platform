@@ -72,3 +72,11 @@ module.exports.validateTokenParamsRequest = ({ data: token }) => {
 
 	return validate(schema, token);
 };
+
+module.exports.validateResendVerificationEmailReq = ({ data: email }) => {
+	const schema = Yup.object().shape({
+		email: Yup.string().required("Email is required"),
+	});
+
+	return validate(schema, email);
+};

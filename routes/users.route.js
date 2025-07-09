@@ -9,6 +9,7 @@ const {
 	validateForgotPasswordRequest,
 	validateResetPasswordRequest,
 	validateTokenParamsRequest,
+	validateResendVerificationEmailReq,
 } = require("../schemas/userSchema");
 
 router.get("/me", authMiddleware, catchAsync(UsersController.getProfile));
@@ -41,13 +42,22 @@ router.patch(
 	catchAsync(UsersController.resetPassword)
 );
 
-router.get(
+router.patch(
 	"/verify-email/:token",
 	validatorMiddleware({
 		validateFunction: validateTokenParamsRequest,
 		reqProperty: "params",
 	}),
 	catchAsync(UsersController.verifyEmail)
+);
+
+router.get(
+	"/resend-email-verification/:email",
+	validatorMiddleware({
+		validateFunction: validateResendVerificationEmailReq,
+		reqProperty: "params",
+	}),
+	catchAsync(UsersController.resendVerificationEmail)
 );
 
 module.exports = router;

@@ -2,7 +2,8 @@ const UsersResponses = {
 	userCreatedSuccessfully: ({ res, user }) => {
 		return res.status(201).json({
 			statusCode: 201,
-			message: "User Created Successfully",
+			message:
+				"Sign-up successful! Verify your email to complete registration.",
 			body: { user },
 		});
 	},
@@ -36,6 +37,14 @@ const UsersResponses = {
 			statusCode: 200,
 			message: "Logged in profile fetched successfully",
 			body: { user },
+		});
+	},
+
+	verificationLinkSentSuccessfully: ({ res }) => {
+		return res.status(200).json({
+			statusCode: 200,
+			message: "Verification link has been sent successfully",
+			body: {},
 		});
 	},
 
