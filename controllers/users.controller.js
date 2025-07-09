@@ -13,6 +13,7 @@ const {
 const {
 	sendResetPasswordLink,
 } = require("../utils/email/processes/sendResetPasswordLink");
+const { asyncTryCatch } = require("../utils/tryCatchUtils");
 
 const UsersController = {
 	signupUser: async (req, res) => {
@@ -48,16 +49,14 @@ const UsersController = {
 	loginUser: async (req, res) => {
 		const data = req.body;
 
-		if (!data.isUserVerified) return UsersErrors.unVerifiedUserErr({ res });
-
 		const { user: existedUser } = await UsersService.findUserByEmail({
 			email: data.email,
 		});
 
+		if (!existedUser) return UsersErrors.wrongCredentialsErr({ res });
+
 		if (!existedUser.isUserVerified)
 			return UsersErrors.unVerifiedUserErr({ res });
-
-		if (!existedUser) return UsersErrors.wrongCredentialsErr({ res });
 
 		const isPasswordMatch = await PasswordUtils.comparePassword({
 			password: data.password,
@@ -99,7 +98,8 @@ const UsersController = {
 
 		const { decodedData, error: decodedError } = verifyToken({ token });
 
-		if (decodedError || !decodedData) return tokenVerificationErr({ res });
+		if (decodedError || !decodedData)
+			return UsersErrors.tokenVerificationErr({ res });
 
 		const currentDateTime = getDateTimeInMillis();
 
@@ -157,6 +157,18 @@ const UsersController = {
 		if (error) return UsersErrors.verificationFailedErr({ res });
 
 		return UsersResponses.userVerifiedSuccessfully({ res });
+	},
+
+	resendVerificationEmail: async (req, res) => {
+		try {
+			const { email } = req.params;
+
+			await sendEmailVerificationLink({ userEmail: email });
+
+			return UsersResponses.verificationLinkSentSuccessfully({ res });
+		} catch (error) {
+			return UsersErrors.verificationFailedErr({ res });
+		}
 	},
 };
 
