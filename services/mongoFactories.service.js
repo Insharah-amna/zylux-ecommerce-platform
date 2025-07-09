@@ -1,4 +1,7 @@
 const MongoFactoryService = {
+	find: async ({ model }) => {
+		return await model.find();
+	},
 	findOne: async ({ model, query }) => {
 		return await model.findOne(query);
 	},
@@ -10,6 +13,9 @@ const MongoFactoryService = {
 	},
 	findByIdAndUpdate: async ({ model, id, data }) => {
 		return await model.findByIdAndUpdate(id, data);
+	},
+	findByIdAndDelete: async ({ model, id }) => {
+		return await model.findByIdAndDelete(id);
 	},
 };
 

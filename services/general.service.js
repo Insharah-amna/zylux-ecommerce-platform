@@ -2,6 +2,14 @@ const { asyncTryCatch } = require("../utils/tryCatchUtils");
 const MongoFactoryService = require("./mongoFactories.service");
 
 const GeneralServices = {
+	find: async ({ model }) => {
+		const { success, error, response } = await asyncTryCatch(
+			async () => await MongoFactoryService.find({ model })
+		);
+
+		return { success, error, response };
+	},
+
 	findOne: async ({ model, query }) => {
 		const { success, error, response } = await asyncTryCatch(
 			async () => await MongoFactoryService.findOne({ model, query })
@@ -41,6 +49,14 @@ const GeneralServices = {
 		);
 
 		return { success, error, updatedDoc };
+	},
+
+	findByIdAndDelete: async ({ model, id }) => {
+		const { success, error, response } = await asyncTryCatch(
+			async () => await MongoFactoryService.findByIdAndDelete({ model, id })
+		);
+
+		return { success, error, response };
 	},
 };
 
