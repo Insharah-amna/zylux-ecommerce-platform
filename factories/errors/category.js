@@ -20,13 +20,6 @@ const CategoryErrors = {
 		});
 	},
 
-	fetchFailedErr: ({ res }) => {
-		return res.status(404).json({
-			statusCode: 404,
-			message: "Category not found",
-		});
-	},
-
 	updationFailedErr: ({ res }) => {
 		return res.status(400).json({
 			statusCode: 400,

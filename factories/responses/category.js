@@ -7,7 +7,7 @@ const CategoryResponses = {
 		});
 	},
 
-	categoryFetchedSuccessfully: ({ res, category }) => {
+	categoriesFetchedSuccessfully: ({ res, category }) => {
 		return res.status(200).json({
 			statusCode: 200,
 			message: "Data fetched successfully",
@@ -15,19 +15,19 @@ const CategoryResponses = {
 		});
 	},
 
-	categoryUpdatedSuccessfully: ({ res, category }) => {
+	categoryUpdatedSuccessfully: ({ res }) => {
 		return res.status(200).json({
 			statusCode: 200,
 			message: "Category updated successfully",
-			body: { category },
+			body: {},
 		});
 	},
 
-	categoryDeletedSuccessfully: ({ res, category }) => {
+	categoryDeletedSuccessfully: ({ res }) => {
 		return res.status(200).json({
 			statusCode: 200,
 			message: "Category deleted successfully",
-			body: { category },
+			body: {},
 		});
 	},
 };

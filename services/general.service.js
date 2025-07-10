@@ -2,9 +2,17 @@ const { asyncTryCatch } = require("../utils/tryCatchUtils");
 const MongoFactoryService = require("./mongoFactories.service");
 
 const GeneralServices = {
-	find: async ({ model }) => {
+	find: async ({ model, query }) => {
 		const { success, error, response } = await asyncTryCatch(
-			async () => await MongoFactoryService.find({ model })
+			async () => await MongoFactoryService.find({ model, query })
+		);
+
+		return { success, error, response };
+	},
+
+	findAll: async ({ model }) => {
+		const { success, error, response } = await asyncTryCatch(
+			async () => await MongoFactoryService.findAll({ model })
 		);
 
 		return { success, error, response };

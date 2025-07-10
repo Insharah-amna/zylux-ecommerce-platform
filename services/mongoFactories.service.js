@@ -1,15 +1,18 @@
 const MongoFactoryService = {
-	find: async ({ model }) => {
-		return await model.find();
+	create: async ({ model, data }) => {
+		return await model.create(data);
+	},
+	find: async ({ model, query }) => {
+		return await model.find(query);
 	},
 	findOne: async ({ model, query }) => {
 		return await model.findOne(query);
 	},
+	findAll: async ({ model }) => {
+		return await model.find();
+	},
 	findById: async ({ model, id }) => {
 		return await model.findById(id);
-	},
-	create: async ({ model, data }) => {
-		return await model.create(data);
 	},
 	findByIdAndUpdate: async ({ model, id, data }) => {
 		return await model.findByIdAndUpdate(id, data);

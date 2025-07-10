@@ -7,12 +7,13 @@ const CategoriesController = {
 	createCategory: async (req, res) => {
 		const data = req.body;
 
-		const { response } = await GeneralServices.findOne({
+		const { response: existingCategory } = await GeneralServices.findOne({
 			model: CategoriesModel,
 			query: data,
 		});
 
-		if (response) return CategoryErrors.categoryAlreadyExistErr({ res });
+		if (existingCategory)
+			return CategoryErrors.categoryAlreadyExistErr({ res });
 
 		const { error, doc: newCategory } = await GeneralServices.create({
 			model: CategoriesModel,
@@ -30,66 +31,62 @@ const CategoriesController = {
 	getCategory: async (req, res) => {
 		const { id } = req.params;
 
-		const { error, response: category } = await GeneralServices.findById({
-			model: CategoriesModel,
-			id,
+		const { error, response: existedCategory } = await GeneralServices.findById(
+			{
+				model: CategoriesModel,
+				id,
+			}
+		);
+
+		if (error) return CategoryErrors.categoryNotFound({ res });
+
+		return CategoryResponses.categoriesFetchedSuccessfully({
+			res,
+			category: existedCategory,
 		});
-
-		if (error) return CategoryErrors.fetchFailedErr({ res });
-
-		return CategoryResponses.categoryFetchedSuccessfully({ res, category });
 	},
 
 	getCategories: async (req, res) => {
-		const { error, response: category } = await GeneralServices.find({
+		const { error, response: categories } = await GeneralServices.findAll({
 			model: CategoriesModel,
 		});
 
-		if (error) return CategoryErrors.fetchFailedErr({ res });
+		if (error) return CategoryErrors.categoryNotFound({ res });
 
-		return CategoryResponses.categoryFetchedSuccessfully({ res, category });
+		return CategoryResponses.categoriesFetchedSuccessfully({
+			res,
+			category: categories,
+		});
 	},
 
 	updateCategory: async (req, res) => {
 		const { id } = req.params;
 		const data = req.body;
 
-		const { error } = await GeneralServices.findByIdAndUpdate({
-			model: CategoriesModel,
-			data,
-			id,
-		});
+		const { error, updatedDoc: updatedCategory } =
+			await GeneralServices.findByIdAndUpdate({
+				model: CategoriesModel,
+				data,
+				id,
+			});
 
-		if (error) return CategoryErrors.updationFailedErr({ res });
+		if (error || !updatedCategory)
+			return CategoryErrors.updationFailedErr({ res });
 
-		return CategoryResponses.categoryUpdatedSuccessfully({
-			res,
-			category: data,
-		});
+		return CategoryResponses.categoryUpdatedSuccessfully({ res });
 	},
 
 	deleteCategory: async (req, res) => {
-		const data = req.body;
-
-		const { response: category, error: notFoundErr } =
-			await GeneralServices.findOne({
-				model: CategoriesModel,
-				query: data,
-			});
-
-		if (notFoundErr) return CategoryErrors.categoryNotFound({ res });
+		const { id } = req.params;
 
 		const { error } = await GeneralServices.findByIdAndDelete({
 			model: CategoriesModel,
-			id: category._id,
+			id,
 		});
 
 		if (error) return CategoryErrors.deletionFailedErr({ res });
 
-		return CategoryResponses.categoryDeletedSuccessfully({
-			res,
-			category,
-		});
+		return CategoryResponses.categoryDeletedSuccessfully({ res });
 	},
 };
 

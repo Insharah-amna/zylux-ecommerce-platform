@@ -12,3 +12,11 @@ module.exports.validateCategoryRequest = ({ data: categories }) => {
 
 	return validate(schema, categories);
 };
+
+module.exports.validateIdParamsRequest = ({ data: id }) => {
+	const schema = Yup.object().shape({
+		id: Yup.string().required("Id is required"),
+	});
+
+	return validate(schema, id);
+};
