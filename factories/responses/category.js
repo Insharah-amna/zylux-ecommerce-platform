@@ -7,11 +7,19 @@ const CategoryResponses = {
 		});
 	},
 
-	categoriesFetchedSuccessfully: ({ res, category }) => {
+	categoryFetchedSuccessfully: ({ res, category }) => {
 		return res.status(200).json({
 			statusCode: 200,
 			message: "Data fetched successfully",
 			body: { category },
+		});
+	},
+
+	categoriesFetchedSuccessfully: ({ res, categories }) => {
+		return res.status(200).json({
+			statusCode: 200,
+			message: "Data fetched successfully",
+			body: { categories },
 		});
 	},
 

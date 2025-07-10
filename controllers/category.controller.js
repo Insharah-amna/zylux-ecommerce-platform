@@ -40,7 +40,7 @@ const CategoriesController = {
 
 		if (error) return CategoryErrors.categoryNotFound({ res });
 
-		return CategoryResponses.categoriesFetchedSuccessfully({
+		return CategoryResponses.categoryFetchedSuccessfully({
 			res,
 			category: existedCategory,
 		});
@@ -55,7 +55,7 @@ const CategoriesController = {
 
 		return CategoryResponses.categoriesFetchedSuccessfully({
 			res,
-			category: categories,
+			categories: categories,
 		});
 	},
 
