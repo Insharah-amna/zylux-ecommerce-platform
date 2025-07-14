@@ -13,7 +13,6 @@ const {
 const {
 	sendResetPasswordLink,
 } = require("../utils/email/processes/sendResetPasswordLink");
-const { asyncTryCatch } = require("../utils/tryCatchUtils");
 
 const UsersController = {
 	signupUser: async (req, res) => {
