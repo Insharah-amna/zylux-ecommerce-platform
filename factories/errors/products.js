@@ -1,0 +1,24 @@
+const ProductsErrors = {
+	creationFailedErr: ({ res }) => {
+		return res.status(400).json({
+			statusCode: 400,
+			message: "Creation failed",
+		});
+	},
+
+	productAlreadyExistErr: ({ res }) => {
+		return res.status(409).json({
+			statusCode: 409,
+			message: "Product already exists",
+		});
+	},
+
+	photoUploadErr: ({ res }) => {
+		return res.status(409).json({
+			statusCode: 409,
+			message: "No file uploaded",
+		});
+	},
+};
+
+module.exports = ProductsErrors;
