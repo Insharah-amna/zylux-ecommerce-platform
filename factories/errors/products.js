@@ -20,10 +20,10 @@ const ProductsErrors = {
 		});
 	},
 
-	productsNotFound: ({ res }) => {
+	productNotFound: ({ res }) => {
 		return res.status(404).json({
 			statusCode: 404,
-			message: "Products not found",
+			message: "Product not found",
 		});
 	},
 };

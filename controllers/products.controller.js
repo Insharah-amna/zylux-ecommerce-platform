@@ -36,9 +36,25 @@ const ProductsController = {
 			model: ProductsModel,
 		});
 
-		if (error) return ProductsErrors.productsNotFound({ res });
+		if (error) return ProductsErrors.productNotFound({ res });
 
 		return ProductsResponses.productsFetchedSuccesfully({ res, products });
+	},
+
+	getProduct: async (req, res) => {
+		const { id } = req.params;
+
+		const { error, response: product } = await GeneralServices.findById({
+			model: ProductsModel,
+			id,
+		});
+
+		if (error) return ProductsErrors.productNotFound({ res });
+
+		return ProductsResponses.productFetchedSuccesfully({
+			res,
+			product,
+		});
 	},
 };
 

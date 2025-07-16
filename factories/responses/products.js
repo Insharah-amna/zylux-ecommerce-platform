@@ -22,6 +22,14 @@ const ProductsResponses = {
 			body: { products },
 		});
 	},
+
+	productFetchedSuccesfully: ({ res, product }) => {
+		return res.status(200).json({
+			statusCode: 200,
+			message: "Data fetched successfully",
+			body: { product },
+		});
+	},
 };
 
 module.exports = ProductsResponses;
