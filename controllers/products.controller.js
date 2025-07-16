@@ -30,6 +30,16 @@ const ProductsController = {
 			product: newProduct,
 		});
 	},
+
+	getAllProducts: async (req, res) => {
+		const { error, response: products } = await GeneralServices.findAll({
+			model: ProductsModel,
+		});
+
+		if (error) return ProductsErrors.productsNotFound({ res });
+
+		return ProductsResponses.productsFetchedSuccesfully({ res, products });
+	},
 };
 
 module.exports = ProductsController;

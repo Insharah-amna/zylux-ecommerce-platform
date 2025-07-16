@@ -19,6 +19,13 @@ const ProductsErrors = {
 			message: "No file uploaded",
 		});
 	},
+
+	productsNotFound: ({ res }) => {
+		return res.status(404).json({
+			statusCode: 404,
+			message: "Products not found",
+		});
+	},
 };
 
 module.exports = ProductsErrors;

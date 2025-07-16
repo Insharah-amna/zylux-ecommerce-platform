@@ -20,4 +20,6 @@ router.post(
 	catchAsync(ProductsController.createProduct)
 );
 
+router.get("/", authMiddleware, catchAsync(ProductsController.getAllProducts));
+
 module.exports = router;
