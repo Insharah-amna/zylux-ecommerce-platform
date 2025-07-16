@@ -56,6 +56,23 @@ const ProductsController = {
 			product,
 		});
 	},
+
+	updateProduct: async (req, res) => {
+		const { id } = req.params;
+		const data = req.body;
+
+		const { error, updatedDoc: updatedProduct } =
+			await GeneralServices.findByIdAndUpdate({
+				model: ProductsModel,
+				data,
+				id,
+			});
+
+		if (error || !updatedProduct)
+			return ProductsErrors.updationFailedErr({ res });
+
+		return ProductsResponses.productUpdatedSuccessfully({ res });
+	},
 };
 
 module.exports = ProductsController;

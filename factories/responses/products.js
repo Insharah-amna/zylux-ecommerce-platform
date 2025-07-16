@@ -30,6 +30,14 @@ const ProductsResponses = {
 			body: { product },
 		});
 	},
+
+	productUpdatedSuccessfully: ({ res }) => {
+		return res.status(200).json({
+			statusCode: 200,
+			message: "Product updated successfully",
+			body: {},
+		});
+	},
 };
 
 module.exports = ProductsResponses;

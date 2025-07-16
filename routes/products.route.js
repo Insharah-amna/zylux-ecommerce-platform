@@ -34,4 +34,14 @@ router.get(
 
 router.get("/", authMiddleware, catchAsync(ProductsController.getAllProducts));
 
+router.patch(
+	"/:id",
+	authMiddleware,
+	validatorMiddleware({
+		validateFunction: validateIdParamsRequest,
+		reqProperty: HTTP_ARGS.params.value,
+	}),
+	catchAsync(ProductsController.updateProduct)
+);
+
 module.exports = router;
