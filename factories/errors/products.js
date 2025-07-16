@@ -33,6 +33,13 @@ const ProductsErrors = {
 			message: "Updation failed",
 		});
 	},
+
+	deletionFailedErr: ({ res }) => {
+		return res.status(400).json({
+			statusCode: 400,
+			message: "Deletion failed",
+		});
+	},
 };
 
 module.exports = ProductsErrors;

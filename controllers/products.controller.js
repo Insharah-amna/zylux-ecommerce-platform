@@ -34,11 +34,12 @@ const ProductsController = {
 	getAllProducts: async (req, res) => {
 		const { error, response: products } = await GeneralServices.findAll({
 			model: ProductsModel,
+			options: { populatedFields: "categoryId" },
 		});
 
 		if (error) return ProductsErrors.productNotFound({ res });
 
-		return ProductsResponses.productsFetchedSuccesfully({ res, products });
+		return ProductsResponses.productsFetchedSuccessfully({ res, products });
 	},
 
 	getProduct: async (req, res) => {
@@ -47,11 +48,12 @@ const ProductsController = {
 		const { error, response: product } = await GeneralServices.findById({
 			model: ProductsModel,
 			id,
+			options: { populatedFields: "categoryId" },
 		});
 
 		if (error) return ProductsErrors.productNotFound({ res });
 
-		return ProductsResponses.productFetchedSuccesfully({
+		return ProductsResponses.productFetchedSuccessfully({
 			res,
 			product,
 		});
@@ -61,10 +63,28 @@ const ProductsController = {
 		const { id } = req.params;
 		const data = req.body;
 
+		const { response: existingProduct } = await GeneralServices.findById({
+			model: ProductsModel,
+			id,
+		});
+
+		const { urls: newUrls, error: imagesUploadErr } =
+			await CloudinaryService.uploadMultipleFile({
+				files: req.files,
+				folder: "products",
+			});
+
+		const combinedImageUrls = [...existingProduct.imageUrls, ...newUrls];
+
+		const updatedData = {
+			...data,
+			imageUrls: combinedImageUrls,
+		};
+
 		const { error, updatedDoc: updatedProduct } =
 			await GeneralServices.findByIdAndUpdate({
 				model: ProductsModel,
-				data,
+				data: updatedData,
 				id,
 			});
 
@@ -72,6 +92,19 @@ const ProductsController = {
 			return ProductsErrors.updationFailedErr({ res });
 
 		return ProductsResponses.productUpdatedSuccessfully({ res });
+	},
+
+	deleteProduct: async (req, res) => {
+		const { id } = req.params;
+
+		const { error } = await GeneralServices.findByIdAndDelete({
+			model: ProductsModel,
+			id,
+		});
+
+		if (error) return ProductsErrors.deletionFailedErr({ res });
+
+		return ProductsResponses.productDeletedSuccessfully({ res });
 	},
 };
 

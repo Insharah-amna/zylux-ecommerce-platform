@@ -37,11 +37,23 @@ router.get("/", authMiddleware, catchAsync(ProductsController.getAllProducts));
 router.patch(
 	"/:id",
 	authMiddleware,
+	uploadFiles.array("files"),
 	validatorMiddleware({
 		validateFunction: validateIdParamsRequest,
 		reqProperty: HTTP_ARGS.params.value,
 	}),
+	validatorMiddleware({ validateFunction: validateProductsRequest }),
 	catchAsync(ProductsController.updateProduct)
+);
+
+router.delete(
+	"/:id",
+	authMiddleware,
+	validatorMiddleware({
+		validateFunction: validateIdParamsRequest,
+		reqProperty: HTTP_ARGS.params.value,
+	}),
+	catchAsync(ProductsController.deleteProduct)
 );
 
 module.exports = router;

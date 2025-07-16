@@ -15,7 +15,7 @@ const ProductsResponses = {
 		});
 	},
 
-	productsFetchedSuccesfully: ({ res, products }) => {
+	productsFetchedSuccessfully: ({ res, products }) => {
 		return res.status(200).json({
 			statusCode: 200,
 			message: "Data fetched successfully",
@@ -23,7 +23,7 @@ const ProductsResponses = {
 		});
 	},
 
-	productFetchedSuccesfully: ({ res, product }) => {
+	productFetchedSuccessfully: ({ res, product }) => {
 		return res.status(200).json({
 			statusCode: 200,
 			message: "Data fetched successfully",
@@ -35,6 +35,14 @@ const ProductsResponses = {
 		return res.status(200).json({
 			statusCode: 200,
 			message: "Product updated successfully",
+			body: {},
+		});
+	},
+
+	productDeletedSuccessfully: ({ res }) => {
+		return res.status(200).json({
+			statusCode: 200,
+			message: "Product deleted successfully",
 			body: {},
 		});
 	},
