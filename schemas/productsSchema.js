@@ -13,9 +13,11 @@ const commonProductSchema = {
 };
 
 module.exports.validateProductsRequest = ({ data: products }) => {
+	let data = JSON.parse(products.data);
+
 	const schema = Yup.object().shape({
 		...commonProductSchema,
 	});
 
-	return validate(schema, products);
+	return validate(schema, data);
 };
