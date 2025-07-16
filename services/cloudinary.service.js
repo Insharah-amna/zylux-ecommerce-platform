@@ -45,22 +45,6 @@ const CloudinaryService = {
 			return urls;
 		});
 
-		// const {
-		// 	success,
-		// 	response: urls,
-		// 	error,
-		// } = await asyncTryCatch(async () => {
-		// 	const uploadPromises = files.map((file) => {
-		// 		console.log(file.path);
-		// 		cloudinary.uploader.upload(file.path, {
-		// 			folder,
-		// 		});
-		// 	});
-
-		// 	const urls = await Promise.all(uploadPromises);
-		// 	return urls;
-		// });
-
 		const finalUrls = urls.map((r) => r.secure_url);
 
 		return { success, urls: finalUrls, error };
