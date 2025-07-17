@@ -3,6 +3,7 @@ const GeneralServices = require("../services/general.service");
 const ProductsResponses = require("../factories/responses/products");
 const ProductsErrors = require("../factories/errors/products");
 const CloudinaryService = require("../services/cloudinary.service");
+const queryFilterServices = require("../services/queryFilters.service");
 
 const ProductsController = {
 	createProduct: async (req, res) => {
@@ -16,6 +17,8 @@ const ProductsController = {
 				folder: "products",
 			});
 
+		if (imagesUploadErr) return ProductsErrors.imageUploadErr({ res });
+
 		data.imageUrls = urls;
 
 		const { error, doc: newProduct } = await GeneralServices.create({
@@ -25,21 +28,34 @@ const ProductsController = {
 
 		if (error) return ProductsErrors.creationFailedErr({ res });
 
-		return ProductsResponses.productCreatedSuccessfully({
-			res,
-			product: newProduct,
-		});
+		return ProductsResponses.productCreatedSuccessfully({ res });
 	},
 
 	getAllProducts: async (req, res) => {
-		const { error, response: products } = await GeneralServices.findAll({
+		const { page, limit } = req.query;
+
+		const skip = (page - 1) * limit;
+
+		const query = queryFilterServices.buildProductQuery(req.query);
+
+		const { error, response: products } = await GeneralServices.find({
 			model: ProductsModel,
-			options: { populatedFields: "categoryId" },
+			query,
+			options: {
+				populatedFields: "categoryId",
+				limit,
+				skip,
+			},
 		});
 
 		if (error) return ProductsErrors.productNotFound({ res });
 
-		return ProductsResponses.productsFetchedSuccessfully({ res, products });
+		return ProductsResponses.productsFetchedSuccessfully({
+			res,
+			products,
+			page,
+			limit,
+		});
 	},
 
 	getProduct: async (req, res) => {
@@ -61,30 +77,24 @@ const ProductsController = {
 
 	updateProduct: async (req, res) => {
 		const { id } = req.params;
-		const data = req.body;
+		let data = req.body;
 
-		const { response: existingProduct } = await GeneralServices.findById({
-			model: ProductsModel,
-			id,
-		});
+		if (req.files.length > 0) {
+			const { urls: newUrls, error: imagesUploadErr } =
+				await CloudinaryService.uploadMultipleFile({
+					files: req.files,
+					folder: "products",
+				});
 
-		const { urls: newUrls, error: imagesUploadErr } =
-			await CloudinaryService.uploadMultipleFile({
-				files: req.files,
-				folder: "products",
-			});
+			if (imagesUploadErr) return ProductsErrors.imageUploadErr({ res });
 
-		const combinedImageUrls = [...existingProduct.imageUrls, ...newUrls];
-
-		const updatedData = {
-			...data,
-			imageUrls: combinedImageUrls,
-		};
+			data.imageUrls = [...(data.imageUrls || []), ...newUrls];
+		}
 
 		const { error, updatedDoc: updatedProduct } =
 			await GeneralServices.findByIdAndUpdate({
 				model: ProductsModel,
-				data: updatedData,
+				data,
 				id,
 			});
 

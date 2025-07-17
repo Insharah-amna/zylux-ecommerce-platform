@@ -17,6 +17,7 @@ module.exports.validateProductsRequest = ({ data: products }) => {
 
 	const schema = Yup.object().shape({
 		...commonProductSchema,
+		imageUrls: Yup.array().required("Images urls are required"),
 	});
 
 	return validate(schema, data);

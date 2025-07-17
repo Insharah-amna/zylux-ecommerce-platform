@@ -8,6 +8,14 @@ const MongoFactoryService = {
 
 		const queryProperties = options?.queryProperties || {};
 
+		if (options.skip !== undefined) {
+			queryProperties.skip = options.skip;
+		}
+
+		if (options.limit !== undefined) {
+			queryProperties.limit = options.limit;
+		}
+
 		return await model
 			.find(query, null, queryProperties)
 			.populate(populatedFields || "");

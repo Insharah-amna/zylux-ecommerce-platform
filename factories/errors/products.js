@@ -13,7 +13,7 @@ const ProductsErrors = {
 		});
 	},
 
-	photoUploadErr: ({ res }) => {
+	imageUploadErr: ({ res }) => {
 		return res.status(409).json({
 			statusCode: 409,
 			message: "No file uploaded",
@@ -30,14 +30,14 @@ const ProductsErrors = {
 	updationFailedErr: ({ res }) => {
 		return res.status(400).json({
 			statusCode: 400,
-			message: "Updation failed",
+			message: "Failed to update product",
 		});
 	},
 
 	deletionFailedErr: ({ res }) => {
 		return res.status(400).json({
 			statusCode: 400,
-			message: "Deletion failed",
+			message: "Failed to delete product",
 		});
 	},
 };

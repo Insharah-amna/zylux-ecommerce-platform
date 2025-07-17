@@ -1,9 +1,9 @@
 const ProductsResponses = {
-	productCreatedSuccessfully: ({ res, product }) => {
+	productCreatedSuccessfully: ({ res }) => {
 		return res.status(201).json({
 			statusCode: 201,
 			message: "Product created successfully",
-			body: { product },
+			body: {},
 		});
 	},
 
@@ -15,18 +15,18 @@ const ProductsResponses = {
 		});
 	},
 
-	productsFetchedSuccessfully: ({ res, products }) => {
+	productsFetchedSuccessfully: ({ res, products, page, limit }) => {
 		return res.status(200).json({
 			statusCode: 200,
-			message: "Data fetched successfully",
-			body: { products },
+			message: "Products retrieved successfully",
+			body: { products, pagination: { page, limit } },
 		});
 	},
 
 	productFetchedSuccessfully: ({ res, product }) => {
 		return res.status(200).json({
 			statusCode: 200,
-			message: "Data fetched successfully",
+			message: "Product retrieved successfully",
 			body: { product },
 		});
 	},
