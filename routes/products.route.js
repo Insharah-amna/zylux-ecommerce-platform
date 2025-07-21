@@ -4,10 +4,13 @@ const validatorMiddleware = require("../middlewares/validator.middleware");
 const { HTTP_ARGS } = require("../constants/general");
 const { ALLOWED_IMAGE_TYPES } = require("../constants/filetypes");
 const { ProductsController } = require("../controllers");
-const { validateProductsRequest } = require("../schemas/productsSchema");
+const {
+	validateProductsRequest,
+	validateUpdateProductsRequest,
+	validatePaginationRequest,
+} = require("../schemas/productsSchema");
 const { validateIdParamsRequest } = require("../schemas/categorySchema");
 const catchAsync = require("../utils/asyncCatchUtils");
-const validatePaginationMiddleware = require("../middlewares/validatePagination.middleware");
 
 const router = require("express").Router();
 
@@ -27,8 +30,8 @@ router.get(
 	"/:id",
 	authMiddleware,
 	validatorMiddleware({
-		validateFunction: validateIdParamsRequest,
-		reqProperty: HTTP_ARGS.params.value,
+		validateFunction: validatePaginationRequest,
+		reqProperty: HTTP_ARGS.query.value,
 	}),
 	catchAsync(ProductsController.getProduct)
 );
@@ -36,7 +39,10 @@ router.get(
 router.get(
 	"/",
 	authMiddleware,
-	validatePaginationMiddleware,
+	validatorMiddleware({
+		validateFunction: validatePaginationRequest,
+		reqProperty: HTTP_ARGS.query.value,
+	}),
 	catchAsync(ProductsController.getAllProducts)
 );
 
@@ -48,7 +54,7 @@ router.patch(
 		reqProperty: HTTP_ARGS.params.value,
 	}),
 	uploadFiles.array("files"),
-	validatorMiddleware({ validateFunction: validateProductsRequest }),
+	validatorMiddleware({ validateFunction: validateUpdateProductsRequest }),
 	catchAsync(ProductsController.updateProduct)
 );
 

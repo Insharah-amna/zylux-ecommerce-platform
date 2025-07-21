@@ -1,4 +1,4 @@
-const queryFilterServices = {
+const QueryFilterUtils = {
 	buildProductQuery: (queryParams) => {
 		const { name, category, color, minPrice, maxPrice } = queryParams;
 
@@ -26,4 +26,4 @@ const queryFilterServices = {
 		return query;
 	},
 };
-module.exports = queryFilterServices;
+module.exports = QueryFilterUtils;

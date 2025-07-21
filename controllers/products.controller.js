@@ -3,7 +3,7 @@ const GeneralServices = require("../services/general.service");
 const ProductsResponses = require("../factories/responses/products");
 const ProductsErrors = require("../factories/errors/products");
 const CloudinaryService = require("../services/cloudinary.service");
-const queryFilterServices = require("../services/queryFilters.service");
+const QueryFilterUtils = require("../utils/queryFilterUtils");
 
 const ProductsController = {
 	createProduct: async (req, res) => {
@@ -36,7 +36,7 @@ const ProductsController = {
 
 		const skip = (page - 1) * limit;
 
-		const query = queryFilterServices.buildProductQuery(req.query);
+		const query = QueryFilterUtils.buildProductQuery(req.query);
 
 		const { error, response: products } = await GeneralServices.find({
 			model: ProductsModel,

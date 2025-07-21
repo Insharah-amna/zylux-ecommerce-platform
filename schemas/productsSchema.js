@@ -12,7 +12,22 @@ const commonProductSchema = {
 	description: Yup.string().required("Product description is required"),
 };
 
+const paginationSchema = {
+	page: Yup.number().min(1).default(1),
+	limit: Yup.number().min(1).max(100).default(1),
+};
+
 module.exports.validateProductsRequest = ({ data: products }) => {
+	let data = JSON.parse(products.data);
+
+	const schema = Yup.object().shape({
+		...commonProductSchema,
+	});
+
+	return validate(schema, data);
+};
+
+module.exports.validateUpdateProductsRequest = ({ data: products }) => {
 	let data = JSON.parse(products.data);
 
 	const schema = Yup.object().shape({
@@ -21,4 +36,12 @@ module.exports.validateProductsRequest = ({ data: products }) => {
 	});
 
 	return validate(schema, data);
+};
+
+module.exports.validatePaginationRequest = ({ data: query }) => {
+	const schema = Yup.object().shape({
+		...paginationSchema,
+	});
+
+	return validate(schema, query);
 };
