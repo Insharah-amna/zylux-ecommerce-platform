@@ -30,8 +30,8 @@ router.get(
 	"/:id",
 	authMiddleware,
 	validatorMiddleware({
-		validateFunction: validatePaginationRequest,
-		reqProperty: HTTP_ARGS.query.value,
+		validateFunction: validateIdParamsRequest,
+		reqProperty: HTTP_ARGS.params.value,
 	}),
 	catchAsync(ProductsController.getProduct)
 );

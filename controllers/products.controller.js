@@ -3,7 +3,8 @@ const GeneralServices = require("../services/general.service");
 const ProductsResponses = require("../factories/responses/products");
 const ProductsErrors = require("../factories/errors/products");
 const CloudinaryService = require("../services/cloudinary.service");
-const QueryFilterUtils = require("../utils/queryFilterUtils");
+const { GetPaginationSkip } = require("../constants/general");
+const { buildProductQuery } = require("../utils/buildQueryUtils");
 
 const ProductsController = {
 	createProduct: async (req, res) => {
@@ -34,9 +35,9 @@ const ProductsController = {
 	getAllProducts: async (req, res) => {
 		const { page, limit } = req.query;
 
-		const skip = (page - 1) * limit;
+		const { skip } = GetPaginationSkip({ page, limit });
 
-		const query = QueryFilterUtils.buildProductQuery(req.query);
+		const query = buildProductQuery({ queryData: req.query });
 
 		const { error, response: products } = await GeneralServices.find({
 			model: ProductsModel,
@@ -48,7 +49,8 @@ const ProductsController = {
 			},
 		});
 
-		if (error) return ProductsErrors.productNotFound({ res });
+		if (error || products.length === 0)
+			return ProductsErrors.productsNotFound({ res });
 
 		return ProductsResponses.productsFetchedSuccessfully({
 			res,
@@ -67,7 +69,7 @@ const ProductsController = {
 			options: { populatedFields: "categoryId" },
 		});
 
-		if (error) return ProductsErrors.productNotFound({ res });
+		if (error || !product) return ProductsErrors.productNotFound({ res });
 
 		return ProductsResponses.productFetchedSuccessfully({
 			res,

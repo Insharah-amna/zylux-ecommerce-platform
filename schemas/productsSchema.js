@@ -14,7 +14,7 @@ const commonProductSchema = {
 
 const paginationSchema = {
 	page: Yup.number().min(1).default(1),
-	limit: Yup.number().min(1).max(100).default(1),
+	limit: Yup.number().min(1).default(1),
 };
 
 module.exports.validateProductsRequest = ({ data: products }) => {
