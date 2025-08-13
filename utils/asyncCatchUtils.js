@@ -4,7 +4,7 @@ const catchAsync = (fn) => async (req, res) => {
 	try {
 		await fn(req, res);
 	} catch (err) {
-		return res.json(GeneralErrors.internalServerError);
+		return GeneralErrors.internalServerError({ res });
 	}
 };
 

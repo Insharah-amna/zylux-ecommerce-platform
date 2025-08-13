@@ -2,9 +2,33 @@ const { asyncTryCatch } = require("../utils/tryCatchUtils");
 const MongoFactoryService = require("./mongoFactories.service");
 
 const GeneralServices = {
-	findOne: async ({ model, query }) => {
+	find: async ({ model, query = {}, options = {} }) => {
 		const { success, error, response } = await asyncTryCatch(
-			async () => await MongoFactoryService.findOne({ model, query })
+			async () => await MongoFactoryService.find({ model, query, options })
+		);
+
+		return { success, error, response };
+	},
+
+	findAll: async ({ model, options = {} }) => {
+		const { success, error, response } = await asyncTryCatch(
+			async () => await MongoFactoryService.findAll({ model, options })
+		);
+
+		return { success, error, response };
+	},
+
+	findOne: async ({ model, query, options = {} }) => {
+		const { success, error, response } = await asyncTryCatch(
+			async () => await MongoFactoryService.findOne({ model, query, options })
+		);
+
+		return { success, error, response };
+	},
+
+	findById: async ({ model, id, options = {} }) => {
+		const { success, error, response } = await asyncTryCatch(
+			async () => await MongoFactoryService.findById({ model, id, options })
 		);
 
 		return { success, error, response };
@@ -20,6 +44,35 @@ const GeneralServices = {
 		);
 
 		return { success, error, doc };
+	},
+
+	findByIdAndUpdate: async ({ model, data, id }) => {
+		const {
+			success,
+			error,
+			response: updatedDoc,
+		} = await asyncTryCatch(
+			async () =>
+				await MongoFactoryService.findByIdAndUpdate({ model, data, id })
+		);
+
+		return { success, error, updatedDoc };
+	},
+
+	findByIdAndDelete: async ({ model, id }) => {
+		const { success, error, response } = await asyncTryCatch(
+			async () => await MongoFactoryService.findByIdAndDelete({ model, id })
+		);
+
+		return { success, error, response };
+	},
+
+	countDocuments: async ({ model, query = {} }) => {
+		const { success, error, response } = await asyncTryCatch(
+			async () => await MongoFactoryService.countDocuments({ model, query })
+		);
+
+		return { success, error, count: response };
 	},
 };
 
