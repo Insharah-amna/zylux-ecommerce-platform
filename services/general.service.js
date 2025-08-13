@@ -2,33 +2,33 @@ const { asyncTryCatch } = require("../utils/tryCatchUtils");
 const MongoFactoryService = require("./mongoFactories.service");
 
 const GeneralServices = {
-	find: async ({ model, query }) => {
+	find: async ({ model, query = {}, options = {} }) => {
 		const { success, error, response } = await asyncTryCatch(
-			async () => await MongoFactoryService.find({ model, query })
+			async () => await MongoFactoryService.find({ model, query, options })
 		);
 
 		return { success, error, response };
 	},
 
-	findAll: async ({ model }) => {
+	findAll: async ({ model, options = {} }) => {
 		const { success, error, response } = await asyncTryCatch(
-			async () => await MongoFactoryService.findAll({ model })
+			async () => await MongoFactoryService.findAll({ model, options })
 		);
 
 		return { success, error, response };
 	},
 
-	findOne: async ({ model, query }) => {
+	findOne: async ({ model, query, options = {} }) => {
 		const { success, error, response } = await asyncTryCatch(
-			async () => await MongoFactoryService.findOne({ model, query })
+			async () => await MongoFactoryService.findOne({ model, query, options })
 		);
 
 		return { success, error, response };
 	},
 
-	findById: async ({ model, id }) => {
+	findById: async ({ model, id, options = {} }) => {
 		const { success, error, response } = await asyncTryCatch(
-			async () => await MongoFactoryService.findById({ model, id })
+			async () => await MongoFactoryService.findById({ model, id, options })
 		);
 
 		return { success, error, response };
@@ -65,6 +65,14 @@ const GeneralServices = {
 		);
 
 		return { success, error, response };
+	},
+
+	countDocuments: async ({ model, query = {} }) => {
+		const { success, error, response } = await asyncTryCatch(
+			async () => await MongoFactoryService.countDocuments({ model, query })
+		);
+
+		return { success, error, count: response };
 	},
 };
 

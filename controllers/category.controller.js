@@ -2,6 +2,8 @@ const GeneralServices = require("../services/general.service");
 const CategoryResponses = require("../factories/responses/category");
 const CategoryErrors = require("../factories/errors/category");
 const CategoriesModel = require("../model/categories.model");
+const { GetPaginationSkip } = require("../constants/general");
+const { buildProductQuery } = require("../utils/buildQueryUtils");
 
 const CategoriesController = {
 	createCategory: async (req, res) => {
@@ -47,15 +49,21 @@ const CategoriesController = {
 	},
 
 	getCategories: async (req, res) => {
-		const { error, response: categories } = await GeneralServices.findAll({
+		const { error, response: categories } = await GeneralServices.find({
 			model: CategoriesModel,
+			options: {
+				queryProperties: {
+					sort: { createdAt: -1 },
+				},
+			},
 		});
 
-		if (error) return CategoryErrors.categoryNotFound({ res });
+		if (error || categories.length === 0)
+			return CategoryErrors.categoryNotFound({ res });
 
 		return CategoryResponses.categoriesFetchedSuccessfully({
 			res,
-			categories: categories,
+			categories,
 		});
 	},
 

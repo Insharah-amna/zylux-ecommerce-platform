@@ -9,3 +9,7 @@ module.exports.HTTP_ARGS = {
 		value: "body",
 	},
 };
+
+module.exports.GetPaginationSkip = ({ page = 1, limit = 1 }) => ({
+	skip: (page - 1) * limit,
+});
