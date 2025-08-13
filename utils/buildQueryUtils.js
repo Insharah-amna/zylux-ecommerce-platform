@@ -1,13 +1,22 @@
 exports.buildProductQuery = ({ queryData }) => {
 	const { name, category, color, minPrice, maxPrice } = queryData;
 
-	const query = {};
+	let query = {};
 
 	if (name) {
 		query.name = { $regex: name, $options: "i" }; // case-insensitive partial match
 	}
 	if (category) {
-		query.category = category;
+		const categoryArray =
+			typeof category === "string"
+				? category.split(",").map((id) => id.trim())
+				: Array.isArray(category)
+					? category
+					: [];
+
+		query.categoryId = {
+			$in: categoryArray,
+		};
 	}
 	if (color) {
 		query.colorVariants = { $regex: color, $options: "i" };

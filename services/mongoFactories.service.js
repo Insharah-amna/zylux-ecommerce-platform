@@ -50,6 +50,9 @@ const MongoFactoryService = {
 	findByIdAndDelete: async ({ model, id }) => {
 		return await model.findByIdAndDelete(id);
 	},
+	countDocuments: async ({ model, query }) => {
+		return await model.countDocuments(query);
+	},
 };
 
 module.exports = MongoFactoryService;

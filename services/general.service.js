@@ -66,6 +66,14 @@ const GeneralServices = {
 
 		return { success, error, response };
 	},
+
+	countDocuments: async ({ model, query = {} }) => {
+		const { success, error, response } = await asyncTryCatch(
+			async () => await MongoFactoryService.countDocuments({ model, query })
+		);
+
+		return { success, error, count: response };
+	},
 };
 
 module.exports = GeneralServices;

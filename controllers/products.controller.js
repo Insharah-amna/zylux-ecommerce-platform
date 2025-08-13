@@ -39,24 +39,30 @@ const ProductsController = {
 
 		const query = buildProductQuery({ queryData: req.query });
 
+		const { count } = await GeneralServices.countDocuments({
+			model: ProductsModel,
+			query,
+		});
+
 		const { error, response: products } = await GeneralServices.find({
 			model: ProductsModel,
 			query,
 			options: {
 				populatedFields: "categoryId",
-				limit,
-				skip,
+				queryProperties: {
+					limit,
+					skip,
+					sort: { createdAt: -1 },
+				},
 			},
 		});
-
-		if (error || products.length === 0)
-			return ProductsErrors.productsNotFound({ res });
 
 		return ProductsResponses.productsFetchedSuccessfully({
 			res,
 			products,
 			page,
 			limit,
+			totalPages: Math.ceil(count / limit),
 		});
 	},
 

@@ -15,11 +15,11 @@ const ProductsResponses = {
 		});
 	},
 
-	productsFetchedSuccessfully: ({ res, products, page, limit }) => {
+	productsFetchedSuccessfully: ({ res, products, page, limit, totalPages }) => {
 		return res.status(200).json({
 			statusCode: 200,
 			message: "Products retrieved successfully",
-			body: { products, pagination: { page, limit } },
+			body: { products, pagination: { page, limit, totalPages } },
 		});
 	},
 

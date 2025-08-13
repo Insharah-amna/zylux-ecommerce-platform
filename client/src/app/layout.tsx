@@ -1,0 +1,52 @@
+import React from 'react';
+import type {Metadata} from 'next';
+import {Geist, Geist_Mono} from 'next/font/google';
+import './globals.css';
+import {ReduxProvider} from '@/providers/ReduxProvider';
+import {ToastContainer} from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import AuthGuard from '@/components/guard';
+
+const geistSans = Geist({
+  variable: '--font-geist-sans',
+  subsets: ['latin'],
+});
+
+const geistMono = Geist_Mono({
+  variable: '--font-geist-mono',
+  subsets: ['latin'],
+});
+
+export const metadata: Metadata = {
+  title: 'ShopEase',
+  description: 'Shop with ease.',
+};
+
+export default function RootLayout({
+  children,
+}: Readonly<{
+  children: React.ReactNode;
+}>) {
+  return (
+    <html lang='en'>
+      <body
+        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+      >
+        <ReduxProvider>
+          <AuthGuard>{children}</AuthGuard>
+        </ReduxProvider>
+
+        <ToastContainer
+          autoClose={5000}
+          hideProgressBar={false}
+          newestOnTop
+          closeOnClick={true}
+          pauseOnHover={false}
+          draggable={false}
+          theme='light'
+          icon={false}
+        />
+      </body>
+    </html>
+  );
+}

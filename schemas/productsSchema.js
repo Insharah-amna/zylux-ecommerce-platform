@@ -10,6 +10,8 @@ const commonProductSchema = {
 		.min(1, "At least one color is required")
 		.required("Color variants are required"),
 	description: Yup.string().required("Product description is required"),
+	isOutOfStock: Yup.boolean().default(false),
+	discount: Yup.number().min(0).max(100).required("Discount is required"),
 };
 
 const paginationSchema = {

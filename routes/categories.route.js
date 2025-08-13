@@ -27,7 +27,7 @@ router.get(
 	catchAsync(CategoriesController.getCategory)
 );
 
-router.get("/", authMiddleware, catchAsync(CategoriesController.getCategories));
+router.get("/", catchAsync(CategoriesController.getCategories));
 
 router.patch(
 	"/:id",

@@ -28,7 +28,6 @@ router.post(
 
 router.get(
 	"/:id",
-	authMiddleware,
 	validatorMiddleware({
 		validateFunction: validateIdParamsRequest,
 		reqProperty: HTTP_ARGS.params.value,
@@ -38,7 +37,6 @@ router.get(
 
 router.get(
 	"/",
-	authMiddleware,
 	validatorMiddleware({
 		validateFunction: validatePaginationRequest,
 		reqProperty: HTTP_ARGS.query.value,
