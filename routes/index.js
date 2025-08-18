@@ -6,4 +6,6 @@ router.use("/categories", require("./categories.route"));
 
 router.use("/products", require("./products.route"));
 
+router.use("/orders", require("./orders.route"));
+
 module.exports = router;

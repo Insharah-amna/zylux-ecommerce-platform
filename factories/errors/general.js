@@ -10,6 +10,12 @@ const GeneralErrors = {
 			.status(400)
 			.json({ statusCode: 400, message: customMessage || "Bad Request Error" });
 	},
+
+	unauthenticated: ({ res, customMessage } = {}) => {
+		return res
+			.status(400)
+			.json({ statusCode: 400, message: customMessage || "Unauthenticated" });
+	},
 };
 
 module.exports = GeneralErrors;

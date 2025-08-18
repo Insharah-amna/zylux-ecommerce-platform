@@ -5,7 +5,7 @@ import {
   EditCategoryResponse,
   GetCategoryResponse,
 } from '@/interfaces/redux';
-import {CategoryPayload, IdProps, ParamProps} from '@/interfaces/dashboard';
+import {CategoryPayload, IdProps} from '@/interfaces/dashboard';
 import {DASHBOARD_API_URLS, serverUrl} from '@/utils/PATHS';
 import {API_METHODS} from '@/constants/generals';
 import {handleApiResponse} from '@/redux/utils';

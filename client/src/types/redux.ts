@@ -17,6 +17,7 @@ export type Currency = {
   label: string;
   country: string;
   rate: number;
+  symbol: string;
 };
 
 export type CartItem = {
@@ -75,4 +76,13 @@ export type GetProductResponseType = {
   body: {
     product: Product;
   };
+};
+
+export type OrderProduct = {
+  productId: string | undefined;
+  name: string;
+  unitPrice: number;
+  discount: number;
+  quantity: number;
+  images: Array<string>;
 };

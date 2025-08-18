@@ -7,7 +7,7 @@ const QUICK_LINK_OPTIONS = {
   },
   storeLocation: {
     label: 'Find store location',
-    url: FOOTER_URLS.quickLinks.storeLocaton,
+    url: FOOTER_URLS.quickLinks.storeLocation,
   },
   privacyPolicy: {
     label: 'Privacy Policy',

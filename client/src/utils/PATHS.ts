@@ -13,6 +13,7 @@ export const AUTH_ROOT = '/auth';
 export const DASHBOARD_ROOT = '/dashboard';
 export const HOME_ROOT = '/home';
 export const SHOP_ROOT = '/shop';
+export const PROFILE_ROOT = '/profile';
 
 export const AUTH_ROUTES = {
   login: path(AUTH_ROOT, '/login'),
@@ -23,6 +24,12 @@ export const AUTH_ROUTES = {
 
 export const PUBLIC_ROUTES = {
   singleProduct: ({_id}: IdProps) => path(SHOP_ROOT, `/${_id}`),
+};
+
+export const PUBLIC_API_URLS = {
+  createOrder: '/orders',
+  orderSucceed: '/order-succeed',
+  orderFailed: '/order-failed',
 };
 
 export const AUTH_API_URLS = {
@@ -70,14 +77,14 @@ export const NAVBAR_URLS = {
 export const FOOTER_URLS = {
   quickLinks: {
     faq: '/faq',
-    storeLocaton: '/store-location',
+    storeLocation: '/store-location',
     privacyPolicy: '/privacy-policy',
     returnPolicy: '/return-policy',
     termsOfService: '/terms-of-service',
   },
   companyOptions: {
     wishlist: '/wishlist',
-    myAccount: '/myaccount',
+    myAccount: '/my-account',
     cart: '/cart',
     aboutUs: '/about-us',
   },

@@ -13,3 +13,12 @@ module.exports.HTTP_ARGS = {
 module.exports.GetPaginationSkip = ({ page = 1, limit = 1 }) => ({
 	skip: (page - 1) * limit,
 });
+
+module.exports.ROLES = {
+	admin: {
+		value: "admin",
+	},
+	buyer: {
+		value: "buyer",
+	},
+};

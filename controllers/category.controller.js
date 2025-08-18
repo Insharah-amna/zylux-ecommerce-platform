@@ -2,8 +2,6 @@ const GeneralServices = require("../services/general.service");
 const CategoryResponses = require("../factories/responses/category");
 const CategoryErrors = require("../factories/errors/category");
 const CategoriesModel = require("../model/categories.model");
-const { GetPaginationSkip } = require("../constants/general");
-const { buildProductQuery } = require("../utils/buildQueryUtils");
 
 const CategoriesController = {
 	createCategory: async (req, res) => {

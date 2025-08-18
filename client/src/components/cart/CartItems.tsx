@@ -4,7 +4,6 @@ import {
   actions,
   getCartItems,
   getCurrency,
-  getTotalPrice,
 } from '@/redux/slices/users/usersSlice';
 import {dispatch} from '@/redux/store';
 import Checkout from './Checkout';
@@ -16,14 +15,12 @@ import {getCurrencyConversion} from '@/utils/currencyUtils';
 const CartItems = () => {
   const cartItems = useSelector(getCartItems);
 
-  const subtotal = useSelector(getTotalPrice);
-
   const currency = useSelector(getCurrency);
 
   if (!cartItems || cartItems?.length === 0) return <EmptyCart />;
 
   return (
-    <div className='my-10'>
+    <div className='my-2'>
       {cartItems && (
         <>
           <div className='flex w-full py-4'>
@@ -72,7 +69,7 @@ const CartItems = () => {
                 </div>
 
                 <div className='w-1/6 h-[120px] flex-center text-lg'>
-                  {`${currency.value} ${getCurrencyConversion({
+                  {`${currency.symbol} ${getCurrencyConversion({
                     price: product.price * product.quantity,
                     currency: currency.label,
                   }).toFixed(2)}`}
@@ -81,7 +78,7 @@ const CartItems = () => {
             ))}
           </div>
 
-          <Checkout subtotal={subtotal} />
+          <Checkout />
         </>
       )}
     </div>

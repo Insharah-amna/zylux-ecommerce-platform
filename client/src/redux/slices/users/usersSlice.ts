@@ -6,7 +6,8 @@ const defaultState: UsersState = {
   currentUser: null,
   cartItems: [],
   currency: {
-    value: 'Rs',
+    value: 'pkr',
+    symbol: 'Rs',
     label: 'PKR',
     country: 'Pakistan',
     rate: 1,

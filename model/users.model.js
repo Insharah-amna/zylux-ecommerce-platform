@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const { ROLES } = require("../constants/general");
 
 const userSchema = new mongoose.Schema(
 	{
@@ -22,6 +23,10 @@ const userSchema = new mongoose.Schema(
 		isUserVerified: {
 			type: Boolean,
 			default: false,
+		},
+		role: {
+			type: String,
+			default: ROLES.buyer.value,
 		},
 	},
 	{

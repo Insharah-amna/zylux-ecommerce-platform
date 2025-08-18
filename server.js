@@ -14,6 +14,8 @@ app.use(
 	})
 );
 
+app.use("/orders/webhook", express.raw({ type: "application/json" }));
+
 app.use(express.json());
 
 app.use("/", require("./routes"));

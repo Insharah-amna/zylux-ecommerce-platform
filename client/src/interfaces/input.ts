@@ -56,3 +56,12 @@ export interface QuantitySelectorProps {
   handleIncrement: (data: any) => void;
   handleDecrement: (data: any) => void;
 }
+
+export interface TextareaFieldProps {
+  label: string;
+  id: string;
+  required: boolean;
+  className: string;
+  placeholder: string;
+  setValue: (data: string) => void;
+}

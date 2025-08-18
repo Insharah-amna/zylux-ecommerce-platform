@@ -5,6 +5,8 @@ export interface CartItemDetailProps {
   handleRemove: (data: any) => void;
 }
 
-export interface CheckoutProps {
-  subtotal: number;
+export interface AddressProps {
+  setAddress: (data: string) => void;
+  setCity: (data: string) => void;
+  setCountry: (data: string) => void;
 }

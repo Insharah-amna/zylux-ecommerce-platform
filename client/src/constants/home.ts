@@ -43,20 +43,23 @@ export const EURORATE = 332;
 
 const CURRENCY = {
   pk: {
-    value: 'Rs',
+    value: 'pk',
+    symbol: 'Rs',
     label: 'PKR',
     country: 'Pakistan',
     currency: 1,
   },
   us: {
-    value: '$',
+    value: 'usd',
+    symbol: '$',
     label: 'USD',
     country: 'United States',
     currency: DOLLARRATE,
   },
   eu: {
-    value: '€',
-    label: 'EU',
+    value: 'eur',
+    symbol: '€',
+    label: 'EUR',
     country: 'European Union',
     currency: EURORATE,
   },

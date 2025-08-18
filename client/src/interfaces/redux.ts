@@ -2,6 +2,7 @@ import {
   GetCategoryResponseType,
   GetProductResponseType,
   GetProductsResponseType,
+  OrderProduct,
 } from '@/types/redux';
 import {User} from '@/types/redux';
 
@@ -99,6 +100,23 @@ export interface DeleteProductResponses extends Response {
   categoryId: string;
   colorVariants: Array<string>;
   imageUrls: Array<string>;
+}
+
+// Orders Responses
+
+export interface CreateOrderResponse extends Response {
+  body: {
+    checkoutUrl: string;
+  };
+}
+
+export interface OrderPayload {
+  details: OrderProduct[];
+  totalPrice: number;
+  currency: string;
+  address: string;
+  city: string;
+  country: string;
 }
 
 interface ToastMessageConfig {

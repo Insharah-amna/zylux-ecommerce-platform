@@ -55,6 +55,13 @@ const UsersErrors = {
 			type: "USER_NOT_VERIFIED",
 		});
 	},
+
+	forbiddenUserErr: ({ res }) => {
+		return res.status(403).json({
+			statusCode: 403,
+			message: "Access denied",
+		});
+	},
 };
 
 module.exports = UsersErrors;

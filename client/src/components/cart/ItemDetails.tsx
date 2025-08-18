@@ -20,16 +20,16 @@ const ItemDetails = ({product, handleRemove}: CartItemDetailProps) => {
         />
       </div>
 
-      <div className='flex flex-col gap-2'>
+      <div className='flex flex-col gap-3 sm:gap-2'>
         <h3 className='text-lg capitalize'>{product.name}</h3>
         <div className='flex gap-2 h-[20px] items-center'>
-          <h4 className='text-gray-600'>Price:</h4>
-          <h4 className='text-gray-600'>{`${currency.value} ${getCurrencyConversion(
+          <h4 className='text-gray-600 text-sm sm:text-md'>Price:</h4>
+          <h4 className='text-gray-600 text-sm sm:text-md'>{`${currency.symbol} ${getCurrencyConversion(
             {
               price: product.price,
               currency: currency.label,
             }
-          ).toFixed(2)}`}</h4>
+          ).toFixed(1)}`}</h4>
         </div>
 
         <PrimaryButton
