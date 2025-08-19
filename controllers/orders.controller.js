@@ -4,6 +4,10 @@ const GeneralServices = require("../services/general.service");
 const StripeServices = require("../services/stripe.service");
 const OrdersModel = require("../model/orders.model");
 const { ORDER_STATUS } = require("../constants/orders");
+const { GetPaginationSkip } = require("../constants/general");
+const { buildOrdersQuery } = require("../utils/buildQueryUtils");
+const usersModel = require("../model/users.model");
+const UsersErrors = require("../factories/errors/users");
 
 const OrdersController = {
 	createOrder: async (req, res) => {
@@ -48,6 +52,92 @@ const OrdersController = {
 				id,
 			});
 		}
+	},
+
+	getAllOrders: async (req, res) => {
+		const { page, limit } = req.query;
+
+		const { skip } = GetPaginationSkip({ page, limit });
+
+		const query = buildOrdersQuery();
+
+		const { count } = await GeneralServices.countDocuments({
+			model: OrdersModel,
+			query,
+		});
+
+		const { error, response: orders } = await GeneralServices.find({
+			model: OrdersModel,
+			query,
+			options: {
+				queryProperties: {
+					limit,
+					skip,
+					sort: { createdAt: -1 },
+				},
+			},
+		});
+
+		return OrderResponses.ordersFetchedSuccessfully({
+			res,
+			orders,
+			page,
+			limit,
+			totalPages: Math.ceil(count / limit),
+		});
+	},
+
+	getOrdersById: async (req, res) => {
+		const { id } = req.params;
+
+		const { page, limit } = req.query;
+
+		const { skip } = GetPaginationSkip({ page, limit });
+
+		const query = buildOrdersQuery({ queryData: id });
+
+		const { count } = await GeneralServices.countDocuments({
+			model: OrdersModel,
+			query,
+		});
+
+		const { error: userError, response: user } = await GeneralServices.findById(
+			{
+				model: usersModel,
+				id,
+			}
+		);
+
+		if (!user || userError) return UsersErrors.userNotFoundErr({ res });
+
+		const { error, response: orders } = await GeneralServices.find({
+			model: OrdersModel,
+			query,
+			options: { limit, skip, sort: { createdAt: -1 } },
+		});
+
+		if (error || !orders) return OrderErrors.orderNotFound({ res });
+
+		return OrderResponses.ordersFetchedSuccessfully({
+			res,
+			orders,
+			page,
+			limit,
+			totalPages: Math.ceil(count / limit),
+		});
+	},
+
+	deleteOrder: async (req, res) => {
+		const { id } = req.params;
+
+		const { error } = await GeneralServices.findByIdAndDelete({
+			model: OrdersModel,
+			id,
+		});
+
+		if (error) return OrderErrors.deletionFailed({ res });
+
+		return OrderResponses.orderDeletedSuccessfully({ res });
 	},
 };
 

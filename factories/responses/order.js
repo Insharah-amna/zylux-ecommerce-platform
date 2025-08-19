@@ -22,6 +22,22 @@ const OrderResponses = {
 			body: {},
 		});
 	},
+
+	ordersFetchedSuccessfully: ({ res, orders, page, limit, totalPages }) => {
+		return res.status(200).json({
+			statusCode: 200,
+			message: "Orders fetched successfully",
+			body: { orders, pagination: { page, limit, totalPages } },
+		});
+	},
+
+	orderDeletedSuccessfully: ({ res }) => {
+		return res.status(200).json({
+			statusCode: 200,
+			message: "Order deleted successfully",
+			body: {},
+		});
+	},
 };
 
 module.exports = OrderResponses;

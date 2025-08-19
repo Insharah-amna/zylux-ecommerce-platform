@@ -6,7 +6,8 @@ const { validateOrderCheckoutRequest } = require("../schemas/ordersSchema");
 const catchAsync = require("../utils/asyncCatchUtils");
 const OrdersController = require("../controllers/orders.controller");
 const verifyStripeWebhookMiddleware = require("../middlewares/verifyStripeWebhook.middleware");
-const { ROLES } = require("../constants/general");
+const { ROLES, HTTP_ARGS } = require("../constants/general");
+const { validateIdParamsRequest } = require("../schemas/categorySchema");
 
 router.post(
 	"/",
@@ -22,6 +23,33 @@ router.post(
 	"/webhook",
 	verifyStripeWebhookMiddleware,
 	catchAsync(OrdersController.verifyOrder)
+);
+
+router.get(
+	"/",
+	authMiddleware,
+	accessMiddleware({ allowedRoles: [ROLES.admin.value] }),
+	catchAsync(OrdersController.getAllOrders)
+);
+
+router.get(
+	"/:id",
+	authMiddleware,
+	validatorMiddleware({
+		validateFunction: validateIdParamsRequest,
+		reqProperty: HTTP_ARGS.params.value,
+	}),
+	catchAsync(OrdersController.getOrdersById)
+);
+
+router.delete(
+	"/:id",
+	authMiddleware,
+	validatorMiddleware({
+		validateFunction: validateIdParamsRequest,
+		reqProperty: HTTP_ARGS.params.value,
+	}),
+	catchAsync(OrdersController.deleteOrder)
 );
 
 module.exports = router;
