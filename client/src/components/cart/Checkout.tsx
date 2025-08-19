@@ -53,7 +53,7 @@ const Checkout = () => {
   };
 
   return (
-    <div className='w-full flex flex-col gap-8 sm:gap-4 sm:flex-row justify-between '>
+    <div className='w-full flex flex-col gap-8 sm:gap-4 sm:flex-row justify-between my-8'>
       <div className='w-full sm:w-1/2'>
         <Address
           control={control}
@@ -62,7 +62,7 @@ const Checkout = () => {
         />
       </div>
 
-      <div className='w-full sm:w-1/2 flex items-end justify-end flex-col gap-5 py-5'>
+      <div className='w-full sm:w-1/2 flex items-end justify-end flex-col gap-5'>
         <div className='flex gap-2'>
           <h4 className='text-lg font-semibold'>Subtotal</h4>
           <h5 className='text-xl text-gray-600'>{`${currency.symbol} ${subtotal.toFixed(2)}`}</h5>

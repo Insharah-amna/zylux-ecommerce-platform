@@ -1,16 +1,14 @@
 import {TextareaField} from '@/components/shared/inputs/Textarea';
-import AuthFormContainer from '@/components/shared/containers/AuthFormContainer';
 import TextInput from '@/components/shared/inputs/TextInput';
 import {AddressProps} from '@/interfaces/cart';
-import SubmitButton from '../shared/buttons/SubmitButton';
+import SubmitButton from '@/components/shared/buttons/SubmitButton';
 
 const Address = ({handleSubmit, onSubmit, control}: AddressProps) => {
   return (
     <div className='w-full'>
-      <AuthFormContainer
-        heading=''
-        handleSubmit={handleSubmit(onSubmit)}
-        className='w-full md:w-[90%]'
+      <form
+        onSubmit={handleSubmit(onSubmit)}
+        className='w-full md:w-[90%] flex flex-col gap-3'
       >
         <TextareaField
           control={control}
@@ -42,7 +40,7 @@ const Address = ({handleSubmit, onSubmit, control}: AddressProps) => {
             className='rounded-[4px] hover:bg-accent'
           />
         </div>
-      </AuthFormContainer>
+      </form>
     </div>
   );
 };

@@ -8,14 +8,22 @@ export const addProductSchema: Yup.ObjectSchema<ProductsFormValues> =
     price: Yup.number()
       .required('Price is required')
       .min(1, 'Price must be greater than 0'),
+
     description: Yup.string().required('Description is required'),
     categoryId: Yup.object({
       value: Yup.string().required(),
       label: Yup.string().required(),
     }).required('Category is required'),
+
     colorVariants: Yup.array()
       .of(Yup.string().required())
       .required('At least 1 color is required'),
+
+    isOutOfStock: Yup.boolean().default(false),
+    discount: Yup.number()
+      .min(0, 'Discount cannot be negative')
+      .max(100, 'Invalid amount for discount')
+      .default(0),
 
     imageUrls: Yup.array().optional(),
     files: Yup.array().optional(),
