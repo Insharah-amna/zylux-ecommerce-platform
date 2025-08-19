@@ -15,8 +15,8 @@ const PriceFilter = ({values, setValues}: PriceFilterProps) => {
           <Slider.Root
             className='relative flex items-center select-none touch-none w-full h-5'
             min={0}
-            max={300}
-            step={1}
+            max={30000}
+            step={100}
             value={values}
             onValueChange={(val) => setValues(val as [number, number])}
           >

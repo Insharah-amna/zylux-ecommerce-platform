@@ -1,7 +1,9 @@
-'use client';
-import {useEffect, useState} from 'react';
 import {useRouter} from 'next/navigation';
 import {useSelector} from 'react-redux';
+import {useForm} from 'react-hook-form';
+import {yupResolver} from '@hookform/resolvers/yup';
+import {AddressPayload} from '@/interfaces/cart';
+import {addressSchema} from '@/schemas/dashboard';
 import {
   getCartItems,
   getCurrency,
@@ -13,10 +15,6 @@ import PrimaryButton from '@/components/shared/buttons/PrimaryButton';
 import Address from './Address';
 
 const Checkout = () => {
-  const [address, setAddress] = useState('');
-  const [city, setCity] = useState('');
-  const [country, setCountry] = useState('');
-
   const router = useRouter();
 
   const subtotal = useSelector(getTotalPrice);
@@ -25,39 +23,46 @@ const Checkout = () => {
 
   const currency = useSelector(getCurrency);
 
-  const [createOrder, {isLoading, data}] = useCreateOrderMutation();
+  const [createOrder, {isLoading}] = useCreateOrderMutation();
 
-  const checkoutUrl = data?.body?.checkoutUrl;
+  const {control, handleSubmit, getValues, setValue} = useForm<AddressPayload>({
+    defaultValues: {address: '', city: '', country: ''},
+    resolver: yupResolver(addressSchema),
+  });
 
-  useEffect(() => {
-    if (checkoutUrl) {
-      router.push(checkoutUrl);
-    }
-  }, [data]);
+  const onSubmit = (data: AddressPayload) => {
+    setValue('address', data.address);
+    setValue('city', data.city);
+    setValue('country', data.country);
+  };
 
-  const handleCheckout = () => {
+  const handleCheckout = async () => {
     const products = prepareOrderData({cartItems, currency});
 
-    createOrder({
+    const addressDetails = getValues();
+
+    const response = await createOrder({
       details: products,
       currency: currency.value,
       totalPrice: subtotal,
-      address,
-      city,
-      country,
+      ...addressDetails,
     });
+
+    const checkoutUrl = response.data?.body.checkoutUrl;
+    if (checkoutUrl) router.push(checkoutUrl);
   };
 
   return (
-    <div className='w-full flex flex-col sm:flex-row justify-between mt-10'>
-      <div className='w-full sm:w-1/2 mb-10'>
+    <div className='w-full flex flex-col gap-8 sm:gap-4 sm:flex-row justify-between '>
+      <div className='w-full sm:w-1/2'>
         <Address
-          setAddress={setAddress}
-          setCity={setCity}
-          setCountry={setCountry}
+          control={control}
+          handleSubmit={handleSubmit}
+          onSubmit={onSubmit}
         />
       </div>
-      <div className='w-full sm:w-1/2 flex items-end justify-center flex-col gap-5'>
+
+      <div className='w-full sm:w-1/2 flex items-end justify-end flex-col gap-5 py-5'>
         <div className='flex gap-2'>
           <h4 className='text-lg font-semibold'>Subtotal</h4>
           <h5 className='text-xl text-gray-600'>{`${currency.symbol} ${subtotal.toFixed(2)}`}</h5>
@@ -69,9 +74,9 @@ const Checkout = () => {
 
         <PrimaryButton
           buttonText='Check out'
-          className='w-[50%] h-[50px] text-lg mt-2 rounded-full'
+          className='w-[50%] h-[45px] text-lg mt-2 rounded-full'
           isLoading={isLoading}
-          handleClick={() => handleCheckout()}
+          handleClick={handleCheckout}
         />
       </div>
     </div>

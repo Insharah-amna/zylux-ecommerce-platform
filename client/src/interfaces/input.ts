@@ -58,10 +58,10 @@ export interface QuantitySelectorProps {
 }
 
 export interface TextareaFieldProps {
+  control: any;
   label: string;
-  id: string;
-  required: boolean;
+  name: string;
+  rows?: number;
   className: string;
   placeholder: string;
-  setValue: (data: string) => void;
 }

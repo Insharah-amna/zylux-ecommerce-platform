@@ -43,7 +43,7 @@ const ProductCardTemp = ({
 
           <CardTitle className='capitalize'>{product.name}</CardTitle>
 
-          <CardDescription className='text-primary font-semibold'>{`${currency.value} ${getCurrencyConversion(
+          <CardDescription className='text-primary font-semibold'>{`${currency.symbol} ${getCurrencyConversion(
             {
               price: product.price,
               currency: currency.label,

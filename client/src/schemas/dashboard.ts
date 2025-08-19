@@ -20,3 +20,9 @@ export const addProductSchema: Yup.ObjectSchema<ProductsFormValues> =
     imageUrls: Yup.array().optional(),
     files: Yup.array().optional(),
   });
+
+export const addressSchema = Yup.object().shape({
+  address: Yup.string().required('Address is required'),
+  city: Yup.string().required('City is required'),
+  country: Yup.string().required('Country is required'),
+});

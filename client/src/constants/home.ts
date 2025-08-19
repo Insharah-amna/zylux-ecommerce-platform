@@ -41,7 +41,7 @@ export const HOME_SWIPER_CONTENT = Object.values(HOME_PAGE_SWIPER_CONTENT);
 export const DOLLARRATE = 274;
 export const EURORATE = 332;
 
-const CURRENCY = {
+export const CURRENCIES = {
   pk: {
     value: 'pk',
     symbol: 'Rs',
@@ -65,7 +65,7 @@ const CURRENCY = {
   },
 };
 
-export const CURRENCY_ARRAY = Object.values(CURRENCY);
+export const CURRENCY_ARRAY = Object.values(CURRENCIES);
 
 const NAVBAR_PATH_LINKS = {
   home: {

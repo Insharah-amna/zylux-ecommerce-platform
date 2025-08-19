@@ -16,7 +16,7 @@ const ItemDetails = ({product, handleRemove}: CartItemDetailProps) => {
           alt='image'
           height={200}
           width={200}
-          className='bg-cover cursor-pointer min-w-[90px] max-h-[120px]'
+          className='bg-cover cursor-pointer min-w-[70px] max-h-[120px]'
         />
       </div>
 
@@ -24,7 +24,7 @@ const ItemDetails = ({product, handleRemove}: CartItemDetailProps) => {
         <h3 className='text-lg capitalize'>{product.name}</h3>
         <div className='flex gap-2 h-[20px] items-center'>
           <h4 className='text-gray-600 text-sm sm:text-md'>Price:</h4>
-          <h4 className='text-gray-600 text-sm sm:text-md'>{`${currency.symbol} ${getCurrencyConversion(
+          <h4 className='text-gray-600 text-sm sm:text-md'>{`${currency.symbol}${getCurrencyConversion(
             {
               price: product.price,
               currency: currency.label,

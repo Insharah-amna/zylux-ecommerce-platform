@@ -1,40 +1,48 @@
+import {TextareaField} from '@/components/shared/inputs/Textarea';
+import AuthFormContainer from '@/components/shared/containers/AuthFormContainer';
+import TextInput from '@/components/shared/inputs/TextInput';
 import {AddressProps} from '@/interfaces/cart';
-import {TextareaField} from '@/components/shared/textarea';
-import {Input} from '@/components/ui/input';
+import SubmitButton from '../shared/buttons/SubmitButton';
 
-const Address = ({setAddress, setCity, setCountry}: AddressProps) => {
+const Address = ({handleSubmit, onSubmit, control}: AddressProps) => {
   return (
-    <div className='flex flex-col gap-3 w-[90%] md:w-[80%] text-primary'>
-      <TextareaField
-        placeholder='Enter your address here...'
-        label='Address'
-        id='address'
-        className='p-2'
-        setValue={setAddress}
-        required={true}
-      />
-
-      <div className='flex flex-col gap-2'>
-        <label htmlFor='city'>City</label>
-        <Input
+    <div className='w-full'>
+      <AuthFormContainer
+        heading=''
+        handleSubmit={handleSubmit(onSubmit)}
+        className='w-full md:w-[90%]'
+      >
+        <TextareaField
+          control={control}
+          placeholder='Enter your address here...'
+          label='Address'
+          name='address'
           className='p-2'
+        />
+
+        <TextInput
+          control={control}
           name='city'
-          placeholder='Enter your city'
-          onChange={(e) => setCity(e.target.value)}
-          required
+          type='text'
+          label='City'
+          className='rounded-[2px] h-[35px]'
         />
-      </div>
 
-      <div className='flex flex-col gap-2'>
-        <label htmlFor='country'>Country</label>
-        <Input
-          className='p-2'
+        <TextInput
+          control={control}
           name='country'
-          placeholder='Enter your country'
-          onChange={(e) => setCountry(e.target.value)}
-          required
+          type='text'
+          label='Country'
+          className='rounded-[2px] h-[35px]'
         />
-      </div>
+
+        <div className='flex w-full justify-end'>
+          <SubmitButton
+            buttonText='Set address'
+            className='rounded-[4px] hover:bg-accent'
+          />
+        </div>
+      </AuthFormContainer>
     </div>
   );
 };

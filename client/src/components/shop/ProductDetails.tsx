@@ -16,10 +16,12 @@ const ProductColor = ({
         {product.name}
       </h1>
 
-      <p className='text-2xl my-3'>{`${currency.value} ${getCurrencyConversion({
-        price: product.price,
-        currency: currency.label,
-      }).toFixed(2)}`}</p>
+      <p className='text-2xl my-3'>{`${currency.symbol} ${getCurrencyConversion(
+        {
+          price: product.price,
+          currency: currency.label,
+        }
+      ).toFixed(2)}`}</p>
 
       <h4 className='text-gray-700 text-lg font-semibold'>Color:</h4>
       <div className='flex gap-2'>
