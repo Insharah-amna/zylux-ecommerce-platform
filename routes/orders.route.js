@@ -28,28 +28,19 @@ router.post(
 router.get(
 	"/",
 	authMiddleware,
-	accessMiddleware({ allowedRoles: [ROLES.admin.value] }),
+	// accessMiddleware({ allowedRoles: [ROLES.admin.value] }),
 	catchAsync(OrdersController.getAllOrders)
 );
 
 router.get(
 	"/:id",
 	authMiddleware,
+	// accessMiddleware({ allowedRoles: [ROLES.buyer.value] }),
 	validatorMiddleware({
 		validateFunction: validateIdParamsRequest,
 		reqProperty: HTTP_ARGS.params.value,
 	}),
-	catchAsync(OrdersController.getOrdersById)
-);
-
-router.delete(
-	"/:id",
-	authMiddleware,
-	validatorMiddleware({
-		validateFunction: validateIdParamsRequest,
-		reqProperty: HTTP_ARGS.params.value,
-	}),
-	catchAsync(OrdersController.deleteOrder)
+	catchAsync(OrdersController.getOrdersByUserId)
 );
 
 module.exports = router;

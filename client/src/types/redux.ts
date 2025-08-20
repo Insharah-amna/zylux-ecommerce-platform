@@ -78,6 +78,19 @@ export type GetProductResponseType = {
   };
 };
 
+export type Order = {
+  _id: string;
+  userId: User;
+  address: string;
+  city: string;
+  country: string;
+  details: OrderProduct[];
+  totalPrice: number;
+  currency: string;
+  status: string;
+  createdAt: string;
+};
+
 export type OrderProduct = {
   productId: string | undefined;
   name: string;
@@ -85,4 +98,11 @@ export type OrderProduct = {
   discount: number;
   quantity: number;
   images: Array<string>;
+};
+
+export type GetOrdersResponseType = {
+  body: {
+    orders: Order[];
+    pagination: Pagination;
+  };
 };

@@ -70,6 +70,7 @@ const OrdersController = {
 			model: OrdersModel,
 			query,
 			options: {
+				populatedFields: "userId",
 				queryProperties: {
 					limit,
 					skip,
@@ -87,8 +88,8 @@ const OrdersController = {
 		});
 	},
 
-	getOrdersById: async (req, res) => {
-		const { id } = req.params;
+	getOrdersByUserId: async (req, res) => {
+		const id = req.user._id;
 
 		const { page, limit } = req.query;
 
@@ -125,19 +126,6 @@ const OrdersController = {
 			limit,
 			totalPages: Math.ceil(count / limit),
 		});
-	},
-
-	deleteOrder: async (req, res) => {
-		const { id } = req.params;
-
-		const { error } = await GeneralServices.findByIdAndDelete({
-			model: OrdersModel,
-			id,
-		});
-
-		if (error) return OrderErrors.deletionFailed({ res });
-
-		return OrderResponses.orderDeletedSuccessfully({ res });
 	},
 };
 

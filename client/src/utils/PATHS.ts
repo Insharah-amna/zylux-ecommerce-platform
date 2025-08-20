@@ -1,4 +1,4 @@
-import {FiGrid, FiTag} from 'react-icons/fi';
+import {FiClock, FiGrid, FiTag} from 'react-icons/fi';
 import {TokenProps} from '@/interfaces/auth';
 import {IdProps} from '@/interfaces/dashboard';
 
@@ -27,7 +27,6 @@ export const PUBLIC_ROUTES = {
 };
 
 export const PUBLIC_API_URLS = {
-  createOrder: '/orders',
   orderSucceed: '/order-succeed',
   orderFailed: '/order-failed',
 };
@@ -45,6 +44,7 @@ export const AUTH_API_URLS = {
 export const DASHBOARD_ROUTES = {
   categories: path(DASHBOARD_ROOT, '/categories'),
   products: path(DASHBOARD_ROOT, '/products'),
+  orders: path(DASHBOARD_ROOT, '/orders'),
 };
 
 export const DASHBOARD_API_URLS = {
@@ -63,9 +63,17 @@ export const DASHBOARD_API_URLS = {
   },
 };
 
+export const ORDER_API_URLS = {
+  createOrder: '/orders',
+  getOrders: '/orders',
+  getOrdersById: ({_id}: IdProps) => `/orders/${_id}`,
+  deleteOrder: ({_id}: IdProps) => `/orders/${_id}`,
+};
+
 export const SIDEBAR_ITEMS = [
   {title: 'Categories', icon: FiGrid, url: DASHBOARD_ROUTES.categories},
   {title: 'Products', icon: FiTag, url: DASHBOARD_ROUTES.products},
+  {title: 'Orders', icon: FiClock, url: DASHBOARD_ROUTES.orders},
 ];
 
 export const NAVBAR_URLS = {
