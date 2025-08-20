@@ -1,16 +1,15 @@
-'use client';
-import CustomTable from '@/components/shared/tables/CustomTable';
-import {TableCell, TableRow} from '@/components/ui/table';
-import {ORDERS_TABLE_HEADER} from '@/constants/orders';
+import {OrderTableProps} from '@/interfaces/order';
 import {useServerSideListFilter} from '@/hooks/useServerSideListFilter';
-import {useFetchOrdersQuery} from '@/redux/slices/orders/ordersApi';
+import {useFetchOrdersByUserIdQuery} from '@/redux/slices/orders/ordersApi';
 import {QUERY_PARAMS} from '@/constants/queryParams';
+import {USER_ORDERS_TABLE_HEADER} from '@/constants/orders';
 import ComponentLoader from '@/components/shared/loaders/ComponentLoader';
 import {Order} from '@/types/redux';
 import OrderRow from './OrderRow';
-import {OrderTableProps} from '@/interfaces/order';
+import CustomTable from '@/components/shared/tables/CustomTable';
+import {TableCell, TableRow} from '@/components/ui/table';
 
-const OrderTable = ({
+const UserOrderTable = ({
   setSelectedOrder,
   setIsInfoOpen,
   isUserOrders,
@@ -20,19 +19,19 @@ const OrderTable = ({
     isLoading: isOrdersLoading,
     PaginationComponent,
   } = useServerSideListFilter({
-    queryToCall: useFetchOrdersQuery,
+    queryToCall: useFetchOrdersByUserIdQuery,
     queryKey: 'orders',
     queryOptions: QUERY_PARAMS.orders,
   });
 
-  const ordersTableHeader = Object.values(ORDERS_TABLE_HEADER);
+  const userOrdersTableHeader = Object.values(USER_ORDERS_TABLE_HEADER);
 
   if (isOrdersLoading) return <ComponentLoader />;
 
   return (
     <>
       <CustomTable
-        tableHeaders={ordersTableHeader}
+        tableHeaders={userOrdersTableHeader}
         tableBody={
           <>
             {ordersList.map((order: Order) => (
@@ -49,7 +48,7 @@ const OrderTable = ({
                   colSpan={5}
                   className='w-full text-center py-6 text-gray-500'
                 >
-                  You have no orders yet.
+                  You have not placed any orders yet.
                 </TableCell>
               </TableRow>
             )}
@@ -61,4 +60,4 @@ const OrderTable = ({
   );
 };
 
-export default OrderTable;
+export default UserOrderTable;

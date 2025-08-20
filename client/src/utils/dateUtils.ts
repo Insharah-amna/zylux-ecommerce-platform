@@ -7,5 +7,5 @@ function getDateTimeInMillis() {
 export default getDateTimeInMillis;
 
 export const formatDate = ({date}: {date: string}) => {
-  return DateTime.fromISO(date).toFormat('MMM dd, yyyy, hh:mm');
+  return DateTime.fromISO(date).toFormat('MMM dd, yyyy, hh:mm a');
 };

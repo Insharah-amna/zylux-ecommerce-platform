@@ -11,7 +11,7 @@ const OrderInfo = ({selectedOrder, onCancel}: OrderInfoModalProps) => {
       <div className='w-full flex pt-4 flex-col gap-4'>
         <DisplayFields label='Order Id' value={selectedOrder._id} />
         <DisplayFields
-          label='Total Price'
+          label='Subtotal'
           value={`${getCurrencySymbol({value: selectedOrder.currency})} ${selectedOrder.totalPrice.toFixed(2)}`}
         />
         <DisplayFields label='Status' value={selectedOrder.status} />
@@ -21,41 +21,44 @@ const OrderInfo = ({selectedOrder, onCancel}: OrderInfoModalProps) => {
       </div>
 
       <div className='w-full flex flex-col gap-4'>
-        <label className='text-lg font-semibold'>Products Info</label>
         {selectedOrder?.details.map((product: OrderProduct) => (
           <div
             key={product.productId}
-            className='border-b-1 border-gray-300 gap-2 flex flex-col'
+            className='border-b-1 border-gray-300 gap-2 flex flex-col shadow-sm rounded-md px-4 py-2'
           >
             <DisplayFields label='Name' value={product.name} />
             <DisplayFields label='Quantity' value={product.quantity} />
-            {/* <DisplayFields
-              label='Unit Price'
-              value={`${getCurrencySymbol({value: selectedOrder.currency})} ${product.unitPrice}`}
-            /> */}
-            <DisplayFields
-              label='Unit Price'
-              value={
-                <p>
-                  {`${getCurrencySymbol({value: selectedOrder.currency})} `}
 
-                  <span className='line-through text-gray-600'>
-                    {getCurrencyConversion({
-                      price: product.unitPrice,
-                      currency: selectedOrder.currency,
-                    })}
-                  </span>
+            {product.discount > 0 ? (
+              <DisplayFields
+                label='Unit Price'
+                value={
+                  <p>
+                    {`${getCurrencySymbol({value: selectedOrder.currency})} `}
 
-                  <span>
-                    {` ${getDiscountedPrice({
-                      unitPrice: product.unitPrice,
-                      discount: product.discount,
-                      currency: selectedOrder.currency,
-                    })}`}
-                  </span>
-                </p>
-              }
-            />
+                    <span className='line-through text-gray-600'>
+                      {getCurrencyConversion({
+                        price: product.unitPrice,
+                        currency: selectedOrder.currency,
+                      })}
+                    </span>
+
+                    <span>
+                      {` ${getDiscountedPrice({
+                        unitPrice: product.unitPrice,
+                        discount: product.discount,
+                        currency: selectedOrder.currency,
+                      })}`}
+                    </span>
+                  </p>
+                }
+              />
+            ) : (
+              <DisplayFields
+                label='Unit Price'
+                value={`${getCurrencySymbol({value: selectedOrder.currency})} ${product.unitPrice}`}
+              />
+            )}
             <DisplayFields label='Discount' value={`${product.discount}%`} />
             <DisplayFields
               label='Images'
@@ -72,11 +75,10 @@ const OrderInfo = ({selectedOrder, onCancel}: OrderInfoModalProps) => {
         ))}
       </div>
 
-      <div className='flex-center mt-6 max-w-[500px]'>
+      <div className='flex-center my-6 sticky bottom-6 bg-white max-w-[500px]'>
         <PrimaryButton
           buttonText='Close'
           className='h-[36px]'
-          variant={'outline'}
           handleClick={onCancel}
         />
       </div>

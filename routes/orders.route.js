@@ -28,18 +28,14 @@ router.post(
 router.get(
 	"/",
 	authMiddleware,
-	// accessMiddleware({ allowedRoles: [ROLES.admin.value] }),
+	accessMiddleware({ allowedRoles: [ROLES.admin.value] }),
 	catchAsync(OrdersController.getAllOrders)
 );
 
 router.get(
-	"/:id",
+	"/user-orders",
 	authMiddleware,
-	// accessMiddleware({ allowedRoles: [ROLES.buyer.value] }),
-	validatorMiddleware({
-		validateFunction: validateIdParamsRequest,
-		reqProperty: HTTP_ARGS.params.value,
-	}),
+	accessMiddleware({ allowedRoles: [ROLES.buyer.value] }),
 	catchAsync(OrdersController.getOrdersByUserId)
 );
 

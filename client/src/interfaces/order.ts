@@ -8,12 +8,14 @@ export interface OrderDataProps {
 export interface OrderTableProps {
   setSelectedOrder: (data: any) => void;
   setIsInfoOpen: (data: any) => void;
+  isUserOrders: boolean;
 }
 
 export interface OrderRowProps {
   order: Order;
   setSelectedOrder: (data: any) => void;
   setIsInfoOpen: (data: any) => void;
+  isUserOrders: boolean;
 }
 
 export interface OrderInfoModalProps {

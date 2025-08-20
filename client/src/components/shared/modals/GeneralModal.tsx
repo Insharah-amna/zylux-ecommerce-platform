@@ -23,9 +23,13 @@ export const GeneralModal = ({
 }: GeneralModalProps) => {
   return (
     <Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>
-      <DialogContent className={`${width} ${height} overflow-y-auto`}>
-        <DialogHeader>
-          <DialogTitle className={titleAlignment}>{title}</DialogTitle>
+      <DialogContent className={`${width} ${height} px-2 py-0`}>
+        <DialogHeader className='overflow-y-auto'>
+          <div className='sticky top-0'>
+            <DialogTitle className={`bg-white p-5 ${titleAlignment}`}>
+              {title}
+            </DialogTitle>
+          </div>
           <div className='flex flex-col'>
             {content && (
               <>

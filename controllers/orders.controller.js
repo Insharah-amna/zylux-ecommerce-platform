@@ -95,7 +95,7 @@ const OrdersController = {
 
 		const { skip } = GetPaginationSkip({ page, limit });
 
-		const query = buildOrdersQuery({ queryData: id });
+		const query = buildOrdersQuery(id);
 
 		const { count } = await GeneralServices.countDocuments({
 			model: OrdersModel,

@@ -66,8 +66,7 @@ export const DASHBOARD_API_URLS = {
 export const ORDER_API_URLS = {
   createOrder: '/orders',
   getOrders: '/orders',
-  getOrdersById: ({_id}: IdProps) => `/orders/${_id}`,
-  deleteOrder: ({_id}: IdProps) => `/orders/${_id}`,
+  getOrdersByUserId: '/orders/user-orders',
 };
 
 export const SIDEBAR_ITEMS = [

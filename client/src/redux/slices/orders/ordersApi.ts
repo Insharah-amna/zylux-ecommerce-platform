@@ -64,7 +64,27 @@ export const ordersApiSlice = createApi({
         });
       },
     }),
+
+    // Get Orders by Id Api
+    fetchOrdersByUserId: builder.query<GetOrdersResponse, ParamProps>({
+      query: (params) => ({
+        url: ORDER_API_URLS.getOrdersByUserId,
+        method: API_METHODS.GET,
+        params,
+      }),
+
+      async onQueryStarted(_, {queryFulfilled}) {
+        await handleApiResponse({
+          queryFulfilled,
+          toastMessage: {success: {show: false}, error: {show: false}},
+        });
+      },
+    }),
   }),
 });
 
-export const {useCreateOrderMutation, useFetchOrdersQuery} = ordersApiSlice;
+export const {
+  useCreateOrderMutation,
+  useFetchOrdersQuery,
+  useFetchOrdersByUserIdQuery,
+} = ordersApiSlice;
