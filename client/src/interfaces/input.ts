@@ -31,9 +31,10 @@ export interface SelectInputProps {
 export interface DropdownProps {
   options: Option[];
   className?: string;
-  selectedValue: string;
+  selectedValue?: string;
   isOpen: boolean;
   setIsOpen: Dispatch<SetStateAction<boolean>>;
+  handleClick: (data: any) => void;
 }
 
 export interface CheckboxInputProps {

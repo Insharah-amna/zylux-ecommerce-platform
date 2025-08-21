@@ -1,7 +1,7 @@
 import Image from 'next/image';
+import {useSelector} from 'react-redux';
 import {CartItemDetailProps} from '@/interfaces/cart';
 import PrimaryButton from '@/components/shared/buttons/PrimaryButton';
-import {useSelector} from 'react-redux';
 import {getCurrency} from '@/redux/slices/users/usersSlice';
 import {getCurrencyConversion} from '@/utils/currencyUtils';
 import {getDiscountedPrice} from '@/utils/discountedPrice';
@@ -27,7 +27,6 @@ const ItemDetails = ({product, handleRemove}: CartItemDetailProps) => {
           <h4 className='text-gray-600 text-sm sm:text-md'>Price:</h4>
           <h4 className='text-gray-600 text-sm sm:text-md'>{`${currency.symbol}${getCurrencyConversion(
             {
-              // price: product.price,
               price: getDiscountedPrice({
                 unitPrice: product.price,
                 discount: product.discount,

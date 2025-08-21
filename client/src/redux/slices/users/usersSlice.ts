@@ -65,6 +65,9 @@ export const actions = slice.actions;
 export const getCurrentUser = (state: {users: UsersState}) =>
   state.users.currentUser;
 
+export const getUserRole = (state: {users: UsersState}) =>
+  state.users.currentUser?.role;
+
 export const getCartItems = (state: {users: UsersState}) =>
   state.users.cartItems;
 

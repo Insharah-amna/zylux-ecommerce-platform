@@ -1,6 +1,12 @@
 import {CURRENCIES} from '@/constants/home';
 
-export const getCurrencyConversion = ({price, currency}: any) => {
+export const getCurrencyConversion = ({
+  price,
+  currency,
+}: {
+  price: number;
+  currency: string;
+}) => {
   if (currency === CURRENCIES.eu.label) {
     return Number(price / CURRENCIES.eu.currency).toFixed(2);
   } else if (currency === CURRENCIES.us.label) {

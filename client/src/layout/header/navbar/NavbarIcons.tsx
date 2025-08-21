@@ -1,27 +1,17 @@
-import {useSelector} from 'react-redux';
-import {FiHeart, FiSearch, FiShoppingBag, FiUser} from 'react-icons/fi';
-import {getCartItems} from '@/redux/slices/users/usersSlice';
-import {NavbarIconProps} from '@/interfaces/headers';
+'use client';
 import Link from 'next/link';
-import {FOOTER_URLS, PROFILE_ROOT} from '@/utils/PATHS';
+import {useSelector} from 'react-redux';
+import {FiHeart, FiShoppingBag} from 'react-icons/fi';
+import {getCartItems} from '@/redux/slices/users/usersSlice';
+import {FOOTER_URLS} from '@/utils/PATHS';
+import ProfileDropdown from '@/components/shared/dropdowns/ProfileDropdown';
 
-const NavbarIcons = ({setIsSearchBarOpen}: NavbarIconProps) => {
+const NavbarIcons = () => {
   const cartItems = useSelector(getCartItems);
 
   return (
     <div className='flex-end gap-5 text-primary text-xl w-1/3'>
-      <button
-        onClick={() => setIsSearchBarOpen(true)}
-        className='cursor-pointer'
-      >
-        <FiSearch className='hover:text-gray-700' />
-      </button>
-
-      <Link href={PROFILE_ROOT}>
-        <button className='hidden md:block cursor-pointer'>
-          <FiUser className='hover:text-gray-700' />
-        </button>
-      </Link>
+      <ProfileDropdown />
 
       <button className='hidden md:block relative cursor-pointer'>
         <FiHeart className='hover:text-gray-700 hidden md:block' />

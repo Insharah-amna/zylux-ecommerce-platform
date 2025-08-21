@@ -4,6 +4,7 @@ export type User = {
   email: string;
   isUserVerified: boolean;
   loginToken?: string;
+  role: 'admin' | 'buyer';
 };
 
 export type UsersState = {
