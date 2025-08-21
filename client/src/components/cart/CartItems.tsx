@@ -70,7 +70,7 @@ const CartItems = () => {
               {`${currency.symbol} ${getCurrencyConversion({
                 price: product.price * product.quantity,
                 currency: currency.label,
-              }).toFixed(2)}`}
+              })}`}
             </div>
           </div>
         ))}

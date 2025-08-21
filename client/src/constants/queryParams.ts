@@ -49,4 +49,11 @@ export const QUERY_PARAMS = {
       category: [],
     },
   },
+
+  orders: {
+    pageOptions: {
+      page: 1,
+      limit: 15,
+    },
+  },
 };

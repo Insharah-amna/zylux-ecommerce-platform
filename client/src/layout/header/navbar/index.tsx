@@ -42,7 +42,7 @@ const Navbar = () => {
 
             <NavbarPaths />
 
-            <NavbarIcons setIsSearchBarOpen={setIsSearchBarOpen} />
+            <NavbarIcons />
           </div>
         </Container>
       </div>

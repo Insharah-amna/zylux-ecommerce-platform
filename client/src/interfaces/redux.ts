@@ -1,5 +1,6 @@
 import {
   GetCategoryResponseType,
+  GetOrdersResponseType,
   GetProductResponseType,
   GetProductsResponseType,
   OrderProduct,
@@ -108,6 +109,19 @@ export interface CreateOrderResponse extends Response {
   body: {
     checkoutUrl: string;
   };
+}
+
+export interface GetOrdersResponse extends Response, GetOrdersResponseType {
+  _id: string;
+  userId: string;
+  address: string;
+  city: string;
+  country: string;
+  details: OrderProduct[];
+  totalPrice: number;
+  currency: string;
+  status: string;
+  createdAt: Date;
 }
 
 export interface OrderPayload {

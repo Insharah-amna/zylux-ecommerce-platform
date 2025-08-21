@@ -10,6 +10,7 @@ import ComponentLoader from '@/components/shared/loaders/ComponentLoader';
 import {ProductCardsProps} from '@/interfaces/cards';
 import ProductNotFound from './ProductNotFound';
 import {getCurrencyConversion} from '@/utils/currencyUtils';
+import {getDiscountedPrice} from '@/utils/discountedPrice';
 
 const ProductCardTemp = ({
   productsList,
@@ -43,12 +44,33 @@ const ProductCardTemp = ({
 
           <CardTitle className='capitalize'>{product.name}</CardTitle>
 
-          <CardDescription className='text-primary font-semibold'>{`${currency.symbol} ${getCurrencyConversion(
-            {
-              price: product.price,
-              currency: currency.label,
-            }
-          ).toFixed(2)}`}</CardDescription>
+          {product.discount > 0 ? (
+            <CardDescription className='text-primary font-semibold'>
+              {`${currency.symbol} `}
+
+              <span className='line-through text-accent'>
+                {getCurrencyConversion({
+                  price: product.price,
+                  currency: currency.label,
+                })}
+              </span>
+
+              <span>
+                {` ${getDiscountedPrice({
+                  unitPrice: product.price,
+                  discount: product.discount,
+                  currency: currency.label,
+                })}`}
+              </span>
+            </CardDescription>
+          ) : (
+            <CardDescription className='text-primary font-semibold'>{`${currency.symbol} ${getCurrencyConversion(
+              {
+                price: product.price,
+                currency: currency.label,
+              }
+            )}`}</CardDescription>
+          )}
 
           <ColorsPreview colorVariants={product.colorVariants} />
         </div>

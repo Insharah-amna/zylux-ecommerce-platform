@@ -33,3 +33,17 @@ exports.buildProductQuery = ({ queryData }) => {
 
 	return query;
 };
+
+exports.buildOrdersQuery = (queryData) => {
+	const userId = queryData;
+
+	let query = {};
+
+	if (userId) {
+		query.userId = userId;
+	}
+
+	query.status = { $in: ["placed", "completed"] };
+
+	return query;
+};

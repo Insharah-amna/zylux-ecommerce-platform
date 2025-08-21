@@ -7,7 +7,8 @@ import {CURRENCY_ARRAY, SOCIAL_ICON_LINKS} from '@/constants/home';
 import DropDown from '@/components/shared/dropdowns/DropDown';
 import TopbarSwiper from './TopbarSwiper';
 import Container from '@/components/shared/containers/Container';
-import {getCurrency} from '@/redux/slices/users/usersSlice';
+import {actions, getCurrency} from '@/redux/slices/users/usersSlice';
+import {dispatch} from '@/redux/store';
 
 const TopBar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -41,6 +42,7 @@ const TopBar = () => {
               selectedValue={currency.label}
               isOpen={isOpen}
               setIsOpen={setIsOpen}
+              handleClick={(option) => dispatch(actions.setCurrency(option))}
             />
           </div>
         </header>

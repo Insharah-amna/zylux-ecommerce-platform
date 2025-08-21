@@ -17,7 +17,7 @@ import Address from './Address';
 const Checkout = () => {
   const router = useRouter();
 
-  const subtotal = useSelector(getTotalPrice);
+  const subtotal = Number(useSelector(getTotalPrice));
 
   const cartItems = useSelector(getCartItems);
 
@@ -65,7 +65,7 @@ const Checkout = () => {
       <div className='w-full sm:w-1/2 flex items-end justify-end flex-col gap-5'>
         <div className='flex gap-2'>
           <h4 className='text-lg font-semibold'>Subtotal</h4>
-          <h5 className='text-xl text-gray-600'>{`${currency.symbol} ${subtotal.toFixed(2)}`}</h5>
+          <h5 className='text-xl text-gray-600'>{`${currency.symbol} ${subtotal}`}</h5>
         </div>
 
         <p className='text-gray-600 text-right'>

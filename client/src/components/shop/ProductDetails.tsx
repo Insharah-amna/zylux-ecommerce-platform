@@ -2,6 +2,7 @@ import {useSelector} from 'react-redux';
 import {getCurrencyConversion} from '@/utils/currencyUtils';
 import {ProductColorProps} from '@/interfaces/shop';
 import {getCurrency} from '@/redux/slices/users/usersSlice';
+import {getDiscountedPrice} from '@/utils/discountedPrice';
 
 const ProductColor = ({
   product,
@@ -12,18 +13,44 @@ const ProductColor = ({
 
   return (
     <>
-      <h1 className='text-4xl text-primary font-semibold capitalize'>
+      <h1 className='text-4xl text-primary font-semibold capitalize mb-2'>
         {product.name}
       </h1>
 
-      <p className='text-2xl my-3'>{`${currency.symbol} ${getCurrencyConversion(
-        {
+      {product.discount > 0 ? (
+        <>
+          <p className='text-2xl'>
+            {`${currency.symbol} `}
+
+            <span className='line-through'>
+              {getCurrencyConversion({
+                price: product.price,
+                currency: currency.label,
+              })}
+            </span>
+
+            <span>
+              {` ${getDiscountedPrice({
+                unitPrice: product.price,
+                discount: product.discount,
+                currency: currency.label,
+              })}`}
+            </span>
+          </p>
+
+          <div className='flex gap-3 items-center text-gray-600'>
+            <p className='text-lg'>Discount:</p>
+            <p>{`${product.discount}%`}</p>
+          </div>
+        </>
+      ) : (
+        <p className='text-2xl'>{`${currency.symbol} ${getCurrencyConversion({
           price: product.price,
           currency: currency.label,
-        }
-      ).toFixed(2)}`}</p>
+        })}`}</p>
+      )}
 
-      <h4 className='text-gray-700 text-lg font-semibold'>Color:</h4>
+      <h6 className='text-gray-700 text-lg font-semibold'>Color:</h6>
       <div className='flex gap-2'>
         {product.colorVariants.map((color) => (
           <button

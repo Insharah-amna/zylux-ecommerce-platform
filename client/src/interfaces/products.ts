@@ -1,4 +1,4 @@
-import {Dispatch, SetStateAction} from 'react';
+import {Dispatch, ReactNode, SetStateAction} from 'react';
 import {UseFormSetValue} from 'react-hook-form';
 import {Product} from '@/types/redux';
 import {CategoryId} from './dashboard';
@@ -82,7 +82,7 @@ export interface ProductInfoProps {
 
 export interface LabelValueRowProps {
   label: string;
-  value: string | number | null | undefined;
+  value: ReactNode | string | number | null | undefined;
 }
 
 export interface ProductProps {
