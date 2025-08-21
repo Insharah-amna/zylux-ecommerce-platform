@@ -8,4 +8,6 @@ router.use("/products", require("./products.route"));
 
 router.use("/orders", require("./orders.route"));
 
+router.use("/wishlist", require("./wishlist.route"));
+
 module.exports = router;
