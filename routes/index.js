@@ -10,4 +10,6 @@ router.use("/orders", require("./orders.route"));
 
 router.use("/wishlist", require("./wishlist.route"));
 
+router.use("/review", require("./review.route"));
+
 module.exports = router;
