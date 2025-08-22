@@ -1,4 +1,4 @@
-import Loader from './Loader';
+import Loader from './SyncLoader';
 import {ComponentLoaderProps} from '@/interfaces/loaders';
 
 const ComponentLoader = ({height = 100}: ComponentLoaderProps) => {

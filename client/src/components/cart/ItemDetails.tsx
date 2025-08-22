@@ -3,7 +3,6 @@ import {useSelector} from 'react-redux';
 import {CartItemDetailProps} from '@/interfaces/cart';
 import PrimaryButton from '@/components/shared/buttons/PrimaryButton';
 import {getCurrency} from '@/redux/slices/users/usersSlice';
-import {getCurrencyConversion} from '@/utils/currencyUtils';
 import {getDiscountedPrice} from '@/utils/discountedPrice';
 
 const ItemDetails = ({product, handleRemove}: CartItemDetailProps) => {
@@ -25,13 +24,10 @@ const ItemDetails = ({product, handleRemove}: CartItemDetailProps) => {
         <h3 className='text-lg capitalize'>{product.name}</h3>
         <div className='flex gap-2 h-[20px] items-center'>
           <h4 className='text-gray-600 text-sm sm:text-md'>Price:</h4>
-          <h4 className='text-gray-600 text-sm sm:text-md'>{`${currency.symbol}${getCurrencyConversion(
+          <h4 className='text-gray-600 text-sm sm:text-md'>{`${currency.symbol}${getDiscountedPrice(
             {
-              price: getDiscountedPrice({
-                unitPrice: product.price,
-                discount: product.discount,
-                currency: currency.label,
-              }),
+              unitPrice: product.price,
+              discount: product.discount,
               currency: currency.label,
             }
           )}`}</h4>

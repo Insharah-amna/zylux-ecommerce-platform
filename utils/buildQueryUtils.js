@@ -47,3 +47,11 @@ exports.buildOrdersQuery = (queryData) => {
 
 	return query;
 };
+
+exports.buildWishlistQuery = (userId) => {
+	let query = {};
+
+	query.userId = userId;
+
+	return query;
+};

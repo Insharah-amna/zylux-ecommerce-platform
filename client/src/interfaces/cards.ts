@@ -1,5 +1,4 @@
 import {Product} from '@/types/redux';
-import {IdProps} from './dashboard';
 
 export interface ColorPreviewProps {
   colorVariants: string[];
@@ -7,6 +6,6 @@ export interface ColorPreviewProps {
 
 export interface ProductCardsProps {
   productsList: Product[];
-  isProductsLoading: boolean;
+  isProductsLoading?: boolean;
   className: string;
 }

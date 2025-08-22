@@ -56,4 +56,13 @@ export const QUERY_PARAMS = {
       limit: 15,
     },
   },
+
+  wishlist: {
+    searchOptions: {},
+    pageOptions: {
+      page: 1,
+      limit: 15,
+    },
+    filters: {},
+  },
 };

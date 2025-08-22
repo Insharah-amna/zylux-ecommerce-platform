@@ -1,4 +1,5 @@
 export type User = {
+  _id: string;
   firstName: string;
   lastName: string;
   email: string;
@@ -10,6 +11,7 @@ export type User = {
 export type UsersState = {
   currentUser: User | null;
   cartItems: CartItem[];
+  wishlist: Wishlist[];
   currency: Currency;
 };
 
@@ -105,5 +107,18 @@ export type GetOrdersResponseType = {
   body: {
     orders: Order[];
     pagination: Pagination;
+  };
+};
+
+export type Wishlist = {
+  _id?: string;
+  userId: string;
+  productId: Product;
+  createdAt: Date;
+};
+
+export type GetWishlistResponseType = {
+  body: {
+    wishlist: Wishlist[];
   };
 };

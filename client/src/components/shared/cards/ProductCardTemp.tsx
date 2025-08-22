@@ -25,8 +25,8 @@ const ProductCardTemp = ({
 
   return (
     <div className={`grid grid-cols-1 ${className} gap-6 my-10`}>
-      {productsList.map((product: Product) => (
-        <div className='flex flex-col gap-2 relative'>
+      {productsList?.map((product: Product) => (
+        <div className='flex flex-col gap-2 relative' key={product._id}>
           <Card
             key={product._id}
             className='p-0 rounded-md overflow-hidden cursor-pointer relative group transition-all duration-500'

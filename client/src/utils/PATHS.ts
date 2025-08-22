@@ -15,6 +15,12 @@ export const HOME_ROOT = '/home';
 export const SHOP_ROOT = '/shop';
 export const PROFILE_ROOT = '/profile';
 
+export const PROFILE_PATHS = {
+  wishlist: `${PROFILE_ROOT}?tab=wishlist`,
+  orders: `${PROFILE_ROOT}?tab=orders`,
+  cart: `${PROFILE_ROOT}?tab=cart`,
+};
+
 export const AUTH_ROUTES = {
   login: path(AUTH_ROOT, '/login'),
   signup: path(AUTH_ROOT, '/signup'),
@@ -69,6 +75,12 @@ export const ORDER_API_URLS = {
   getOrdersByUserId: '/orders/user-orders',
 };
 
+export const WISHLIST_API_URLS = {
+  addToWishlist: ({_id}: IdProps) => `/wishlist/${_id}`,
+  getWishlistbyUserId: '/wishlist',
+  removeFromWishlist: ({_id}: IdProps) => `/wishlist/${_id}`,
+};
+
 export const SIDEBAR_ITEMS = [
   {title: 'Categories', icon: FiGrid, url: DASHBOARD_ROUTES.categories},
   {title: 'Products', icon: FiTag, url: DASHBOARD_ROUTES.products},
@@ -90,7 +102,7 @@ export const FOOTER_URLS = {
     termsOfService: '/terms-of-service',
   },
   companyOptions: {
-    wishlist: '/wishlist',
+    wishlist: PROFILE_PATHS.wishlist,
     myAccount: '/my-account',
     cart: '/cart',
     aboutUs: '/about-us',
