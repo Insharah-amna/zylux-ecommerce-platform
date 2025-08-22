@@ -1,6 +1,7 @@
 import {FiClock, FiHeart, FiShoppingBag, FiUser} from 'react-icons/fi';
 import {ProfileTabProps} from '@/interfaces/profile';
 import Orders from '@/components/orders';
+import Wishlist from '@/components/wishlist';
 import CartItems from '@/components/cart/CartItems';
 
 export const PROFILE_TABS: ProfileTabProps = {
@@ -20,7 +21,7 @@ export const PROFILE_TABS: ProfileTabProps = {
     value: 'wishlist',
     label: 'Wishlist',
     icon: FiHeart,
-    component: FiHeart,
+    component: Wishlist,
   },
   cart: {
     value: 'cart',

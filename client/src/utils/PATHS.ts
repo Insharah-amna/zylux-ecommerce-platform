@@ -69,6 +69,12 @@ export const ORDER_API_URLS = {
   getOrdersByUserId: '/orders/user-orders',
 };
 
+export const WISHLIST_API_URLS = {
+  addToWishlist: ({_id}: IdProps) => `/wishlist/${_id}`,
+  getWishlistbyUserId: '/wishlist',
+  removeFromWishlist: ({_id}: IdProps) => `/wishlist/${_id}`,
+};
+
 export const SIDEBAR_ITEMS = [
   {title: 'Categories', icon: FiGrid, url: DASHBOARD_ROUTES.categories},
   {title: 'Products', icon: FiTag, url: DASHBOARD_ROUTES.products},

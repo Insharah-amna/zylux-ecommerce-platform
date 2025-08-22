@@ -10,8 +10,10 @@ export const getDiscountedPrice = ({
   currency: string;
 }) => {
   const discountedPrice = unitPrice - (unitPrice * discount) / 100;
-  return getCurrencyConversion({
-    price: discountedPrice,
-    currency: currency,
-  });
+  return Number(
+    getCurrencyConversion({
+      price: discountedPrice,
+      currency: currency,
+    })
+  );
 };

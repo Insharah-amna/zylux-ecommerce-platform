@@ -22,6 +22,7 @@ const UserProfile = () => {
                     <div
                       className={`border-b border-gray-200 last:border-b-0 py-4 items-center hover:text-accent/90 transform duration-150 ${tab === activeTab ? 'text-accent' : 'text-primary'} cursor-pointer`}
                       onClick={() => setActiveTab(tab)}
+                      key={tab}
                     >
                       <h2 className='flex gap-3 items-center'>
                         <span>

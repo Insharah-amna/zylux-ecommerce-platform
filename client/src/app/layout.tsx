@@ -6,6 +6,7 @@ import {ReduxProvider} from '@/providers/ReduxProvider';
 import {ToastContainer} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import AuthGuard from '@/components/guard';
+import PrefetchProvider from '@/providers/PrefetchProvider';
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -33,7 +34,9 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <ReduxProvider>
-          <AuthGuard>{children}</AuthGuard>
+          <PrefetchProvider>
+            <AuthGuard>{children}</AuthGuard>
+          </PrefetchProvider>
         </ReduxProvider>
 
         <ToastContainer

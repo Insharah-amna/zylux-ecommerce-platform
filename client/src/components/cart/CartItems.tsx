@@ -10,7 +10,7 @@ import Checkout from './Checkout';
 import EmptyCart from './EmptyCart';
 import QuantitySelector from '@/components/shared/inputs/QuantitySelector';
 import ItemDetails from './ItemDetails';
-import {getCurrencyConversion} from '@/utils/currencyUtils';
+import {getDiscountedPrice} from '@/utils/discountedPrice';
 
 const CartItems = () => {
   const cartItems = useSelector(getCartItems);
@@ -67,8 +67,9 @@ const CartItems = () => {
             </div>
 
             <div className='w-1/6 h-[120px] flex-center text-lg'>
-              {`${currency.symbol} ${getCurrencyConversion({
-                price: product.price * product.quantity,
+              {`${currency.symbol} ${getDiscountedPrice({
+                unitPrice: product.price,
+                discount: product.discount,
                 currency: currency.label,
               })}`}
             </div>

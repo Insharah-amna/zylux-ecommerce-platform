@@ -9,6 +9,7 @@ import {usersApiSlice} from './slices/users/usersApi';
 import {categoriesApiSlice} from './slices/categories/categoriesApi';
 import {productsApiSlice} from './slices/products/productsApi';
 import {ordersApiSlice} from './slices/orders/ordersApi';
+import {wishlistApiSlice} from './slices/wishlistApi';
 
 interface NoopStorage {
   getItem: () => Promise<string | null>;
@@ -44,6 +45,7 @@ const userPersistConfig: PersistConfig<any> = {
   key: 'users',
   storage,
   keyPrefix: 'redux-',
+  blacklist: ['wishlist'],
 };
 
 const categoriesPersistConfig: PersistConfig<any> = {
@@ -60,6 +62,7 @@ const reduxAppReducer = combineReducers({
   [categoriesApiSlice.reducerPath]: categoriesApiSlice.reducer,
   [productsApiSlice.reducerPath]: productsApiSlice.reducer,
   [ordersApiSlice.reducerPath]: ordersApiSlice.reducer,
+  [wishlistApiSlice.reducerPath]: wishlistApiSlice.reducer,
 });
 
 const rootReducer: Reducer<any> = (state, action) => {

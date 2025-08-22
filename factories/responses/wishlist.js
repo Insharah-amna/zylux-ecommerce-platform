@@ -2,20 +2,20 @@ const WishlistResponses = {
 	addedToWishlist: ({ res, wishlist }) => {
 		return res.status(200).json({
 			statusCode: 200,
-			message: "Product added to wishlist successfully",
+			message: "Product added to wishlist",
 			body: { wishlist },
 		});
 	},
 
-	wishlistFetchedSuccessfully: ({ res, wishlist, page, limit, totalPages }) => {
+	wishlistFetchedSuccessfully: ({ res, wishlist }) => {
 		return res.status(200).json({
 			statusCode: 200,
 			message: "Wishlist fetched successfully",
-			body: { wishlist, pagination: { page, limit, totalPages } },
+			body: { wishlist },
 		});
 	},
 
-	productRemovedSuccesfully: ({ res }) => {
+	productRemovedSuccessfully: ({ res }) => {
 		return res.status(200).json({
 			statusCode: 200,
 			message: "Product removed from wishlist",

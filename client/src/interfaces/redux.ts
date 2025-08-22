@@ -3,7 +3,9 @@ import {
   GetOrdersResponseType,
   GetProductResponseType,
   GetProductsResponseType,
+  GetWishlistResponseType,
   OrderProduct,
+  Product,
 } from '@/types/redux';
 import {User} from '@/types/redux';
 
@@ -131,6 +133,26 @@ export interface OrderPayload {
   address: string;
   city: string;
   country: string;
+}
+
+// Wishlist Responses
+
+export interface AddToWishlistResponse extends Response {
+  productId: string;
+}
+
+export interface GetWishlistResponse extends Response, GetWishlistResponseType {
+  _id: string;
+  userId: string;
+  productId: Product;
+  createdAt: Date;
+}
+
+export interface RemoveFromWishlistResponse extends Response {
+  _id: string;
+  userId: string;
+  productId: Product;
+  createdAt: Date;
 }
 
 interface ToastMessageConfig {

@@ -30,25 +30,12 @@ const WishlistController = {
 	getWishlist: async (req, res) => {
 		const userId = req.user._id;
 
-		const { page, limit } = req.query;
-
-		const { skip } = GetPaginationSkip({ page, limit });
-
-		const query = buildWishlistQuery(userId);
-
-		const { count } = await GeneralServices.countDocuments({
-			model: WishlistModel,
-			query,
-		});
-
 		const { error, response: wishlist } = await GeneralServices.find({
 			model: WishlistModel,
-			query,
+			query: { userId },
 			options: {
 				populatedFields: ["productId"],
 				queryProperties: {
-					limit,
-					skip,
 					sort: { createdAt: -1 },
 				},
 			},
@@ -57,9 +44,6 @@ const WishlistController = {
 		return WishlistResponses.wishlistFetchedSuccessfully({
 			res,
 			wishlist,
-			page,
-			limit,
-			totalPages: Math.ceil(count / limit),
 		});
 	},
 
@@ -73,7 +57,7 @@ const WishlistController = {
 
 		if (error) return WishlistErrors.deletionFailedErr({ res });
 
-		return WishlistResponses.productRemovedSuccesfully({ res });
+		return WishlistResponses.productRemovedSuccessfully({ res });
 	},
 };
 

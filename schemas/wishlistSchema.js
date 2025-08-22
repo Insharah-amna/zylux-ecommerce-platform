@@ -6,8 +6,6 @@ const commonWishlistSchema = {
 };
 
 module.exports.validateWishlistRequest = ({ data: wishlist }) => {
-	console.log(wishlist);
-
 	const schema = Yup.object().shape({
 		...commonWishlistSchema,
 	});
