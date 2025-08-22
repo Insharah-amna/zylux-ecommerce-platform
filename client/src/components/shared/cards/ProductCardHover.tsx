@@ -18,6 +18,9 @@ import {
 } from '@/redux/slices/wishlistApi';
 import {createWishlistItem} from '@/utils/general';
 import {User} from '@/types/redux';
+import ComponentLoader from '../loaders/ComponentLoader';
+import {ClipLoader} from 'react-spinners';
+import ClipBtnLoader from '../loaders/ClipLoader';
 
 const iconClass =
   'p-[10px] bg-stone-100 rounded-full text-center shadow-md hover:bg-primary hover:text-white cursor-pointer transition-all duration-300 mb-3';
@@ -37,8 +40,9 @@ const HoverIcons = ({product}: ProductProps) => {
     getWishlistByProductId({productId: product._id as string})
   );
 
-  const [addProduct] = useAddToWishlistMutation();
-  const [removeProduct] = useRemoveFromWishlistMutation();
+  const [addProduct, {isLoading: isProductAdding}] = useAddToWishlistMutation();
+  const [removeProduct, {isLoading: isProductRemoving}] =
+    useRemoveFromWishlistMutation();
 
   const handleWishlistBtn = ({product}: ProductProps) => {
     if (existedItem) {
@@ -69,14 +73,18 @@ const HoverIcons = ({product}: ProductProps) => {
             className={iconClass}
             onClick={() => handleWishlistBtn({product})}
           >
-            <FiHeart color='red' fill='red' />
+            {isProductRemoving ? (
+              <ClipBtnLoader />
+            ) : (
+              <FiHeart color='red' fill='red' />
+            )}
           </div>
         ) : (
           <div
             className={iconClass}
             onClick={() => handleWishlistBtn({product})}
           >
-            <FiHeart />
+            {isProductAdding ? <ClipBtnLoader /> : <FiHeart />}
           </div>
         )}
 

@@ -49,13 +49,11 @@ const WishlistController = {
 
 	removeFromWishlist: async (req, res) => {
 		const { id } = req.params;
-		console.log(id);
 
 		const { error } = await GeneralServices.findByIdAndDelete({
 			model: WishlistModel,
 			id,
 		});
-		// console.log(error);
 
 		if (error) return WishlistErrors.deletionFailedErr({ res });
 
