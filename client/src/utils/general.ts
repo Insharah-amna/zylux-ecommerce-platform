@@ -31,7 +31,7 @@ export const createWishlistItem = ({
   user: User;
   product: Product;
 }) => ({
-  _id: crypto.randomUUID(),
+  // _id: crypto.randomUUID(),
   userId: user?._id,
   productId: product,
   createdAt: new Date(),

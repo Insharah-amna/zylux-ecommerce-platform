@@ -42,13 +42,11 @@ const HoverIcons = ({product}: ProductProps) => {
 
   const handleWishlistBtn = ({product}: ProductProps) => {
     if (existedItem) {
-      dispatch(actions.removeItemFromWishlist(product._id));
-      removeProduct({_id: existedItem._id});
+      removeProduct({_id: existedItem._id, productId: product._id as string});
     } else {
       const wishlistItem = createWishlistItem({user: user as User, product});
 
-      dispatch(actions.addItemToWishlist(wishlistItem));
-      addProduct({_id: product._id});
+      addProduct({_id: product._id as string, wishlistItem});
     }
   };
 

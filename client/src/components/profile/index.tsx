@@ -1,11 +1,16 @@
 'use client';
 import {useState} from 'react';
+import {useSearchParams} from 'next/navigation';
 import Container from '@/components/shared/containers/Container';
 import {PROFILE_TABS} from '@/constants/profile';
 import {TabKey} from '@/types/profile';
 
 const UserProfile = () => {
-  const [activeTab, setActiveTab] = useState<TabKey>('profile');
+  const searchParams = useSearchParams();
+
+  const tab = searchParams.get('tab');
+
+  const [activeTab, setActiveTab] = useState<TabKey>(tab as TabKey);
 
   const ActiveComponent = PROFILE_TABS[activeTab].component;
 

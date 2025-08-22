@@ -15,6 +15,12 @@ export const HOME_ROOT = '/home';
 export const SHOP_ROOT = '/shop';
 export const PROFILE_ROOT = '/profile';
 
+export const PROFILE_PATHS = {
+  wishlist: `${PROFILE_ROOT}?tab=wishlist`,
+  orders: `${PROFILE_ROOT}?tab=orders`,
+  cart: `${PROFILE_ROOT}?tab=cart`,
+};
+
 export const AUTH_ROUTES = {
   login: path(AUTH_ROOT, '/login'),
   signup: path(AUTH_ROOT, '/signup'),
@@ -96,7 +102,7 @@ export const FOOTER_URLS = {
     termsOfService: '/terms-of-service',
   },
   companyOptions: {
-    wishlist: '/wishlist',
+    wishlist: PROFILE_PATHS.wishlist,
     myAccount: '/my-account',
     cart: '/cart',
     aboutUs: '/about-us',

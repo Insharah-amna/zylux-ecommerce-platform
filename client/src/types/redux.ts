@@ -111,7 +111,7 @@ export type GetOrdersResponseType = {
 };
 
 export type Wishlist = {
-  _id: string;
+  _id?: string;
   userId: string;
   productId: Product;
   createdAt: Date;
