@@ -2,8 +2,6 @@ const WishlistModel = require("../model/wishlist.model");
 const GeneralServices = require("../services/general.service");
 const WishlistErrors = require("../factories/errors/wishlist");
 const WishlistResponses = require("../factories/responses/wishlist");
-const { GetPaginationSkip } = require("../constants/general");
-const { buildWishlistQuery } = require("../utils/buildQueryUtils");
 
 const WishlistController = {
 	addToWishlist: async (req, res) => {

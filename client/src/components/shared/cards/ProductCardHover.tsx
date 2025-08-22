@@ -1,5 +1,5 @@
-import {useSelector} from 'react-redux';
 import Link from 'next/link';
+import {useSelector} from 'react-redux';
 import {FiEye, FiHeart} from 'react-icons/fi';
 import PrimaryButton from '@/components/shared/buttons/PrimaryButton';
 import {ProductProps} from '@/interfaces/products';
@@ -9,7 +9,6 @@ import {
   actions,
   getCartItem,
   getCurrentUser,
-  getWishlist,
   getWishlistByProductId,
 } from '@/redux/slices/users/usersSlice';
 import {
@@ -18,9 +17,7 @@ import {
 } from '@/redux/slices/wishlistApi';
 import {createWishlistItem} from '@/utils/general';
 import {User} from '@/types/redux';
-import ComponentLoader from '../loaders/ComponentLoader';
-import {ClipLoader} from 'react-spinners';
-import ClipBtnLoader from '../loaders/ClipLoader';
+import ClipBtnLoader from '@/components/shared/loaders/ClipLoader';
 
 const iconClass =
   'p-[10px] bg-stone-100 rounded-full text-center shadow-md hover:bg-primary hover:text-white cursor-pointer transition-all duration-300 mb-3';
