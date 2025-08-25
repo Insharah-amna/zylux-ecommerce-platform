@@ -68,7 +68,7 @@ const CartItems = () => {
 
             <div className='w-1/6 h-[120px] flex-center text-lg'>
               {`${currency.symbol} ${getDiscountedPrice({
-                unitPrice: product.price,
+                unitPrice: product.price * product.quantity,
                 discount: product.discount,
                 currency: currency.label,
               })}`}

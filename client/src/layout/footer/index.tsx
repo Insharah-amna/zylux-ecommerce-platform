@@ -5,7 +5,7 @@ import {COMPANY_LINKS, QUICK_LINKS} from '@/constants/footer';
 
 const Footer = () => {
   return (
-    <div className='text-gray-500 flex-center flex-col bg-gray-50 mt-20'>
+    <div className='text-gray-500 flex-center flex-col bg-gray-50 mt-16'>
       <Container>
         <div className='flex justify-between flex-col md:flex-row text-sm py-10 border-b-1 border-gray-300'>
           <div className='px-2 w-full md:w-1/4'>

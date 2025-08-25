@@ -3,4 +3,5 @@ export const QUERY_TAGS = {
   categories: 'Categories',
   products: 'Products',
   wishlist: 'Wishlist',
+  reviews: 'Reviews',
 } as const;

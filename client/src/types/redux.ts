@@ -122,3 +122,24 @@ export type GetWishlistResponseType = {
     wishlist: Wishlist[];
   };
 };
+
+export type Review = {
+  _id?: string;
+  userId: User;
+  productId: Product;
+  rating: number;
+  comment: string;
+};
+
+export type GetReviewResponseType = {
+  body: {
+    pagination: Pagination;
+    reviews: Review[];
+  };
+};
+
+export type ReviewData = {
+  rating: number;
+  subject: string;
+  comment: string;
+};

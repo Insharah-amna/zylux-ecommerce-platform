@@ -54,6 +54,7 @@ const ProductColor = ({
       <div className='flex gap-2'>
         {product.colorVariants.map((color) => (
           <button
+            key={color}
             value={color}
             id={color}
             className={`w-6 h-6 rounded-full cursor-pointer transition-all duration-100 ${selectedColor === color ? 'border-2 border-gray-700' : ''}`}

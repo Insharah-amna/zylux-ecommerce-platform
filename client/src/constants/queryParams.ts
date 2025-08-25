@@ -65,4 +65,11 @@ export const QUERY_PARAMS = {
     },
     filters: {},
   },
+
+  reviews: {
+    pageOptions: {
+      page: 1,
+      limit: 15,
+    },
+  },
 };

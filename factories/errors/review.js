@@ -30,7 +30,7 @@ const ReviewErrors = {
 	unauthorizedToDeleteReview: ({ res }) => {
 		return res.status(400).json({
 			statusCode: 400,
-			message: "Unauthorized user to delete review",
+			message: "You are not authorized to delete this review",
 		});
 	},
 };

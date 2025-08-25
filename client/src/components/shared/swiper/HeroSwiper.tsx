@@ -1,5 +1,6 @@
 'use client';
 
+import Link from 'next/link';
 import Image from 'next/image';
 import {useState} from 'react';
 import {SwiperSlide} from 'swiper/react';
@@ -50,11 +51,12 @@ const HeroSwiperContent = () => {
                 </p>
 
                 <div className='text-center md:text-start'>
-                  <PrimaryButton
-                    buttonText={button.text}
-                    handleClick={() => button.url}
-                    className='rounded-full py-6 w-50 text-lg mt-3'
-                  />
+                  <Link href={button.url}>
+                    <PrimaryButton
+                      buttonText={button.text}
+                      className='rounded-full py-6 w-50 text-lg mt-3'
+                    />
+                  </Link>
                 </div>
               </div>
 

@@ -1,4 +1,4 @@
-import {FiClock, FiGrid, FiTag} from 'react-icons/fi';
+import {FiBookmark, FiClock, FiGrid, FiTag} from 'react-icons/fi';
 import {TokenProps} from '@/interfaces/auth';
 import {IdProps} from '@/interfaces/dashboard';
 
@@ -16,6 +16,7 @@ export const SHOP_ROOT = '/shop';
 export const PROFILE_ROOT = '/profile';
 
 export const PROFILE_PATHS = {
+  profile: `${PROFILE_ROOT}?tab=profile`,
   wishlist: `${PROFILE_ROOT}?tab=wishlist`,
   orders: `${PROFILE_ROOT}?tab=orders`,
   cart: `${PROFILE_ROOT}?tab=cart`,
@@ -51,6 +52,7 @@ export const DASHBOARD_ROUTES = {
   categories: path(DASHBOARD_ROOT, '/categories'),
   products: path(DASHBOARD_ROOT, '/products'),
   orders: path(DASHBOARD_ROOT, '/orders'),
+  reviews: path(DASHBOARD_ROOT, '/reviews'),
 };
 
 export const DASHBOARD_API_URLS = {
@@ -81,10 +83,18 @@ export const WISHLIST_API_URLS = {
   removeFromWishlist: ({_id}: IdProps) => `/wishlist/${_id}`,
 };
 
-export const SIDEBAR_ITEMS = [
+export const REVIEW_API_URLS = {
+  addReview: ({_id}: IdProps) => `/reviews/${_id}`,
+  fetchReviews: '/reviews',
+  fetchReviewsByProductId: ({_id}: IdProps) => `/reviews/${_id}`,
+  deleteReview: ({_id}: IdProps) => `/reviews/${_id}`,
+};
+
+export const DASHBOARD_SIDEBAR_ITEMS = [
   {title: 'Categories', icon: FiGrid, url: DASHBOARD_ROUTES.categories},
   {title: 'Products', icon: FiTag, url: DASHBOARD_ROUTES.products},
   {title: 'Orders', icon: FiClock, url: DASHBOARD_ROUTES.orders},
+  {title: 'Reviews', icon: FiBookmark, url: DASHBOARD_ROUTES.reviews},
 ];
 
 export const NAVBAR_URLS = {

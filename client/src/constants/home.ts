@@ -1,4 +1,4 @@
-import {NAVBAR_URLS} from '@/utils/PATHS';
+import {NAVBAR_URLS, SHOP_ROOT} from '@/utils/PATHS';
 import {FaFacebook, FaInstagram, FaLinkedin, FaTwitter} from 'react-icons/fa';
 
 const SOCIAL_ICONS = {
@@ -90,7 +90,7 @@ export const HERO_SLIDE_CONTENT = {
     description: 'Introducing the Ambaz women winter fashion',
     button: {
       text: 'Shop Collection',
-      url: '',
+      url: SHOP_ROOT,
     },
     image: {
       src: '/images/image_1.webp',
@@ -102,7 +102,7 @@ export const HERO_SLIDE_CONTENT = {
     description: 'Shop the best collections at unbeatable prices',
     button: {
       text: 'Shop Now',
-      url: '',
+      url: SHOP_ROOT,
     },
     image: {
       src: '/images/image_2.webp',
@@ -114,7 +114,7 @@ export const HERO_SLIDE_CONTENT = {
     description: 'Explore vibrant colors and breathable fabrics',
     button: {
       text: 'Explore',
-      url: '',
+      url: SHOP_ROOT,
     },
     image: {
       src: '/images/image_3.webp',

@@ -14,7 +14,7 @@ import {
 import {
   useAddToWishlistMutation,
   useRemoveFromWishlistMutation,
-} from '@/redux/slices/wishlistApi';
+} from '@/redux/slices/wishlist/wishlistApi';
 import {createWishlistItem} from '@/utils/general';
 import {User} from '@/types/redux';
 import ClipBtnLoader from '@/components/shared/loaders/ClipLoader';
@@ -22,7 +22,7 @@ import ClipBtnLoader from '@/components/shared/loaders/ClipLoader';
 const iconClass =
   'p-[10px] bg-stone-100 rounded-full text-center shadow-md hover:bg-primary hover:text-white cursor-pointer transition-all duration-300 mb-3';
 const onHoverClass =
-  'opacity-0 group-hover:opacity-100 translate-y-3 group-hover:translate-y-0 transition-all duration-300 delay-100 absolute top-0 right-0 flex-col z-10 p-5';
+  'opacity-0 group-hover:opacity-100 translate-x-4 group-hover:translate-x-0 transition-all duration-300 delay-100 absolute top-0 right-0 flex-col z-10 p-5';
 const buttonClass =
   'opacity-0 group-hover:opacity-100 absolute bottom-0 p-5 w-full justify-center translate-y-5 group-hover:translate-y-0 transition-all duration-400 delay-100';
 

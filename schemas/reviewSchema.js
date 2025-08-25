@@ -2,10 +2,9 @@ const Yup = require("yup");
 const { validate } = require("../utils/validatorUtils");
 
 const commonReviewSchema = {
-	userId: Yup.string().required("User Id is required"),
-	productId: Yup.string().required("Product Id is required"),
 	rating: Yup.number().min(0).max(5).required("Rating is required"),
-	comment: Yup.string().optional(),
+	subject: Yup.string().required("Subject is required"),
+	comment: Yup.string().required("Comment is required"),
 };
 
 module.exports.validateAddReviewRequest = ({ data: review }) => {

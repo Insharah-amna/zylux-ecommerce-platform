@@ -2,16 +2,20 @@ const ReviewModel = require("../model/review.model");
 const GeneralServices = require("../services/general.service");
 const ReviewResponses = require("../factories/responses/review");
 const ReviewErrors = require("../factories/errors/review");
-const { GetPaginationSkip } = require("../constants/general");
+const { GetPaginationSkip, ROLES } = require("../constants/general");
 
 const ReviewController = {
 	addReview: async (req, res) => {
 		let data = req.body;
+		const userId = req.user._id;
+		const { id: productId } = req.params;
 
 		const { error, doc: review } = await GeneralServices.create({
 			model: ReviewModel,
-			data,
+			data: { ...data, userId, productId },
 		});
+
+		console.log(error);
 
 		if (error) return ReviewErrors.failedToAddReviewErr({ res });
 
@@ -100,20 +104,19 @@ const ReviewController = {
 
 		if (error) return ReviewErrors.reviewNotFound({ res });
 
-		if (user.role === "buyer") {
-			if (user._id.toString() === reviewObj.userId._id.toString()) {
-				const { error } = await GeneralServices.findByIdAndDelete({
-					model: ReviewModel,
-					id,
-				});
+		if (
+			user.role === ROLES.buyer.value &&
+			user._id.toString() === reviewObj.userId._id.toString()
+		) {
+			const { error } = await GeneralServices.findByIdAndDelete({
+				model: ReviewModel,
+				id,
+			});
 
-				if (error) return ReviewErrors.failedToDeleteReviewErr({ res });
+			if (error) return ReviewErrors.failedToDeleteReviewErr({ res });
 
-				return ReviewResponses.reviewRemovedSuccessfully({ res });
-			} else {
-				return ReviewErrors.unauthorizedToDeleteReview({ res });
-			}
-		} else if (user.role === "admin") {
+			return ReviewResponses.reviewRemovedSuccessfully({ res });
+		} else if (user.role === ROLES.admin.value) {
 			const { error } = await GeneralServices.findByIdAndDelete({
 				model: ReviewModel,
 				id,

@@ -12,9 +12,9 @@ const { validateIdParamsRequest } = require("../schemas/categorySchema");
 const { ROLES, HTTP_ARGS } = require("../constants/general");
 
 router.post(
-	"/",
+	"/:id",
 	authMiddleware,
-	accessMiddleware({ allowedRoles: [ROLES.buyer.value] }),
+	// accessMiddleware({ allowedRoles: [ROLES.buyer.value] }),
 	validatorMiddleware({
 		validateFunction: validateAddReviewRequest,
 	}),
@@ -33,7 +33,7 @@ router.get(
 router.get(
 	"/",
 	authMiddleware,
-	accessMiddleware({ allowedRoles: [ROLES.admin.value] }),
+	// accessMiddleware({ allowedRoles: [ROLES.admin.value] }),
 	catchAsync(ReviewController.fetchAllReviews)
 );
 

@@ -127,3 +127,7 @@
   padding: 30px !important;
   border-radius: 100px !important;
 }
+
+.review-cards-swiper {
+  --swiper-theme-color: #FC5732;
+}

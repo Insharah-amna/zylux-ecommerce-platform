@@ -16,9 +16,13 @@ const reviewSchema = new mongoose.Schema(
 			type: Number,
 			required: true,
 		},
+		subject: {
+			type: String,
+			required: true,
+		},
 		comment: {
 			type: String,
-			required: false,
+			required: true,
 		},
 	},
 	{ timestamps: true }

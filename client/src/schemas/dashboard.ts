@@ -34,3 +34,9 @@ export const addressSchema = Yup.object().shape({
   city: Yup.string().required('City is required'),
   country: Yup.string().required('Country is required'),
 });
+
+export const reviewSchema = Yup.object().shape({
+  rating: Yup.number().min(1).required('Rating is required'),
+  subject: Yup.string().required('Subject is required'),
+  comment: Yup.string().required('Comment is required'),
+});

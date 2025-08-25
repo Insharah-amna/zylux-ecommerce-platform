@@ -8,7 +8,7 @@ import {
 import {handleApiResponse} from '@/redux/utils';
 import {serverUrl, WISHLIST_API_URLS} from '@/utils/PATHS';
 import {RootState} from '@/redux/rootReducer';
-import {actions} from './users/usersSlice';
+import {actions} from '../users/usersSlice';
 import {AddToWishlist, RemoveFromWishlist} from '@/interfaces/wishlist';
 import {QUERY_TAGS} from '@/constants/invalidateTags';
 

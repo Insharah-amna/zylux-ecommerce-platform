@@ -4,7 +4,7 @@ import {buttonVariants} from '@/components/ui/button';
 
 type ButtonVariant = VariantProps<typeof buttonVariants>['variant'];
 export interface SubmitButtonProps {
-  buttonText: string;
+  buttonText: string | ReactNode;
   disabled?: boolean;
   isLoading?: boolean;
   handleSubmit?: () => void;
