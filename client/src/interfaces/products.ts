@@ -85,6 +85,6 @@ export interface LabelValueRowProps {
   value: ReactNode | string | number | null | undefined;
 }
 
-export interface ProductProps {
+export type ProductProps = {
   product: Product;
-}
+};

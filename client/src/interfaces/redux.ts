@@ -3,6 +3,7 @@ import {
   GetOrdersResponseType,
   GetProductResponseType,
   GetProductsResponseType,
+  GetReviewResponseType,
   GetWishlistResponseType,
   OrderProduct,
   Product,
@@ -153,6 +154,55 @@ export interface RemoveFromWishlistResponse extends Response {
   userId: string;
   productId: Product;
   createdAt: Date;
+}
+
+// Reviews Responses
+
+export interface AddReviewResponse extends Response {
+  userId: string;
+  productId: Product;
+  rating: number;
+  comment: string;
+}
+
+export interface GetReviewItemsResponse
+  extends Response,
+    GetReviewResponseType {
+  _id: string;
+  userId: User;
+  productId: Product;
+  rating: number;
+  subject: string;
+  comment: string;
+}
+
+export type GetReviewsResponse = GetReviewItemsResponse[];
+
+export interface GetReviewsResponseFromApi {
+  statusCode: number;
+  message: string;
+  body: {
+    pagination: {
+      totalPages: number | null;
+    };
+    reviews: GetReviewItemsResponse[];
+  };
+}
+
+export interface FetchReviewByIdPayload {
+  productId: string;
+}
+
+export interface DeleteReviewResponse extends Response {
+  _id: string;
+  userId: string;
+  productId: Product;
+  rating: number;
+  comment: string;
+}
+
+export interface DeleteReviewPayload {
+  _id: string;
 }
 
 interface ToastMessageConfig {

@@ -7,7 +7,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
-import {PROFILE_ROOT} from '@/utils/PATHS';
+import {PROFILE_PATHS} from '@/utils/PATHS';
 import {actions} from '@/redux/slices/users/usersSlice';
 
 const ProfileDropdown = () => {
@@ -22,11 +22,16 @@ const ProfileDropdown = () => {
       </DropdownMenuTrigger>
 
       <DropdownMenuContent>
-        <Link href={PROFILE_ROOT}>
-          <DropdownMenuItem>My Profile</DropdownMenuItem>
+        <Link href={PROFILE_PATHS.profile}>
+          <DropdownMenuItem className='cursor-pointer'>
+            My Profile
+          </DropdownMenuItem>
         </Link>
 
-        <DropdownMenuItem onClick={() => dispatch(actions.resetUsersSlice())}>
+        <DropdownMenuItem
+          onClick={() => dispatch(actions.resetUsersSlice())}
+          className='cursor-pointer'
+        >
           Log out
         </DropdownMenuItem>
       </DropdownMenuContent>

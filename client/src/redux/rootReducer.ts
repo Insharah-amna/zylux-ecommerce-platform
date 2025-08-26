@@ -9,7 +9,8 @@ import {usersApiSlice} from './slices/users/usersApi';
 import {categoriesApiSlice} from './slices/categories/categoriesApi';
 import {productsApiSlice} from './slices/products/productsApi';
 import {ordersApiSlice} from './slices/orders/ordersApi';
-import {wishlistApiSlice} from './slices/wishlistApi';
+import {wishlistApiSlice} from './slices/wishlist/wishlistApi';
+import {reviewsApiSlice} from './slices/reviews/reviewsApi';
 
 interface NoopStorage {
   getItem: () => Promise<string | null>;
@@ -63,6 +64,7 @@ const reduxAppReducer = combineReducers({
   [productsApiSlice.reducerPath]: productsApiSlice.reducer,
   [ordersApiSlice.reducerPath]: ordersApiSlice.reducer,
   [wishlistApiSlice.reducerPath]: wishlistApiSlice.reducer,
+  [reviewsApiSlice.reducerPath]: reviewsApiSlice.reducer,
 });
 
 const rootReducer: Reducer<any> = (state, action) => {

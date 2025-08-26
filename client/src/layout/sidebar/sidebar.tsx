@@ -4,7 +4,7 @@ import {FiLogOut} from 'react-icons/fi';
 import {actions as userActions} from '@/redux/slices/users/usersSlice';
 import {actions as categoryActions} from '@/redux/slices/categories/categoriesSlice';
 import {SidebarProps} from '@/interfaces/layout';
-import {AUTH_ROUTES, SIDEBAR_ITEMS} from '@/utils/PATHS';
+import {AUTH_ROUTES, DASHBOARD_SIDEBAR_ITEMS} from '@/utils/PATHS';
 
 export default function Sidebar({isOpen}: SidebarProps) {
   const dispatch = useDispatch();
@@ -24,7 +24,7 @@ export default function Sidebar({isOpen}: SidebarProps) {
 
       <nav className='flex flex-col p-4'>
         <div className='sidebar'>
-          {SIDEBAR_ITEMS.map((item) => {
+          {DASHBOARD_SIDEBAR_ITEMS.map((item) => {
             const Icon = item.icon;
             return (
               <Link

@@ -88,14 +88,10 @@ export const getWishlist = (state: {users: UsersState}) => state.users.wishlist;
 export const getWishlistByProductId =
   ({productId}: {productId: string}) =>
   (state: {users: UsersState}) => {
-    console.log(state.users.wishlist);
-
     const existedItem = state.users.wishlist.find((item) => {
-      // If productId is populated object
       if (typeof item.productId === 'object') {
         return item.productId._id === productId;
       }
-      // If productId is just a string
       return item.productId === productId;
     });
 

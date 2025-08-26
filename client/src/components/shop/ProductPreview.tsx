@@ -10,6 +10,8 @@ import ProductQuantity from './ProductQuantity';
 import ProductButtons from './ProductButtons';
 import ProductDescription from './ProductDescription';
 import Footer from '@/layout/footer';
+import ReviewForm from '@/components/reviews/ReviewForm';
+import ReviewCard from '@/components/reviews/ReviewCard';
 
 const ProductPreview = ({productId}: ProductPreviewIdProps) => {
   const {data, isLoading} = useGetSingleProductQuery({_id: productId});
@@ -63,6 +65,10 @@ const ProductPreview = ({productId}: ProductPreviewIdProps) => {
               </div>
             </div>
           )}
+
+          <ReviewForm productId={productId} />
+
+          <ReviewCard productId={productId} />
         </Container>
       </div>
       <Footer />
