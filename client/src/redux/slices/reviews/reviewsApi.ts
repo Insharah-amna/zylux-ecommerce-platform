@@ -120,6 +120,6 @@ export const reviewsApiSlice = createApi({
 export const {
   useAddReviewMutation,
   useFetchReviewsQuery,
-  useLazyFetchReviewsByProductIdQuery,
+  useFetchReviewsByProductIdQuery,
   useDeleteReviewMutation,
 } = reviewsApiSlice;
