@@ -22,3 +22,6 @@ module.exports.ROLES = {
 		value: "buyer",
 	},
 };
+
+module.exports.DEFAULT_PROFILE_IMAGE =
+	"https://res.cloudinary.com/dk0dbpfoh/image/upload/v1756305008/profile_placeholder_ulp6ih.webp";

@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const { ROLES } = require("../constants/general");
+const { ROLES, DEFAULT_PROFILE_IMAGE } = require("../constants/general");
 
 const userSchema = new mongoose.Schema(
 	{
@@ -30,7 +30,7 @@ const userSchema = new mongoose.Schema(
 		},
 		profileImage: {
 			type: String,
-			default: process.env.DEFAULT_PROFILE_IMAGE,
+			default: DEFAULT_PROFILE_IMAGE,
 		},
 	},
 	{
