@@ -10,7 +10,8 @@ import SubmitButton from '@/components/shared/buttons/SubmitButton';
 import TextInput from '@/components/shared/inputs/TextInput';
 import {dispatch} from '@/redux/store';
 import {actions, getCurrentUser} from '@/redux/slices/users/usersSlice';
-import ImageCropper from './ImageCropper';
+import {useUpdateUserProfileMutation} from '@/redux/slices/profile/profileApi';
+import ImageCropper from '@/components/shared/imageCropper';
 
 const ProfileForm = ({setIsFormOpen}: ProfileFormProps) => {
   const user = useSelector(getCurrentUser);
@@ -19,21 +20,42 @@ const ProfileForm = ({setIsFormOpen}: ProfileFormProps) => {
     defaultValues: {
       firstName: user?.firstName,
       lastName: user?.lastName,
-      profileImage: user?.profileImage || '/images/profile_placeholder.webp',
+      profileImage: user?.profileImage,
     },
     resolver: yupResolver(profileSchema),
   });
 
-  const [croppedImage, setCroppedImage] = useState<string>(user?.profileImage!);
+  const [croppedImage, setCroppedImage] = useState<[string, File | null]>([
+    user?.profileImage!,
+    null,
+  ]);
+
+  const [updateProfile, {isLoading}] = useUpdateUserProfileMutation();
 
   const onSubmit = (data: any) => {
+    const formData = new FormData();
+
+    formData.append(
+      'data',
+      JSON.stringify({
+        firstName: data.firstName,
+        lastName: data.lastName,
+      })
+    );
+
+    if (croppedImage[1]) {
+      formData.append('file', croppedImage[1]);
+    }
+
     dispatch(
       actions.updateUserProfile({
         firstName: data.firstName,
         lastName: data.lastName,
-        profileImage: croppedImage,
+        profileImage: croppedImage[0],
       })
     );
+
+    updateProfile(formData);
     setIsFormOpen(false);
   };
 
@@ -45,7 +67,7 @@ const ProfileForm = ({setIsFormOpen}: ProfileFormProps) => {
       <div className='max-h-[200px] max-w-[200px] relative'>
         <ImageCropper
           setCroppedImage={setCroppedImage}
-          croppedImage={croppedImage}
+          croppedImage={croppedImage[0] || user?.profileImage!}
         />
       </div>
 
@@ -78,7 +100,7 @@ const ProfileForm = ({setIsFormOpen}: ProfileFormProps) => {
         <SubmitButton
           buttonText={'Save'}
           className='rounded-md hover:bg-accent'
-          handleSubmit={() => setIsFormOpen(false)}
+          isLoading={isLoading}
         />
       </div>
     </form>

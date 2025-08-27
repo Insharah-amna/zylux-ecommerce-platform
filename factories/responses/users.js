@@ -55,6 +55,14 @@ const UsersResponses = {
 			body: {},
 		});
 	},
+
+	profileImageSavesSuccessfully: ({ res, profileImage }) => {
+		return res.status(200).json({
+			statusCode: 200,
+			message: "Profile Image saved successfully",
+			body: { profileImage },
+		});
+	},
 };
 
 module.exports = UsersResponses;

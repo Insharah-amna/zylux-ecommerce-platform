@@ -1,14 +1,11 @@
 import Image from 'next/image';
 import {useState} from 'react';
-import {ProfileImageUploaderProps} from '@/interfaces/profile';
+import {ImageCropperProps} from '@/interfaces/profile';
 import PrimaryButton from '@/components/shared/buttons/PrimaryButton';
 import {FormModal} from '@/components/shared/modals/FormModal';
-import ImageForm from './ImageForm';
+import ImageForm from '@/components/profile/ImageForm';
 
-const ProfileImageUploader = ({
-  setCroppedImage,
-  croppedImage,
-}: ProfileImageUploaderProps) => {
+const ImageCropper = ({setCroppedImage, croppedImage}: ImageCropperProps) => {
   const [isFormOpen, setIsFormOpen] = useState(false);
 
   return (
@@ -45,4 +42,4 @@ const ProfileImageUploader = ({
   );
 };
 
-export default ProfileImageUploader;
+export default ImageCropper;

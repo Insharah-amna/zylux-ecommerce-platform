@@ -39,6 +39,12 @@ export interface ResendEmailResponse extends Response {
   user: User;
 }
 
+export interface UpdateProfileResponse extends Response {
+  firstName: string;
+  lastName: string;
+  profileImage?: File | null;
+}
+
 // Category Responses
 export interface AddCategoryResponse extends Response {
   name: string;

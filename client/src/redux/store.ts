@@ -8,6 +8,7 @@ import {productsApiSlice} from './slices/products/productsApi';
 import {ordersApiSlice} from './slices/orders/ordersApi';
 import {wishlistApiSlice} from './slices/wishlist/wishlistApi';
 import {reviewsApiSlice} from './slices/reviews/reviewsApi';
+import {profileApiSlice} from './slices/profile/profileApi';
 
 const store = configureStore({
   reducer: persistReducer(rootPersistConfig, rootReducer),
@@ -21,7 +22,8 @@ const store = configureStore({
       productsApiSlice.middleware,
       ordersApiSlice.middleware,
       wishlistApiSlice.middleware,
-      reviewsApiSlice.middleware
+      reviewsApiSlice.middleware,
+      profileApiSlice.middleware
     ),
 });
 

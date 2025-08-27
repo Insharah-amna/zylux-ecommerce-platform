@@ -28,6 +28,10 @@ const userSchema = new mongoose.Schema(
 			type: String,
 			default: ROLES.buyer.value,
 		},
+		profileImage: {
+			type: String,
+			default: process.env.DEFAULT_PROFILE_IMAGE,
+		},
 	},
 	{
 		timestamps: true,
