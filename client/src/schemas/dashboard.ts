@@ -40,3 +40,9 @@ export const reviewSchema = Yup.object().shape({
   subject: Yup.string().required('Subject is required'),
   comment: Yup.string().required('Comment is required'),
 });
+
+export const profileSchema = Yup.object().shape({
+  firstName: Yup.string().required('First name is required'),
+  lastName: Yup.string().required('Last name is required'),
+  profileImage: Yup.string().required('Image is required'),
+});

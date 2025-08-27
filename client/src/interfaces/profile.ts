@@ -13,3 +13,27 @@ export interface TabProps {
   component: ComponentType;
   icon: IconType;
 }
+
+export interface ProfileFormProps {
+  setIsFormOpen: (data: any) => void;
+}
+
+export interface ProfileImageUploaderProps {
+  croppedImage: string;
+  setCroppedImage: (data: any) => void;
+}
+
+export interface ImageFormProps {
+  setIsFormOpen: (data: any) => void;
+  setCroppedImage: (data: any) => void;
+}
+
+export interface ProfileFormValues {
+  firstName: string;
+  lastName: string;
+  profileImage: string;
+}
+
+export interface ImageCropperProps {
+  image: string;
+}
