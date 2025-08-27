@@ -70,6 +70,12 @@ const slice = createSlice({
         (wishlistItem) => wishlistItem.productId._id !== action.payload
       );
     },
+
+    updateUserProfile(state, action) {
+      if (state.currentUser) {
+        state.currentUser = {...state.currentUser, ...action.payload};
+      }
+    },
   },
 });
 

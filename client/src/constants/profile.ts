@@ -1,5 +1,6 @@
 import {FiClock, FiHeart, FiShoppingBag, FiUser} from 'react-icons/fi';
 import {ProfileTabProps} from '@/interfaces/profile';
+import Profile from '@/components/profile/Profile';
 import Orders from '@/components/orders';
 import Wishlist from '@/components/wishlist';
 import CartItems from '@/components/cart/CartItems';
@@ -9,7 +10,7 @@ export const PROFILE_TABS: ProfileTabProps = {
     value: 'profile',
     label: 'Profile',
     icon: FiUser,
-    component: FiUser,
+    component: Profile,
   },
   orders: {
     value: 'orders',

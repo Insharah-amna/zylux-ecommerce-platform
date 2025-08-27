@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const { ROLES } = require("../constants/general");
+const { ROLES, DEFAULT_PROFILE_IMAGE } = require("../constants/general");
 
 const userSchema = new mongoose.Schema(
 	{
@@ -27,6 +27,10 @@ const userSchema = new mongoose.Schema(
 		role: {
 			type: String,
 			default: ROLES.buyer.value,
+		},
+		profileImage: {
+			type: String,
+			default: DEFAULT_PROFILE_IMAGE,
 		},
 	},
 	{

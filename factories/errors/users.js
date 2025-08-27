@@ -62,6 +62,20 @@ const UsersErrors = {
 			message: "Access denied",
 		});
 	},
+
+	profileImageErr: ({ res }) => {
+		return res.status(400).json({
+			statusCode: 400,
+			message: "Failed to upload Image",
+		});
+	},
+
+	userProfileUpdateErr: ({ res }) => {
+		return res.status(400).json({
+			statusCode: 400,
+			message: "Failed to update user profile",
+		});
+	},
 };
 
 module.exports = UsersErrors;

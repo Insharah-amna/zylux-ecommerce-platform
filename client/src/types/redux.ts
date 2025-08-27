@@ -6,6 +6,7 @@ export type User = {
   isUserVerified: boolean;
   loginToken?: string;
   role: 'admin' | 'buyer';
+  profileImage?: string;
 };
 
 export type UsersState = {

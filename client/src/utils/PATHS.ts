@@ -46,6 +46,7 @@ export const AUTH_API_URLS = {
   verifyEmail: ({token}: TokenProps) => `/users/verify-email/${token}`,
   resendVerificationEmail: ({email}: TokenProps) =>
     `/users/resend-email-verification/${email}`,
+  updateUserProfile: '/users/updateProfile',
 };
 
 export const DASHBOARD_ROUTES = {
