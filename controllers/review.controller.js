@@ -39,7 +39,7 @@ const ReviewController = {
 			});
 
 		if (productUpdateError || !updatedProduct) {
-			const {} = GeneralServices.findByIdAndDelete({
+			await GeneralServices.findByIdAndDelete({
 				model: ReviewModel,
 				id: review._id,
 			});
