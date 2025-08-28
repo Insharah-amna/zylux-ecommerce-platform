@@ -17,6 +17,12 @@ export const setQueryParams = ({search, filters = {}}: QueryParams) => {
     ...(filters?.category && {
       category: filters.category,
     }),
+    ...(filters?.sortBy && {
+      sortBy: filters.sortBy,
+    }),
+    ...(filters?.rating && {
+      rating: filters.rating,
+    }),
   };
 };
 

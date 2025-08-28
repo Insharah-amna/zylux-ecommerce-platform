@@ -3,6 +3,8 @@ const GeneralServices = require("../services/general.service");
 const ReviewResponses = require("../factories/responses/review");
 const ReviewErrors = require("../factories/errors/review");
 const { GetPaginationSkip, ROLES } = require("../constants/general");
+const ProductsModel = require("../model/products.model");
+const { calculateAverageRating } = require("../utils/calculateAverageRating");
 
 const ReviewController = {
 	addReview: async (req, res) => {
@@ -15,9 +17,35 @@ const ReviewController = {
 			data: { ...data, userId, productId },
 		});
 
-		console.log(error);
-
 		if (error) return ReviewErrors.failedToAddReviewErr({ res });
+
+		const { response: product } = await GeneralServices.findById({
+			model: ProductsModel,
+			id: productId,
+		});
+
+		const { newRating, oldCount } = calculateAverageRating({ product, data });
+
+		const { error: productUpdateError, updatedDoc: updatedProduct } =
+			await GeneralServices.findByIdAndUpdate({
+				model: ProductsModel,
+				id: productId,
+				data: {
+					$set: {
+						averageRating: newRating,
+						reviewCount: oldCount + 1,
+					},
+				},
+			});
+
+		if (productUpdateError || !updatedProduct) {
+			const {} = GeneralServices.findByIdAndDelete({
+				model: ReviewModel,
+				id: review._id,
+			});
+
+			return ReviewErrors.failedToAddReviewErr({ res });
+		}
 
 		return ReviewResponses.reviewAddedSuccessfully({ res, review });
 	},

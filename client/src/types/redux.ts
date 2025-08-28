@@ -62,6 +62,7 @@ export type Product = {
   isOutOfStock: boolean;
   discount: number;
   imageUrls: string[];
+  averageRating: number;
 };
 
 type Pagination = {
