@@ -19,6 +19,11 @@ export interface CategoryFilterProps {
   handleCheckboxChange: (data: string) => void;
 }
 
+export interface RatingFilterProps {
+  ratings: number[];
+  handleRatingChange: (data: any) => void;
+}
+
 export interface ProductPreviewParamProps {
   params: Promise<{id: string}>;
 }

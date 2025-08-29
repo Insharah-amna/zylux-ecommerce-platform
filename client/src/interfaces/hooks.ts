@@ -31,7 +31,7 @@ export interface FilterQueryParams {
   minPrice?: number;
   maxPrice?: number;
   category?: string[];
-  rating?: number;
+  rating?: number[];
   sortBy?: string;
 }
 

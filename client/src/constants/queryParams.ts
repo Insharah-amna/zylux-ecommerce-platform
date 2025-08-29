@@ -58,6 +58,7 @@ export const QUERY_PARAMS = {
       minPrice: 0,
       maxPrice: 0,
       category: [],
+      rating: [],
     },
   },
 

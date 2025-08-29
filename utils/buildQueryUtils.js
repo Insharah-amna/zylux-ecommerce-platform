@@ -31,7 +31,8 @@ exports.buildProductQuery = ({ queryData }) => {
 		query.price = { $gte: Number(minPrice), $lte: Number(maxPrice) };
 	}
 	if (rating) {
-		query.averageRating = { $gte: Number(rating) };
+		const ratingArray = rating.split(",");
+		query.averageRating = { $in: ratingArray };
 	}
 
 	return query;

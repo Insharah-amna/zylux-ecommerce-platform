@@ -1,4 +1,4 @@
-import {Dispatch, SetStateAction} from 'react';
+import {Dispatch, ReactElement, SetStateAction} from 'react';
 import {Option} from '@/types/home';
 import {CartItem} from '@/types/redux';
 
@@ -38,7 +38,7 @@ export interface DropdownProps {
 }
 
 export interface CheckboxInputProps {
-  label: string;
+  label: string | ReactElement;
   disabled?: boolean;
   checked?: boolean;
   onChange: () => void;
