@@ -11,6 +11,7 @@ import {ProductCardsProps} from '@/interfaces/cards';
 import ProductNotFound from './ProductNotFound';
 import {getCurrencyConversion} from '@/utils/currencyUtils';
 import {getDiscountedPrice} from '@/utils/discountedPrice';
+import RatingStar from '@/components/shared/rating';
 
 const ProductCardTemp = ({
   productsList,
@@ -73,6 +74,14 @@ const ProductCardTemp = ({
           )}
 
           <ColorsPreview colorVariants={product.colorVariants} />
+
+          <div className='flex-center'>
+            <RatingStar
+              readOnly={true}
+              rating={product.averageRating}
+              width={100}
+            />
+          </div>
         </div>
       ))}
     </div>

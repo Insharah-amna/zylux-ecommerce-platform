@@ -42,10 +42,7 @@ export const reviewsApiSlice = createApi({
       invalidatesTags: [{type: QUERY_TAGS.reviews}],
 
       async onQueryStarted(_, {queryFulfilled}) {
-        await handleApiResponse({
-          queryFulfilled,
-          toastMessage: {success: {show: false}, error: {show: false}},
-        });
+        await handleApiResponse({queryFulfilled});
       },
     }),
 

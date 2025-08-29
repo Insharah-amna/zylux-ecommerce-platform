@@ -1,5 +1,5 @@
 exports.buildProductQuery = ({ queryData }) => {
-	const { name, category, color, minPrice, maxPrice } = queryData;
+	const { name, category, color, minPrice, maxPrice, rating } = queryData;
 
 	let query = {};
 
@@ -30,8 +30,21 @@ exports.buildProductQuery = ({ queryData }) => {
 	if (minPrice && maxPrice) {
 		query.price = { $gte: Number(minPrice), $lte: Number(maxPrice) };
 	}
+	if (rating) {
+		query.averageRating = { $gte: Number(rating) };
+	}
 
 	return query;
+};
+
+exports.getSortedDocuments = ({ sortBy }) => {
+	let sortOption = {};
+
+	if (sortBy == "rating") {
+		sortOption = { averageRating: -1, reviewCount: -1, createdAt: -1 };
+	} else sortOption = { createdAt: -1 };
+
+	return sortOption;
 };
 
 exports.buildOrdersQuery = (queryData) => {

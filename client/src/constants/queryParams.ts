@@ -34,6 +34,17 @@ export const QUERY_PARAMS = {
     filters: {},
   },
 
+  topRatedProducts: {
+    searchOptions: {},
+    pageOptions: {
+      page: 1,
+      limit: 8,
+    },
+    filters: {
+      sortBy: 'rating',
+    },
+  },
+
   shopProducts: {
     searchOptions: {
       search: '',

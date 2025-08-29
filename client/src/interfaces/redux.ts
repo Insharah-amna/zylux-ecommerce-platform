@@ -81,6 +81,7 @@ export interface GetProductsResponses
   isOutOfStock: boolean;
   discount: number;
   imageUrls: Array<string>;
+  averageRating: number;
 }
 
 export interface GetProductResponses extends Response, GetProductResponseType {
@@ -92,6 +93,7 @@ export interface GetProductResponses extends Response, GetProductResponseType {
   isOutOfStock: boolean;
   discount: number;
   imageUrls: Array<string>;
+  averageRating: number;
 }
 
 export interface UpdateProductResponses extends Response {
