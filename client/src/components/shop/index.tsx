@@ -11,17 +11,28 @@ import {useFetchProductsQuery} from '@/redux/slices/products/productsApi';
 import PriceFilter from '@/layout/sidebar/filterSidebar/PriceFilter';
 import PrimaryButton from '@/components/shared/buttons/PrimaryButton';
 import ProductCardTemp from '@/components/shared/cards/ProductCardTemp';
+import RatingFilter from '@/layout/sidebar/filterSidebar/RatingFilter';
 
 const ShopPage = () => {
   const [categories, setCategories] = useState<string[]>([]);
 
   const [price, setPrice] = useState<number[]>([0, 30000]);
 
+  const [ratings, setRatings] = useState<number[]>([]);
+
   const handleCheckboxChange = (categoryId: string) => {
     setCategories((prev) =>
       prev.includes(categoryId)
         ? prev.filter((id) => id !== categoryId)
         : [...prev, categoryId]
+    );
+  };
+
+  const handleRatingChange = (selectedRating: number) => {
+    setRatings((prev) =>
+      prev.includes(selectedRating)
+        ? prev.filter((r) => r !== selectedRating)
+        : [...prev, selectedRating]
     );
   };
 
@@ -47,11 +58,16 @@ const ShopPage = () => {
   });
 
   const isResetButtonShown =
-    !!search || categories.length > 0 || price[0] !== 0;
+    !!search || categories.length > 0 || price[0] !== 0 || ratings.length > 0;
 
   useEffect(() => {
-    setFilters({category: categories, minPrice: price[0], maxPrice: price[1]});
-  }, [categories, price]);
+    setFilters({
+      category: categories,
+      minPrice: price[0],
+      maxPrice: price[1],
+      rating: ratings,
+    });
+  }, [categories, price, ratings]);
 
   return (
     <>
@@ -76,6 +92,7 @@ const ShopPage = () => {
                         resetAllFilters();
                         setCategories([]);
                         setPrice([0, 30000]);
+                        setRatings([]);
                       }}
                     />
                   </div>
@@ -97,6 +114,11 @@ const ShopPage = () => {
                   isCategoriesLoading={isCategoriesLoading}
                   categories={categories}
                   handleCheckboxChange={handleCheckboxChange}
+                />
+
+                <RatingFilter
+                  ratings={ratings}
+                  handleRatingChange={handleRatingChange}
                 />
               </div>
             </div>
