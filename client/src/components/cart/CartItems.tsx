@@ -17,9 +17,9 @@ const CartItems = () => {
 
   const currency = useSelector(getCurrency);
 
-  return cartItems?.length === 0 ? (
-    <EmptyCart />
-  ) : (
+  if (cartItems.length === 0) return <EmptyCart />;
+
+  return (
     <div className='my-2'>
       <div className='flex w-full py-4'>
         <h2 className='text-lg text-gray-700 w-3/6 uppercase'>Product</h2>
@@ -67,11 +67,13 @@ const CartItems = () => {
             </div>
 
             <div className='w-1/6 h-[120px] flex-center text-lg'>
-              {`${currency.symbol} ${getDiscountedPrice({
-                unitPrice: product.price * product.quantity,
-                discount: product.discount,
-                currency: currency.label,
-              })}`}
+              {`${currency.symbol} ${Number(
+                getDiscountedPrice({
+                  unitPrice: product.price * product.quantity,
+                  discount: product.discount,
+                  currency: currency.label,
+                })
+              ).toLocaleString('en-IN')}`}
             </div>
           </div>
         ))}

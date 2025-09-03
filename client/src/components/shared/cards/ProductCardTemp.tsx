@@ -1,4 +1,3 @@
-'use client';
 import Image from 'next/image';
 import {useSelector} from 'react-redux';
 import {getCurrency} from '@/redux/slices/users/usersSlice';
@@ -50,27 +49,31 @@ const ProductCardTemp = ({
               {`${currency.symbol} `}
 
               <span className='line-through text-accent'>
-                {getCurrencyConversion({
-                  price: product.price,
-                  currency: currency.label,
-                })}
+                {Number(
+                  getCurrencyConversion({
+                    price: product.price,
+                    currency: currency.label,
+                  })
+                ).toLocaleString('en-IN')}
               </span>
 
               <span>
-                {` ${getDiscountedPrice({
-                  unitPrice: product.price,
-                  discount: product.discount,
-                  currency: currency.label,
-                })}`}
+                {` ${Number(
+                  getDiscountedPrice({
+                    unitPrice: product.price,
+                    discount: product.discount,
+                    currency: currency.label,
+                  })
+                ).toLocaleString('en-IN')}`}
               </span>
             </CardDescription>
           ) : (
-            <CardDescription className='text-primary font-semibold'>{`${currency.symbol} ${getCurrencyConversion(
-              {
+            <CardDescription className='text-primary font-semibold'>{`${currency.symbol} ${Number(
+              getCurrencyConversion({
                 price: product.price,
                 currency: currency.label,
-              }
-            )}`}</CardDescription>
+              })
+            ).toLocaleString('en-IN')}`}</CardDescription>
           )}
 
           <ColorsPreview colorVariants={product.colorVariants} />

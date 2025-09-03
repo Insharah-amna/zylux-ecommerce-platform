@@ -24,13 +24,13 @@ const ItemDetails = ({product, handleRemove}: CartItemDetailProps) => {
         <h3 className='text-lg capitalize'>{product.name}</h3>
         <div className='flex gap-2 h-[20px] items-center'>
           <h4 className='text-gray-600 text-sm sm:text-md'>Price:</h4>
-          <h4 className='text-gray-600 text-sm sm:text-md'>{`${currency.symbol}${getDiscountedPrice(
-            {
+          <h4 className='text-gray-600 text-sm sm:text-md'>{`${currency.symbol}${Number(
+            getDiscountedPrice({
               unitPrice: product.price,
               discount: product.discount,
               currency: currency.label,
-            }
-          )}`}</h4>
+            })
+          ).toLocaleString('en-IN')}`}</h4>
         </div>
 
         <PrimaryButton
