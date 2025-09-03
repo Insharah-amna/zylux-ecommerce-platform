@@ -35,6 +35,7 @@ export type CartItem = {
   discount: number;
   imageUrls: string[];
   quantity: number;
+  averageRating: number;
 };
 
 export type Category = {
