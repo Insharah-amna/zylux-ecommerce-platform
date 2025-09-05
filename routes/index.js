@@ -12,4 +12,6 @@ router.use("/wishlist", require("./wishlist.route"));
 
 router.use("/reviews", require("./reviews.route"));
 
+router.use("/messages", require("./messages.route"));
+
 module.exports = router;
