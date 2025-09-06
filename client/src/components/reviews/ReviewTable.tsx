@@ -24,7 +24,6 @@ const ReviewTable = ({
     queryKey: 'reviews',
     queryOptions: QUERY_PARAMS.reviews,
   });
-  console.log(reviewsList);
 
   const reviewsTableHeader = Object.values(REVIEWS_TABLE_HEADER);
 

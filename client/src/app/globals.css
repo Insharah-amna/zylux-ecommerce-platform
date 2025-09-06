@@ -118,6 +118,14 @@
     justify-content: flex-end;
     align-items: center;
   }
+
+  .scrollbar-none::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 .swiper-button-next,

@@ -1,4 +1,10 @@
-import {FiBookmark, FiClock, FiGrid, FiTag} from 'react-icons/fi';
+import {
+  FiBookmark,
+  FiClock,
+  FiGrid,
+  FiMessageCircle,
+  FiTag,
+} from 'react-icons/fi';
 import {TokenProps} from '@/interfaces/auth';
 import {IdProps} from '@/interfaces/dashboard';
 
@@ -14,6 +20,8 @@ export const DASHBOARD_ROOT = '/dashboard';
 export const HOME_ROOT = '/home';
 export const SHOP_ROOT = '/shop';
 export const PROFILE_ROOT = '/profile';
+export const MESSAGE_ROOT = '/chat/';
+export const MESSAGE_ROUTE = (_id: string) => `/chat/${_id}`;
 
 export const PROFILE_PATHS = {
   profile: `${PROFILE_ROOT}?tab=profile`,
@@ -54,6 +62,7 @@ export const DASHBOARD_ROUTES = {
   products: path(DASHBOARD_ROOT, '/products'),
   orders: path(DASHBOARD_ROOT, '/orders'),
   reviews: path(DASHBOARD_ROOT, '/reviews'),
+  chat: path(DASHBOARD_ROOT, '/chat'),
 };
 
 export const DASHBOARD_API_URLS = {
@@ -91,11 +100,18 @@ export const REVIEW_API_URLS = {
   deleteReview: ({_id}: IdProps) => `/reviews/${_id}`,
 };
 
+export const MESSAGE_API_URLS = {
+  sendMessage: '/messages',
+  getMessageByUserId: ({_id}: IdProps) => `/messages/${_id}`,
+  getUsers: '/messages',
+};
+
 export const DASHBOARD_SIDEBAR_ITEMS = [
   {title: 'Categories', icon: FiGrid, url: DASHBOARD_ROUTES.categories},
   {title: 'Products', icon: FiTag, url: DASHBOARD_ROUTES.products},
   {title: 'Orders', icon: FiClock, url: DASHBOARD_ROUTES.orders},
   {title: 'Reviews', icon: FiBookmark, url: DASHBOARD_ROUTES.reviews},
+  {title: 'Messages', icon: FiMessageCircle, url: DASHBOARD_ROUTES.chat},
 ];
 
 export const NAVBAR_URLS = {

@@ -7,7 +7,7 @@ const Header = ({onToggleSidebar}: HeaderProps) => {
       <h1 className='text-xl font-semibold'>Header</h1>
       <button
         onClick={onToggleSidebar}
-        className='p-2 rounded-md hover:bg-gray-100 lg:hidden'
+        className='p-2 rounded-md hover:bg-gray-100 lg:hidden cursor-pointer'
         aria-label='Toggle sidebar'
       >
         <FiMenu />

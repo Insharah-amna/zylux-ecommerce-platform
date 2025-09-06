@@ -24,10 +24,6 @@ export interface RatingFilterProps {
   handleRatingChange: (data: any) => void;
 }
 
-export interface ProductPreviewParamProps {
-  params: Promise<{id: string}>;
-}
-
 export interface ProductPreviewIdProps {
   productId: string;
 }

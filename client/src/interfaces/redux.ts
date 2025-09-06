@@ -1,3 +1,4 @@
+import {UserMessage} from '@/types/messages';
 import {
   GetCategoryResponseType,
   GetOrdersResponseType,
@@ -185,6 +186,20 @@ export interface GetReviewItemsResponse
 }
 
 export type GetReviewsResponse = GetReviewItemsResponse[];
+
+// Messages Responses
+
+export interface SendMessageResponse extends Response {
+  senderId: string;
+  receiverId: string;
+  message: string;
+}
+
+export interface GetUserMessagesResponse extends Response {
+  body: {
+    usersList: UserMessage[];
+  };
+}
 
 export interface GetReviewsResponseFromApi {
   statusCode: number;
