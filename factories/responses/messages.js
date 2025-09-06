@@ -14,6 +14,14 @@ const MessageResponses = {
 			body: { messages },
 		});
 	},
+
+	usersMessagesFetchedSuccessfully: ({ res, usersList }) => {
+		return res.status(200).json({
+			statusCode: 200,
+			message: "Data fetched successfully",
+			body: { usersList },
+		});
+	},
 };
 
 module.exports = MessageResponses;

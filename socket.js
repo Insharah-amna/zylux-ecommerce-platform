@@ -6,15 +6,25 @@ module.exports = {
 		io = new Server(server, { cors: { origin: "*" } });
 
 		io.on("connection", (socket) => {
-			console.log("New user connected:", socket.id);
-
 			socket.on("join", (userId) => {
 				socket.join(userId);
-				console.log(`User ${userId} joined their room`);
+			});
+
+			socket.on("sendMessage", ({ senderId, receiverId, message }) => {
+				const messageData = {
+					_id: Date.now().toString(),
+					senderId,
+					receiverId,
+					message,
+					createdAt: new Date().toISOString(),
+				};
+
+				io.to(receiverId).emit("newMessage", messageData);
+				io.to(senderId).emit("newMessage", messageData);
 			});
 
 			socket.on("disconnect", () => {
-				console.log("User disconnected:", socket.id);
+				// console.log("User disconnected:", socket.id);
 			});
 		});
 

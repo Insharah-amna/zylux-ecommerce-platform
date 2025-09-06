@@ -74,6 +74,14 @@ const GeneralServices = {
 
 		return { success, error, count: response };
 	},
+
+	getDistinctValues: async ({ model, query }) => {
+		const { success, error, response } = await asyncTryCatch(
+			async () => await MongoFactoryService.getDistinctValues({ model, query })
+		);
+
+		return { success, error, response };
+	},
 };
 
 module.exports = GeneralServices;
