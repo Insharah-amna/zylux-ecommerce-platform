@@ -16,7 +16,7 @@ const ProfileDropdown = () => {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <button className={`hidden md:block gap-1 cursor-pointer focus:ring-0`}>
+        <button className={`block gap-1 cursor-pointer focus:ring-0`}>
           <FiUser className='hover:text-gray-700' />
         </button>
       </DropdownMenuTrigger>

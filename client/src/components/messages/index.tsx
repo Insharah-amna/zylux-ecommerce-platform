@@ -8,13 +8,17 @@ const ChatWithSeller = () => {
   const user = useSelector(getCurrentUser);
 
   if (!user) {
-    return <p className='text-accent text-sm'>User is not logged in</p>;
+    return (
+      <div className='text-accent text-sm flex-end'>User is not logged in</div>
+    );
   }
 
   return (
     <div className='flex justify-end'>
       <Link href={MESSAGE_ROUTE(user._id)}>
-        <div className='bg-accent px-4 py-2 rounded-full flex-center gap-2 text-white cursor-pointer hover:shadow-md transition'>
+        <div
+          className={`${user ? 'bg-accent hover:shadow-md' : 'bg-accent/40'} px-4 py-2 rounded-full flex-center gap-2 text-white cursor-pointer transition`}
+        >
           <p>Chat with Seller</p>
           <FiMessageCircle size={24} />
         </div>

@@ -1,6 +1,5 @@
 'use client';
 import {useEffect, useState} from 'react';
-import {io} from 'socket.io-client';
 import {useForm} from 'react-hook-form';
 import {useSelector} from 'react-redux';
 import {getCurrentUser} from '@/redux/slices/users/usersSlice';
@@ -12,8 +11,8 @@ import {
 import Container from '@/components/shared/containers/Container';
 import MessagesList from './MessagesList';
 import MessageInput from './MessageInput';
+import {socketService} from '@/utils/socketUtils';
 
-const socket = io(process.env.NEXT_PUBLIC_SERVER_URL);
 const ADMIN_ID = process.env.ADMIN_ID || '68a572639026d5af96c2c0dd';
 
 const ChatPage = ({userId}: {userId: string}) => {
@@ -34,8 +33,8 @@ const ChatPage = ({userId}: {userId: string}) => {
 
     const receiverId = currentUser?.role === 'admin' ? userId : ADMIN_ID;
 
-    socket.emit('sendMessage', {
-      senderId: currentUser?._id,
+    socketService.sendMessage({
+      senderId: currentUser?._id!,
       receiverId,
       message: data.sendMessage,
     });
@@ -56,17 +55,17 @@ const ChatPage = ({userId}: {userId: string}) => {
   }, [data]);
 
   useEffect(() => {
-    socket.emit('join', userId);
+    socketService.connect(userId);
 
     const handleNewMessage = (msg: Message) => {
       setMessagesList((prev) => [...prev, msg]);
     };
 
-    socket.on('newMessage', handleNewMessage);
+    socketService.onNewMessage(handleNewMessage);
 
     return () => {
-      socket.off('newMessage', handleNewMessage);
-      socket.emit('leave', userId);
+      socketService.offNewMessage(handleNewMessage);
+      socketService.disconnect(userId);
     };
   }, [userId]);
 

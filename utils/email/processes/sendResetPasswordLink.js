@@ -35,7 +35,7 @@ exports.sendResetPasswordLink = async ({ user }) => {
       <p>Thank you,<br/>The Support Team</p>
     </div>
     <div style="margin-top: 30px; font-size: 12px; color: #aaa; text-align: center;">
-      © 2025 Your Company. All rights reserved.
+      © 2025 ShopEase. All rights reserved.
     </div>
   </div>
 </body>
