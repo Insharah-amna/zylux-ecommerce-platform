@@ -6,7 +6,7 @@ import {actions as categoryActions} from '@/redux/slices/categories/categoriesSl
 import {SidebarProps} from '@/interfaces/layout';
 import {AUTH_ROUTES, DASHBOARD_SIDEBAR_ITEMS} from '@/utils/PATHS';
 
-export default function Sidebar({isOpen}: SidebarProps) {
+export default function Sidebar({isOpen, setIsOpen}: SidebarProps) {
   const dispatch = useDispatch();
 
   const onClick = () => {
@@ -31,6 +31,7 @@ export default function Sidebar({isOpen}: SidebarProps) {
                 href={item.url}
                 key={item.title}
                 className='flex items-center gap-[10px] p-2 rounded-md transition-colors hover:bg-gray-200'
+                onClick={() => setIsOpen(false)}
               >
                 <Icon />
                 <span>{item.title}</span>

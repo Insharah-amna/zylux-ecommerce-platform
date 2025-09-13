@@ -10,9 +10,9 @@ const GeneralServices = {
 		return { success, error, response };
 	},
 
-	findAll: async ({ model, options = {} }) => {
+	findAll: async ({ model, options = {}, filter = {} }) => {
 		const { success, error, response } = await asyncTryCatch(
-			async () => await MongoFactoryService.findAll({ model, options })
+			async () => await MongoFactoryService.findAll({ model, options, filter })
 		);
 
 		return { success, error, response };
@@ -73,6 +73,14 @@ const GeneralServices = {
 		);
 
 		return { success, error, count: response };
+	},
+
+	getDistinctValues: async ({ model, query }) => {
+		const { success, error, response } = await asyncTryCatch(
+			async () => await MongoFactoryService.getDistinctValues({ model, query })
+		);
+
+		return { success, error, response };
 	},
 };
 
