@@ -1,5 +1,7 @@
 import {useForm} from 'react-hook-form';
 import {yupResolver} from '@hookform/resolvers/yup';
+import {useSelector} from 'react-redux';
+import {getCurrentUser} from '@/redux/slices/users/usersSlice';
 import {ProductPreviewIdProps} from '@/interfaces/shop';
 import RatingStar from '@/components/shared/rating';
 import {TextareaField} from '@/components/shared/inputs/Textarea';
@@ -9,6 +11,8 @@ import {reviewSchema} from '@/schemas/dashboard';
 import {useAddReviewMutation} from '@/redux/slices/reviews/reviewsApi';
 import {ReviewData} from '@/types/redux';
 import ClipBtnLoader from '@/components/shared/loaders/ClipLoader';
+import {socketService} from '@/utils/socketUtils';
+import {useSendNotificationsMutation} from '@/redux/slices/notifications/notificationsApi';
 
 const ReviewForm = ({productId}: ProductPreviewIdProps) => {
   const {control, handleSubmit, reset} = useForm<ReviewData>({
@@ -17,9 +21,25 @@ const ReviewForm = ({productId}: ProductPreviewIdProps) => {
   });
 
   const [addReview, {isLoading}] = useAddReviewMutation();
+  const [notifyAdmin] = useSendNotificationsMutation();
+
+  const user = useSelector(getCurrentUser);
 
   const onSubmit = (data: ReviewData) => {
     addReview({payload: {...data}, _id: productId});
+
+    notifyAdmin({
+      message: `A new review is submitted by user ${user?._id!} on product id ${productId}`,
+      relatedId: productId,
+      typeRef: 'Products',
+      userId: user?._id!,
+    });
+
+    socketService.emitNewReview({
+      userId: user?._id!,
+      productId,
+    });
+
     reset();
   };
 

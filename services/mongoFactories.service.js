@@ -47,6 +47,10 @@ const MongoFactoryService = {
 		return await model.findByIdAndUpdate(id, data, { new: true });
 	},
 
+	updateMany: async ({ model, filter, update }) => {
+		return await model.updateMany(filter, update);
+	},
+
 	findByIdAndDelete: async ({ model, id }) => {
 		return await model.findByIdAndDelete(id);
 	},

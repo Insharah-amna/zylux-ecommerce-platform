@@ -20,6 +20,7 @@ const Reviews = () => {
   };
 
   if (isLoading) return <ComponentLoader />;
+
   return (
     <div className='mx-auto px-14 py-8'>
       <h2 className='text-2xl font-semibold mb-4'>Manage Reviews</h2>

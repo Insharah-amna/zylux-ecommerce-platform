@@ -14,4 +14,6 @@ router.use("/reviews", require("./reviews.route"));
 
 router.use("/messages", require("./messages.route"));
 
+router.use("/notifications", require("./notifications.route"));
+
 module.exports = router;

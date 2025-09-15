@@ -29,6 +29,14 @@ module.exports = {
 				io.to(senderId).emit("newMessage", messageData);
 			});
 
+			socket.on("new_order", (data) => {
+				io.emit("order_notification", data);
+			});
+
+			socket.on("new_review", (data) => {
+				io.emit("review_notification", data);
+			});
+
 			socket.on("disconnect", () => {
 				if (socket.userId) {
 					const stillConnected = Array.from(io.sockets.sockets.values()).some(
