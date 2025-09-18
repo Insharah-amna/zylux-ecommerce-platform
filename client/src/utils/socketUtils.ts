@@ -16,6 +16,7 @@ export const socketService = {
     socket.disconnect();
   },
 
+  // ----------------- Messages -----------------
   onNewMessage: (callback: (msg: Message) => void) => {
     socket.on('newMessage', callback);
   },
@@ -24,6 +25,7 @@ export const socketService = {
     socket.off('newMessage', callback);
   },
 
+  // ----------------- Online Users -----------------
   onOnlineUsers: (callback: (users: string[]) => void) => {
     socket.on('onlineUsers', callback);
   },
@@ -34,6 +36,40 @@ export const socketService = {
 
   sendMessage: ({senderId, receiverId, message}: MessagePayload) => {
     socket.emit('sendMessage', {senderId, receiverId, message});
+  },
+
+  // ----------------- Orders -----------------
+  emitNewOrder: ({userId, orderId}: {userId: string; orderId: string}) => {
+    socket.emit('new_order', {userId, orderId});
+  },
+
+  onOrderNotification: (
+    callback: (order: {userId: string; orderId: string}) => void
+  ) => {
+    socket.on('order_notification', callback);
+  },
+
+  offOrderNotification: (
+    callback: (order: {userId: string; orderId: string}) => void
+  ) => {
+    socket.off('order_notification', callback);
+  },
+
+  // ----------------- Reviews -----------------
+  emitNewReview: ({userId, productId}: {userId: string; productId: string}) => {
+    socket.emit('new_review', {userId, productId});
+  },
+
+  onReviewNotification: (
+    callback: (review: {userId: string; productId: string}) => void
+  ) => {
+    socket.on('review_notification', callback);
+  },
+
+  offReviewNotification: (
+    callback: (review: {userId: string; productId: string}) => void
+  ) => {
+    socket.off('review_notification', callback);
   },
 
   ADMIN_ID,

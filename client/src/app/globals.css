@@ -118,10 +118,10 @@
     justify-content: flex-end;
     align-items: center;
   }
+}
 
-  .scrollbar-none::-webkit-scrollbar {
-    display: none;
-  }
+.scrollbar-none::-webkit-scrollbar {
+  display: none;
 }
 
 html {

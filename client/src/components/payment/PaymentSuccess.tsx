@@ -2,14 +2,23 @@
 import Link from 'next/link';
 import {useEffect} from 'react';
 import {FiCheck} from 'react-icons/fi';
+import {useSelector} from 'react-redux';
+import {actions, getCurrentUser} from '@/redux/slices/users/usersSlice';
 import PrimaryButton from '@/components/shared/buttons/PrimaryButton';
 import {SHOP_ROOT} from '@/utils/PATHS';
 import {dispatch} from '@/redux/store';
-import {actions} from '@/redux/slices/users/usersSlice';
+import {socketService} from '@/utils/socketUtils';
 
 const PaymentSuccess = () => {
+  const user = useSelector(getCurrentUser);
+
   useEffect(() => {
     dispatch(actions.resetCartItems());
+
+    socketService.emitNewOrder({
+      userId: user?._id!,
+      orderId: 'order._id',
+    });
   }, []);
 
   return (

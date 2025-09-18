@@ -59,6 +59,19 @@ const GeneralServices = {
 		return { success, error, updatedDoc };
 	},
 
+	updateMany: async ({ model, filter, update }) => {
+		const {
+			success,
+			error,
+			response: updatedDoc,
+		} = await asyncTryCatch(
+			async () =>
+				await MongoFactoryService.updateMany({ model, filter, update })
+		);
+
+		return { success, error, updatedDoc };
+	},
+
 	findByIdAndDelete: async ({ model, id }) => {
 		const { success, error, response } = await asyncTryCatch(
 			async () => await MongoFactoryService.findByIdAndDelete({ model, id })

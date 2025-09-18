@@ -1,4 +1,5 @@
 import {
+  FiBell,
   FiBookmark,
   FiClock,
   FiGrid,
@@ -63,6 +64,7 @@ export const DASHBOARD_ROUTES = {
   orders: path(DASHBOARD_ROOT, '/orders'),
   reviews: path(DASHBOARD_ROOT, '/reviews'),
   chat: path(DASHBOARD_ROOT, '/chat'),
+  notifications: path(DASHBOARD_ROOT, '/notifications'),
 };
 
 export const DASHBOARD_API_URLS = {
@@ -106,12 +108,19 @@ export const MESSAGE_API_URLS = {
   getUsers: '/messages',
 };
 
+export const NOTIFICATION_API_URLS = {
+  sendMessage: '/notifications',
+  getNotifications: '/notifications',
+  updateNotifications: '/notifications',
+};
+
 export const DASHBOARD_SIDEBAR_ITEMS = [
   {title: 'Categories', icon: FiGrid, url: DASHBOARD_ROUTES.categories},
   {title: 'Products', icon: FiTag, url: DASHBOARD_ROUTES.products},
   {title: 'Orders', icon: FiClock, url: DASHBOARD_ROUTES.orders},
   {title: 'Reviews', icon: FiBookmark, url: DASHBOARD_ROUTES.reviews},
   {title: 'Messages', icon: FiMessageCircle, url: DASHBOARD_ROUTES.chat},
+  {title: 'Notifications', icon: FiBell, url: DASHBOARD_ROUTES.notifications},
 ];
 
 export const NAVBAR_URLS = {

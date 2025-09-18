@@ -10,6 +10,7 @@ import {
   Product,
 } from '@/types/redux';
 import {User} from '@/types/redux';
+import {Notification} from './notifications';
 
 export interface Response {
   statusCode: number;
@@ -226,6 +227,21 @@ export interface DeleteReviewResponse extends Response {
 
 export interface DeleteReviewPayload {
   _id: string;
+}
+
+// Notifications Responses
+
+export interface SendNotificationResponse extends Response {
+  userId: string;
+  relatedId: string;
+  typeRef: string;
+  message: string;
+}
+
+export interface GetNotificationResponse extends Response {
+  body: {
+    notifications: Notification[];
+  };
 }
 
 interface ToastMessageConfig {
