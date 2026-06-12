@@ -39,18 +39,24 @@ const OrdersController = {
 	},
 
 	verifyOrder: async (req, res) => {
-		if (req.webhookEvent.type === "checkout.session.completed") {
-			const id = req.webhookEvent.data.object.metadata._id;
+		try {
+			if (req.webhookEvent.type === "checkout.session.completed") {
+				const id = req.webhookEvent.data.object.metadata._id;
 
-			const updatedData = {
-				status: ORDER_STATUS.placed.value,
-			};
+				const updatedData = {
+					status: ORDER_STATUS.placed.value,
+				};
 
-			await GeneralServices.findByIdAndUpdate({
-				model: OrdersModel,
-				data: updatedData,
-				id,
-			});
+				await GeneralServices.findByIdAndUpdate({
+					model: OrdersModel,
+					data: updatedData,
+					id,
+				});
+			}
+
+			res.status(200).json({ received: true });
+		} catch (err) {
+			res.status(400).json({ message: err.message });
 		}
 	},
 
@@ -106,7 +112,7 @@ const OrdersController = {
 			{
 				model: usersModel,
 				id,
-			}
+			},
 		);
 
 		if (!user || userError) return UsersErrors.userNotFoundErr({ res });
