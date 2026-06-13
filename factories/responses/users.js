@@ -2,8 +2,7 @@ const UsersResponses = {
 	userCreatedSuccessfully: ({ res, user }) => {
 		return res.status(201).json({
 			statusCode: 201,
-			message:
-				"Sign-up successful! Verify your email to complete registration.",
+			message: "Sign-up successful! Log in to continue.",
 			body: { user },
 		});
 	},
