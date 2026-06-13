@@ -1,28 +1,80 @@
-# Zylux
+# Zylux — Beyond the Ordinary 🛒
 
-A full-stack e-commerce platform where users can browse products, make secure payments, and chat with sellers in real-time, while admins manage orders and inventory through a dedicated dashboard.
+A full-stack e-commerce platform where users can browse products, make secure payments, and chat with support in real-time. Admins manage orders, products, and inventory through a dedicated dashboard.
 
-## Demo Credentials
+## 🌐 Live Demo
+
+**[https://zylux-pink.vercel.app](https://zylux-pink.vercel.app)**
+
+## 🔐 Demo Credentials
 
 | Role  | Email                      | Password |
 | :---- | :------------------------- | :------- |
 | Admin | insharahamna7@gmail.com    | AAAAAAAA |
 | User  | insharahshakir26@gmail.com | AAAAAAAA |
 
-## Features
+> ⚠️ Please do not change the demo credentials.
 
-- User Authentication (JWT)
-- Admin Dashboard
-- Payment Gateway Integration (Stripe)
-- Live Chat (Real-time)
-- Responsive Design (Mobile + Desktop)
+## ✨ Features
 
-## Tech Stack
+- **User Authentication** — Secure login & registration with JWT
+- **Product Browsing** — Search, filter, and explore products
+- **Shopping Cart & Wishlist** — Save and manage items
+- **Secure Payments** — Stripe integration with test mode support
+- **Real-time Chat** — Live support chat powered by Socket.io
+- **Admin Dashboard** — Manage products, orders, categories & reviews
+- **Notifications** — Real-time product notifications
+- **Responsive Design** — Fully optimized for mobile & desktop
 
-| Layer     | Technology       |
-| :-------- | :--------------- |
-| Frontend  | React, NextJs    |
-| Backend   | Node.js, Express |
-| Database  | MongoDB          |
-| Real-time | Socket.io        |
-| Payments  | Stripe           |
+## 🛠️ Tech Stack
+
+| Layer     | Technology                                     |
+| :-------- | :--------------------------------------------- |
+| Frontend  | Next.js 16, React, Redux Toolkit, Tailwind CSS |
+| Backend   | Node.js, Express.js                            |
+| Database  | MongoDB, Mongoose                              |
+| Real-time | Socket.io                                      |
+| Payments  | Stripe                                         |
+| Auth      | JWT                                            |
+| Images    | Cloudinary                                     |
+
+## 🚀 Deployments
+
+| Layer    | Service       | URL                                                                        |
+| :------- | :------------ | :------------------------------------------------------------------------- |
+| Frontend | Vercel        | [zylux-pink.vercel.app](https://zylux-pink.vercel.app)                     |
+| Backend  | Railway       | [zylux-production.up.railway.app](https://zylux-production.up.railway.app) |
+| Database | MongoDB Atlas | Cloud hosted                                                               |
+
+## 📁 Project Structure
+
+```
+Zylux/
+├── client/          # Next.js frontend
+│   ├── src/
+│   │   ├── app/         # Next.js app router pages
+│   │   ├── components/  # Reusable UI components
+│   │   ├── redux/       # Redux store & slices
+│   │   └── utils/       # Helper functions
+├── controllers/     # Express route controllers
+├── models/          # Mongoose models
+├── routes/          # API routes
+├── services/        # Business logic
+└── server.js        # Entry point
+```
+
+## 🧪 Test Payment
+
+Use Stripe test card to make a purchase:
+
+| Field  | Value               |
+| :----- | :------------------ |
+| Card   | 4242 4242 4242 4242 |
+| Expiry | Any future date     |
+| CVV    | Any 3 digits        |
+
+## 👩‍💻 Author
+
+**Insharah Amna**
+
+- GitHub: [@Insharah-amna](https://github.com/Insharah-amna)
