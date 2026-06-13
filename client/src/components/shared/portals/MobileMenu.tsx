@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import {useEffect, useState} from 'react';
 import {createPortal} from 'react-dom';
 import {LiaTimesSolid} from 'react-icons/lia';
 import {SearchbarContentProps} from '@/interfaces/portals';
@@ -7,6 +8,13 @@ import {NAVBAR_PATHS} from '@/constants/home';
 
 const MobileMenu = ({open, setOpen}: SearchbarContentProps) => {
   const {shouldExpand} = useSideContentExpand({open});
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  if (!mounted) return null;
 
   return createPortal(
     <div
