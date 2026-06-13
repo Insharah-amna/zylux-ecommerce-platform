@@ -14,7 +14,7 @@ connection();
 
 app.use(
 	cors({
-		origin: process.env.FRONTEND_APP_URL,
+		origin: [process.env.FRONTEND_APP_URL, process.env.CLIENT_URL],
 		credentials: true,
 	}),
 );
