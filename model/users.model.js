@@ -22,7 +22,7 @@ const userSchema = new mongoose.Schema(
 		},
 		isUserVerified: {
 			type: Boolean,
-			default: false,
+			default: true,
 		},
 		role: {
 			type: String,
@@ -35,7 +35,7 @@ const userSchema = new mongoose.Schema(
 	},
 	{
 		timestamps: true,
-	}
+	},
 );
 
 module.exports = mongoose.model("Users", userSchema);

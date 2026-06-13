@@ -38,7 +38,7 @@ const UsersController = {
 
 		if (error) return UsersErrors.userCreationErr({ res });
 
-		await sendEmailVerificationLink({ userEmail: data.email });
+		// await sendEmailVerificationLink({ userEmail: data.email });
 
 		return UsersResponses.userCreatedSuccessfully({
 			res,
@@ -115,7 +115,7 @@ const UsersController = {
 				model: UsersModel,
 				data,
 				id: decodedData._id,
-			}
+			},
 		);
 
 		let user = updatedUser.toObject();

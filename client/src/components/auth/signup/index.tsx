@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import {useForm} from 'react-hook-form';
 import {yupResolver} from '@hookform/resolvers/yup';
+import {useRouter} from 'next/dist/client/components/navigation';
 import {SignUpPayload} from '@/interfaces/auth';
 import TextInput from '@/components/shared/inputs/TextInput';
 import {AUTH_ROUTES} from '@/utils/PATHS';
@@ -10,8 +11,11 @@ import AuthFormContainer from '@/components/shared/containers/AuthFormContainer'
 import SubmitButton from '@/components/shared/buttons/SubmitButton';
 import {signUpUserSchema} from '@/schemas/auth';
 import {useSignUpUserMutation} from '@/redux/slices/users/usersApi';
+import {asyncTryCatch} from '@/utils/tryCatchUtils';
 
 const SignUp = () => {
+  const router = useRouter();
+
   const {control, handleSubmit} = useForm<SignUpPayload>({
     defaultValues: {
       firstName: '',
@@ -24,13 +28,19 @@ const SignUp = () => {
 
   const [signUpUser, {isLoading}] = useSignUpUserMutation();
 
-  const onSubmit = (data: SignUpPayload) => {
-    signUpUser({
-      firstName: data.firstName,
-      lastName: data.lastName,
-      email: data.email,
-      password: data.password,
-    });
+  const onSubmit = async (data: SignUpPayload) => {
+    const {success} = await asyncTryCatch(() =>
+      signUpUser({
+        firstName: data.firstName,
+        lastName: data.lastName,
+        email: data.email,
+        password: data.password,
+      }).unwrap()
+    );
+
+    if (success) {
+      router.push('/auth/login');
+    }
   };
 
   return (
