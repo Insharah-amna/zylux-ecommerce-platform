@@ -21,8 +21,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: 'ShopEase',
-  description: 'Shop with ease.',
+  title: 'Zylux',
+  description: 'beyond the ordinary',
 };
 
 export default function RootLayout({
