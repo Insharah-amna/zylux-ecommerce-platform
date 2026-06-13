@@ -8,6 +8,7 @@ import {
 } from '@/components/ui/card';
 import PrimaryButton from '@/components/shared/buttons/PrimaryButton';
 import Container from '@/components/shared/containers/Container';
+import {SHOP_ROOT} from '@/utils/PATHS';
 
 const HeroCards = () => {
   return (
@@ -38,10 +39,12 @@ const HeroCards = () => {
                   </CardDescription>
                 </div>
 
-                <PrimaryButton
-                  buttonText={'Shop Now'}
-                  className='h-[50px] rounded-full bg-black hover:bg-accent'
-                />
+                <Link href={SHOP_ROOT}>
+                  <PrimaryButton
+                    buttonText={'Shop Now'}
+                    className='h-[50px] rounded-full bg-black hover:bg-accent'
+                  />
+                </Link>
               </CardContent>
             </Card>
           </div>
@@ -64,7 +67,7 @@ const HeroCards = () => {
                   </div>
 
                   <Link
-                    href={''}
+                    href={SHOP_ROOT}
                     className='text-sm md:text-lg hover:text-accent'
                   >
                     Shop Now
@@ -88,7 +91,7 @@ const HeroCards = () => {
                   </div>
 
                   <Link
-                    href={''}
+                    href={SHOP_ROOT}
                     className='text-sm md:text-lg hover:text-accent'
                   >
                     Shop Now
@@ -116,11 +119,12 @@ const HeroCards = () => {
                       {'SAVE UP TO $99 OFF, GET CHANCE!'}
                     </CardDescription>
                   </div>
-
-                  <PrimaryButton
-                    buttonText={'Shop Now'}
-                    className='h-[35px] md:h-[50px] rounded-full bg-black hover:bg-accent'
-                  />
+                  <Link href={SHOP_ROOT}>
+                    <PrimaryButton
+                      buttonText={'Shop Now'}
+                      className='h-[35px] md:h-[50px] rounded-full bg-black hover:bg-accent'
+                    />
+                  </Link>
                 </CardContent>
               </Card>
             </div>

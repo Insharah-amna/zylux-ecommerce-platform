@@ -1,4 +1,3 @@
-'use client';
 import Image from 'next/image';
 import {useSelector} from 'react-redux';
 import {getCurrency} from '@/redux/slices/users/usersSlice';
@@ -10,6 +9,8 @@ import ComponentLoader from '@/components/shared/loaders/ComponentLoader';
 import {ProductCardsProps} from '@/interfaces/cards';
 import ProductNotFound from './ProductNotFound';
 import {getCurrencyConversion} from '@/utils/currencyUtils';
+import {getDiscountedPrice} from '@/utils/discountedPrice';
+import RatingStar from '@/components/shared/rating';
 
 const ProductCardTemp = ({
   productsList,
@@ -24,8 +25,8 @@ const ProductCardTemp = ({
 
   return (
     <div className={`grid grid-cols-1 ${className} gap-6 my-10`}>
-      {productsList.map((product: Product) => (
-        <div className='flex flex-col gap-2 relative'>
+      {productsList?.map((product: Product) => (
+        <div className='flex flex-col gap-2 relative' key={product._id}>
           <Card
             key={product._id}
             className='p-0 rounded-md overflow-hidden cursor-pointer relative group transition-all duration-500'
@@ -43,14 +44,47 @@ const ProductCardTemp = ({
 
           <CardTitle className='capitalize'>{product.name}</CardTitle>
 
-          <CardDescription className='text-primary font-semibold'>{`${currency.value} ${getCurrencyConversion(
-            {
-              price: product.price,
-              currency: currency.label,
-            }
-          ).toFixed(2)}`}</CardDescription>
+          {product.discount > 0 ? (
+            <CardDescription className='text-primary font-semibold'>
+              {`${currency.symbol} `}
+
+              <span className='line-through text-accent'>
+                {Number(
+                  getCurrencyConversion({
+                    price: product.price,
+                    currency: currency.label,
+                  })
+                ).toLocaleString('en-IN')}
+              </span>
+
+              <span>
+                {` ${Number(
+                  getDiscountedPrice({
+                    unitPrice: product.price,
+                    discount: product.discount,
+                    currency: currency.label,
+                  })
+                ).toLocaleString('en-IN')}`}
+              </span>
+            </CardDescription>
+          ) : (
+            <CardDescription className='text-primary font-semibold'>{`${currency.symbol} ${Number(
+              getCurrencyConversion({
+                price: product.price,
+                currency: currency.label,
+              })
+            ).toLocaleString('en-IN')}`}</CardDescription>
+          )}
 
           <ColorsPreview colorVariants={product.colorVariants} />
+
+          <div className='flex-center'>
+            <RatingStar
+              readOnly={true}
+              rating={product.averageRating}
+              width={100}
+            />
+          </div>
         </div>
       ))}
     </div>

@@ -1,4 +1,4 @@
-import Loader from './Loader';
+import Loader from './SyncLoader';
 
 const GlobalLoader = () => {
   return (

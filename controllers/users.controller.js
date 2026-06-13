@@ -13,6 +13,7 @@ const {
 const {
 	sendResetPasswordLink,
 } = require("../utils/email/processes/sendResetPasswordLink");
+const CloudinaryService = require("../services/cloudinary.service");
 
 const UsersController = {
 	signupUser: async (req, res) => {
@@ -168,6 +169,37 @@ const UsersController = {
 		} catch (error) {
 			return UsersErrors.verificationFailedErr({ res });
 		}
+	},
+
+	updateUserProfile: async (req, res) => {
+		const data = JSON.parse(req.body.data);
+
+		if (req.file) {
+			const { url, error: imageUploadErr } =
+				await CloudinaryService.uploadSingleFile({
+					file: req.file,
+					folder: "user",
+				});
+
+			if (imageUploadErr) return ProductsErrors.imageUploadErr({ res });
+
+			data.profileImage = url;
+		}
+
+		const { error, updatedDoc: updatedUser } =
+			await GeneralServices.findByIdAndUpdate({
+				model: UsersModel,
+				id: req.user._id,
+				data,
+				options: { new: true },
+			});
+
+		if (error) return UsersErrors.userProfileUpdateErr({ res });
+
+		return UsersResponses.profileImageSavesSuccessfully({
+			res,
+			profileImage: updatedUser.profileImage,
+		});
 	},
 };
 

@@ -10,9 +10,9 @@ const GeneralServices = {
 		return { success, error, response };
 	},
 
-	findAll: async ({ model, options = {} }) => {
+	findAll: async ({ model, options = {}, filter = {} }) => {
 		const { success, error, response } = await asyncTryCatch(
-			async () => await MongoFactoryService.findAll({ model, options })
+			async () => await MongoFactoryService.findAll({ model, options, filter })
 		);
 
 		return { success, error, response };
@@ -59,6 +59,19 @@ const GeneralServices = {
 		return { success, error, updatedDoc };
 	},
 
+	updateMany: async ({ model, filter, update }) => {
+		const {
+			success,
+			error,
+			response: updatedDoc,
+		} = await asyncTryCatch(
+			async () =>
+				await MongoFactoryService.updateMany({ model, filter, update })
+		);
+
+		return { success, error, updatedDoc };
+	},
+
 	findByIdAndDelete: async ({ model, id }) => {
 		const { success, error, response } = await asyncTryCatch(
 			async () => await MongoFactoryService.findByIdAndDelete({ model, id })
@@ -73,6 +86,14 @@ const GeneralServices = {
 		);
 
 		return { success, error, count: response };
+	},
+
+	getDistinctValues: async ({ model, query }) => {
+		const { success, error, response } = await asyncTryCatch(
+			async () => await MongoFactoryService.getDistinctValues({ model, query })
+		);
+
+		return { success, error, response };
 	},
 };
 

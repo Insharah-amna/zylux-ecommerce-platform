@@ -27,13 +27,13 @@ const MongoFactoryService = {
 		return await model.findOne(query).populate(populatedFields || "");
 	},
 
-	findAll: async ({ model, options = {} }) => {
+	findAll: async ({ model, options = {}, filter = {} }) => {
 		const populatedFields = options?.populatedFields;
 
 		const queryProperties = options?.queryProperties || {};
 
 		return await model
-			.find({}, null, queryProperties)
+			.find(filter, null, queryProperties)
 			.populate(populatedFields || "");
 	},
 
@@ -44,14 +44,23 @@ const MongoFactoryService = {
 	},
 
 	findByIdAndUpdate: async ({ model, id, data }) => {
-		return await model.findByIdAndUpdate(id, data);
+		return await model.findByIdAndUpdate(id, data, { new: true });
+	},
+
+	updateMany: async ({ model, filter, update }) => {
+		return await model.updateMany(filter, update);
 	},
 
 	findByIdAndDelete: async ({ model, id }) => {
 		return await model.findByIdAndDelete(id);
 	},
+
 	countDocuments: async ({ model, query }) => {
 		return await model.countDocuments(query);
+	},
+
+	getDistinctValues: async ({ model, query }) => {
+		return await model.aggregate(query);
 	},
 };
 

@@ -45,7 +45,7 @@ exports.sendEmailVerificationLink = async ({ userEmail }) => {
 
       <hr style="margin-top: 40px;" />
       <p style="font-size: 12px; color: #999; text-align: center;">
-        © 2025 Your Company. All rights reserved.
+        © 2025 ShopEase. All rights reserved.
       </p>
     </div>
   </body>

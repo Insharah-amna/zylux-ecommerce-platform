@@ -5,8 +5,10 @@ import {getCurrencyConversion} from '@/utils/currencyUtils';
 const defaultState: UsersState = {
   currentUser: null,
   cartItems: [],
+  wishlist: [],
   currency: {
-    value: 'Rs',
+    value: 'pkr',
+    symbol: 'Rs',
     label: 'PKR',
     country: 'Pakistan',
     rate: 1,
@@ -54,6 +56,26 @@ const slice = createSlice({
     setCurrency(state, action) {
       state.currency = action.payload;
     },
+
+    setWishlist(state, action) {
+      state.wishlist = action.payload;
+    },
+
+    addItemToWishlist(state, action) {
+      state.wishlist.push(action.payload);
+    },
+
+    removeItemFromWishlist(state, action) {
+      state.wishlist = state.wishlist.filter(
+        (wishlistItem) => wishlistItem.productId._id !== action.payload
+      );
+    },
+
+    updateUserProfile(state, action) {
+      if (state.currentUser) {
+        state.currentUser = {...state.currentUser, ...action.payload};
+      }
+    },
   },
 });
 
@@ -63,6 +85,24 @@ export const actions = slice.actions;
 
 export const getCurrentUser = (state: {users: UsersState}) =>
   state.users.currentUser;
+
+export const getUserRole = (state: {users: UsersState}) =>
+  state.users.currentUser?.role;
+
+export const getWishlist = (state: {users: UsersState}) => state.users.wishlist;
+
+export const getWishlistByProductId =
+  ({productId}: {productId: string}) =>
+  (state: {users: UsersState}) => {
+    const existedItem = state.users.wishlist.find((item) => {
+      if (typeof item.productId === 'object') {
+        return item.productId._id === productId;
+      }
+      return item.productId === productId;
+    });
+
+    return existedItem;
+  };
 
 export const getCartItems = (state: {users: UsersState}) =>
   state.users.cartItems;
@@ -79,7 +119,9 @@ export const getCartItem =
 
 export const getTotalPrice = (state: {users: UsersState}) => {
   const totalPrice = state.users.cartItems.reduce((total, item) => {
-    return total + item.price * item.quantity;
+    const discountedPrice = item.price - (item.price * item.discount) / 100;
+
+    return total + discountedPrice * item.quantity;
   }, 0);
 
   const finalPrice = getCurrencyConversion({

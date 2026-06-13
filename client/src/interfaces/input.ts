@@ -1,4 +1,4 @@
-import {Dispatch, SetStateAction} from 'react';
+import {Dispatch, ReactElement, SetStateAction} from 'react';
 import {Option} from '@/types/home';
 import {CartItem} from '@/types/redux';
 
@@ -31,13 +31,14 @@ export interface SelectInputProps {
 export interface DropdownProps {
   options: Option[];
   className?: string;
-  selectedValue: string;
+  selectedValue?: string;
   isOpen: boolean;
   setIsOpen: Dispatch<SetStateAction<boolean>>;
+  handleClick: (data: any) => void;
 }
 
 export interface CheckboxInputProps {
-  label: string;
+  label: string | ReactElement;
   disabled?: boolean;
   checked?: boolean;
   onChange: () => void;
@@ -55,4 +56,13 @@ export interface QuantitySelectorProps {
   product: CartItem;
   handleIncrement: (data: any) => void;
   handleDecrement: (data: any) => void;
+}
+
+export interface TextareaFieldProps {
+  control: any;
+  label: string;
+  name: string;
+  rows?: number;
+  className: string;
+  placeholder: string;
 }

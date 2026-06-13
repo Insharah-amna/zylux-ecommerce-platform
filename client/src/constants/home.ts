@@ -1,4 +1,4 @@
-import {NAVBAR_URLS} from '@/utils/PATHS';
+import {NAVBAR_URLS, SHOP_ROOT} from '@/utils/PATHS';
 import {FaFacebook, FaInstagram, FaLinkedin, FaTwitter} from 'react-icons/fa';
 
 const SOCIAL_ICONS = {
@@ -41,28 +41,31 @@ export const HOME_SWIPER_CONTENT = Object.values(HOME_PAGE_SWIPER_CONTENT);
 export const DOLLARRATE = 274;
 export const EURORATE = 332;
 
-const CURRENCY = {
+export const CURRENCIES = {
   pk: {
-    value: 'Rs',
+    value: 'pk',
+    symbol: 'Rs',
     label: 'PKR',
     country: 'Pakistan',
     currency: 1,
   },
   us: {
-    value: '$',
+    value: 'usd',
+    symbol: '$',
     label: 'USD',
     country: 'United States',
     currency: DOLLARRATE,
   },
   eu: {
-    value: '€',
-    label: 'EU',
+    value: 'eur',
+    symbol: '€',
+    label: 'EUR',
     country: 'European Union',
     currency: EURORATE,
   },
 };
 
-export const CURRENCY_ARRAY = Object.values(CURRENCY);
+export const CURRENCY_ARRAY = Object.values(CURRENCIES);
 
 const NAVBAR_PATH_LINKS = {
   home: {
@@ -87,7 +90,7 @@ export const HERO_SLIDE_CONTENT = {
     description: 'Introducing the Ambaz women winter fashion',
     button: {
       text: 'Shop Collection',
-      url: '',
+      url: SHOP_ROOT,
     },
     image: {
       src: '/images/image_1.webp',
@@ -99,7 +102,7 @@ export const HERO_SLIDE_CONTENT = {
     description: 'Shop the best collections at unbeatable prices',
     button: {
       text: 'Shop Now',
-      url: '',
+      url: SHOP_ROOT,
     },
     image: {
       src: '/images/image_2.webp',
@@ -111,7 +114,7 @@ export const HERO_SLIDE_CONTENT = {
     description: 'Explore vibrant colors and breathable fabrics',
     button: {
       text: 'Explore',
-      url: '',
+      url: SHOP_ROOT,
     },
     image: {
       src: '/images/image_3.webp',

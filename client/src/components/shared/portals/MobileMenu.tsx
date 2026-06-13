@@ -1,7 +1,9 @@
+import Link from 'next/link';
 import {createPortal} from 'react-dom';
 import {LiaTimesSolid} from 'react-icons/lia';
 import {SearchbarContentProps} from '@/interfaces/portals';
 import useSideContentExpand from '@/hooks/useSideContentExpand';
+import {NAVBAR_PATHS} from '@/constants/home';
 
 const MobileMenu = ({open, setOpen}: SearchbarContentProps) => {
   const {shouldExpand} = useSideContentExpand({open});
@@ -23,6 +25,18 @@ const MobileMenu = ({open, setOpen}: SearchbarContentProps) => {
         >
           <LiaTimesSolid />
         </button>
+
+        <div className='flex flex-col px-6 mt-4'>
+          {NAVBAR_PATHS.map((item, index) => (
+            <Link
+              key={index}
+              href={item.path}
+              className='py-4 border-b-1 border-gray-300 text-primary hover:text-accent transition-colors duration-250'
+            >
+              {item.label}
+            </Link>
+          ))}
+        </div>
       </div>
     </div>,
     document.body

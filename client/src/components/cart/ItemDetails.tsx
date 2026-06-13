@@ -1,9 +1,9 @@
 import Image from 'next/image';
+import {useSelector} from 'react-redux';
 import {CartItemDetailProps} from '@/interfaces/cart';
 import PrimaryButton from '@/components/shared/buttons/PrimaryButton';
-import {useSelector} from 'react-redux';
 import {getCurrency} from '@/redux/slices/users/usersSlice';
-import {getCurrencyConversion} from '@/utils/currencyUtils';
+import {getDiscountedPrice} from '@/utils/discountedPrice';
 
 const ItemDetails = ({product, handleRemove}: CartItemDetailProps) => {
   const currency = useSelector(getCurrency);
@@ -16,20 +16,21 @@ const ItemDetails = ({product, handleRemove}: CartItemDetailProps) => {
           alt='image'
           height={200}
           width={200}
-          className='bg-cover cursor-pointer min-w-[90px] max-h-[120px]'
+          className='bg-cover cursor-pointer min-w-[70px] max-h-[120px]'
         />
       </div>
 
-      <div className='flex flex-col gap-2'>
+      <div className='flex flex-col gap-3 sm:gap-2'>
         <h3 className='text-lg capitalize'>{product.name}</h3>
         <div className='flex gap-2 h-[20px] items-center'>
-          <h4 className='text-gray-600'>Price:</h4>
-          <h4 className='text-gray-600'>{`${currency.value} ${getCurrencyConversion(
-            {
-              price: product.price,
+          <h4 className='text-gray-600 text-sm sm:text-md'>Price:</h4>
+          <h4 className='text-gray-600 text-sm sm:text-md'>{`${currency.symbol}${Number(
+            getDiscountedPrice({
+              unitPrice: product.price,
+              discount: product.discount,
               currency: currency.label,
-            }
-          ).toFixed(2)}`}</h4>
+            })
+          ).toLocaleString('en-IN')}`}</h4>
         </div>
 
         <PrimaryButton

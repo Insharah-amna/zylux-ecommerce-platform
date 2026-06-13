@@ -5,6 +5,12 @@ import {rootPersistConfig, rootReducer} from './rootReducer';
 import {usersApiSlice} from './slices/users/usersApi';
 import {categoriesApiSlice} from './slices/categories/categoriesApi';
 import {productsApiSlice} from './slices/products/productsApi';
+import {ordersApiSlice} from './slices/orders/ordersApi';
+import {wishlistApiSlice} from './slices/wishlist/wishlistApi';
+import {reviewsApiSlice} from './slices/reviews/reviewsApi';
+import {profileApiSlice} from './slices/profile/profileApi';
+import {messagesApiSlice} from './slices/messages/messagesApi';
+import {notificationsApiSlice} from './slices/notifications/notificationsApi';
 
 const store = configureStore({
   reducer: persistReducer(rootPersistConfig, rootReducer),
@@ -15,7 +21,13 @@ const store = configureStore({
     }).concat(
       usersApiSlice.middleware,
       categoriesApiSlice.middleware,
-      productsApiSlice.middleware
+      productsApiSlice.middleware,
+      ordersApiSlice.middleware,
+      wishlistApiSlice.middleware,
+      reviewsApiSlice.middleware,
+      profileApiSlice.middleware,
+      messagesApiSlice.middleware,
+      notificationsApiSlice.middleware
     ),
 });
 

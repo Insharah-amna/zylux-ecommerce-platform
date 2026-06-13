@@ -30,6 +30,7 @@ const Navbar = () => {
                 <HiOutlineBars3CenterLeft />
               </button>
             </div>
+
             <div className='flex items-center w-1/3 md'>
               <Logo
                 height={'h-auto'}
@@ -41,7 +42,7 @@ const Navbar = () => {
 
             <NavbarPaths />
 
-            <NavbarIcons setIsSearchBarOpen={setIsSearchBarOpen} />
+            <NavbarIcons />
           </div>
         </Container>
       </div>

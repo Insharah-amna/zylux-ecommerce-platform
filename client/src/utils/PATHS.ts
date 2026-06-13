@@ -1,4 +1,11 @@
-import {FiGrid, FiTag} from 'react-icons/fi';
+import {
+  FiBell,
+  FiBookmark,
+  FiClock,
+  FiGrid,
+  FiMessageCircle,
+  FiTag,
+} from 'react-icons/fi';
 import {TokenProps} from '@/interfaces/auth';
 import {IdProps} from '@/interfaces/dashboard';
 
@@ -13,6 +20,16 @@ export const AUTH_ROOT = '/auth';
 export const DASHBOARD_ROOT = '/dashboard';
 export const HOME_ROOT = '/home';
 export const SHOP_ROOT = '/shop';
+export const PROFILE_ROOT = '/profile';
+export const MESSAGE_ROOT = '/chat/';
+export const MESSAGE_ROUTE = (_id: string) => `/chat/${_id}`;
+
+export const PROFILE_PATHS = {
+  profile: `${PROFILE_ROOT}?tab=profile`,
+  wishlist: `${PROFILE_ROOT}?tab=wishlist`,
+  orders: `${PROFILE_ROOT}?tab=orders`,
+  cart: `${PROFILE_ROOT}?tab=cart`,
+};
 
 export const AUTH_ROUTES = {
   login: path(AUTH_ROOT, '/login'),
@@ -25,6 +42,11 @@ export const PUBLIC_ROUTES = {
   singleProduct: ({_id}: IdProps) => path(SHOP_ROOT, `/${_id}`),
 };
 
+export const PUBLIC_API_URLS = {
+  orderSucceed: '/order-succeed',
+  orderFailed: '/order-failed',
+};
+
 export const AUTH_API_URLS = {
   login: '/users/login',
   signup: '/users/signup',
@@ -33,11 +55,16 @@ export const AUTH_API_URLS = {
   verifyEmail: ({token}: TokenProps) => `/users/verify-email/${token}`,
   resendVerificationEmail: ({email}: TokenProps) =>
     `/users/resend-email-verification/${email}`,
+  updateUserProfile: '/users/updateProfile',
 };
 
 export const DASHBOARD_ROUTES = {
   categories: path(DASHBOARD_ROOT, '/categories'),
   products: path(DASHBOARD_ROOT, '/products'),
+  orders: path(DASHBOARD_ROOT, '/orders'),
+  reviews: path(DASHBOARD_ROOT, '/reviews'),
+  chat: path(DASHBOARD_ROOT, '/chat'),
+  notifications: path(DASHBOARD_ROOT, '/notifications'),
 };
 
 export const DASHBOARD_API_URLS = {
@@ -56,9 +83,44 @@ export const DASHBOARD_API_URLS = {
   },
 };
 
-export const SIDEBAR_ITEMS = [
+export const ORDER_API_URLS = {
+  createOrder: '/orders',
+  getOrders: '/orders',
+  getOrdersByUserId: '/orders/user-orders',
+};
+
+export const WISHLIST_API_URLS = {
+  addToWishlist: ({_id}: IdProps) => `/wishlist/${_id}`,
+  getWishlistbyUserId: '/wishlist',
+  removeFromWishlist: ({_id}: IdProps) => `/wishlist/${_id}`,
+};
+
+export const REVIEW_API_URLS = {
+  addReview: ({_id}: IdProps) => `/reviews/${_id}`,
+  fetchReviews: '/reviews',
+  fetchReviewsByProductId: ({_id}: IdProps) => `/reviews/${_id}`,
+  deleteReview: ({_id}: IdProps) => `/reviews/${_id}`,
+};
+
+export const MESSAGE_API_URLS = {
+  sendMessage: '/messages',
+  getMessageByUserId: ({_id}: IdProps) => `/messages/${_id}`,
+  getUsers: '/messages',
+};
+
+export const NOTIFICATION_API_URLS = {
+  sendMessage: '/notifications',
+  getNotifications: '/notifications',
+  updateNotifications: '/notifications',
+};
+
+export const DASHBOARD_SIDEBAR_ITEMS = [
   {title: 'Categories', icon: FiGrid, url: DASHBOARD_ROUTES.categories},
   {title: 'Products', icon: FiTag, url: DASHBOARD_ROUTES.products},
+  {title: 'Orders', icon: FiClock, url: DASHBOARD_ROUTES.orders},
+  {title: 'Reviews', icon: FiBookmark, url: DASHBOARD_ROUTES.reviews},
+  {title: 'Messages', icon: FiMessageCircle, url: DASHBOARD_ROUTES.chat},
+  {title: 'Notifications', icon: FiBell, url: DASHBOARD_ROUTES.notifications},
 ];
 
 export const NAVBAR_URLS = {
@@ -70,14 +132,14 @@ export const NAVBAR_URLS = {
 export const FOOTER_URLS = {
   quickLinks: {
     faq: '/faq',
-    storeLocaton: '/store-location',
+    storeLocation: '/store-location',
     privacyPolicy: '/privacy-policy',
     returnPolicy: '/return-policy',
     termsOfService: '/terms-of-service',
   },
   companyOptions: {
-    wishlist: '/wishlist',
-    myAccount: '/myaccount',
+    wishlist: PROFILE_PATHS.wishlist,
+    myAccount: '/my-account',
     cart: '/cart',
     aboutUs: '/about-us',
   },

@@ -1,7 +1,8 @@
 const router = require("express").Router();
 const { UsersController } = require("../controllers");
-const validatorMiddleware = require("../middlewares/validator.middleware");
 const authMiddleware = require("../middlewares/auth.middleware");
+const accessMiddleware = require("../middlewares/access.middleware");
+const validatorMiddleware = require("../middlewares/validator.middleware");
 const catchAsync = require("../utils/asyncCatchUtils");
 const {
 	validateCreateUserRequest,
@@ -10,7 +11,15 @@ const {
 	validateResetPasswordRequest,
 	validateTokenParamsRequest,
 	validateResendVerificationEmailReq,
+	validateUpdateUserProfileReq,
 } = require("../schemas/userSchema");
+const { ROLES } = require("../constants/general");
+const createUploadMiddleware = require("../middlewares/uploadFiles.middleware");
+const { ALLOWED_IMAGE_TYPES } = require("../constants/filetypes");
+
+const uploadFile = createUploadMiddleware({
+	allowedTypes: ALLOWED_IMAGE_TYPES,
+});
 
 router.get("/me", authMiddleware, catchAsync(UsersController.getProfile));
 
@@ -58,6 +67,14 @@ router.get(
 		reqProperty: "params",
 	}),
 	catchAsync(UsersController.resendVerificationEmail)
+);
+
+router.patch(
+	"/updateProfile",
+	authMiddleware,
+	accessMiddleware({ allowedRoles: [ROLES.buyer.value] }),
+	uploadFile.single("file"),
+	catchAsync(UsersController.updateUserProfile)
 );
 
 module.exports = router;

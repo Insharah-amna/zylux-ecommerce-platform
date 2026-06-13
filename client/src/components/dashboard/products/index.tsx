@@ -69,7 +69,7 @@ const Products = () => {
       />
 
       <InfoModal
-        title={`Product's Details`}
+        title={`Product Details`}
         content={[
           <ProductInfo selectedProduct={selectedProduct} onCancel={onClose} />,
         ]}

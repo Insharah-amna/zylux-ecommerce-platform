@@ -17,6 +17,7 @@ const DropDown = ({
   selectedValue,
   isOpen,
   setIsOpen,
+  handleClick,
 }: DropdownProps) => {
   return (
     <DropdownMenu>
@@ -31,11 +32,13 @@ const DropDown = ({
       </DropdownMenuTrigger>
 
       {isOpen ? (
-        <DropdownMenuContent>
+        <DropdownMenuContent align='end'>
           {options.map((option) => (
             <DropdownMenuItem
               key={option.value}
-              onClick={() => dispatch(actions.setCurrency(option))}
+              onClick={() => {
+                handleClick(option);
+              }}
               className='cursor-pointer'
             >
               {option.label}

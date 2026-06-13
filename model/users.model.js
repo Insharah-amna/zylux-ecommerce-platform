@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const { ROLES, DEFAULT_PROFILE_IMAGE } = require("../constants/general");
 
 const userSchema = new mongoose.Schema(
 	{
@@ -22,6 +23,14 @@ const userSchema = new mongoose.Schema(
 		isUserVerified: {
 			type: Boolean,
 			default: false,
+		},
+		role: {
+			type: String,
+			default: ROLES.buyer.value,
+		},
+		profileImage: {
+			type: String,
+			default: DEFAULT_PROFILE_IMAGE,
 		},
 	},
 	{

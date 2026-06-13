@@ -34,6 +34,17 @@ export const QUERY_PARAMS = {
     filters: {},
   },
 
+  topRatedProducts: {
+    searchOptions: {},
+    pageOptions: {
+      page: 1,
+      limit: 8,
+    },
+    filters: {
+      sortBy: 'rating',
+    },
+  },
+
   shopProducts: {
     searchOptions: {
       search: '',
@@ -47,6 +58,30 @@ export const QUERY_PARAMS = {
       minPrice: 0,
       maxPrice: 0,
       category: [],
+      rating: [],
+    },
+  },
+
+  orders: {
+    pageOptions: {
+      page: 1,
+      limit: 15,
+    },
+  },
+
+  wishlist: {
+    searchOptions: {},
+    pageOptions: {
+      page: 1,
+      limit: 15,
+    },
+    filters: {},
+  },
+
+  reviews: {
+    pageOptions: {
+      page: 1,
+      limit: 15,
     },
   },
 };

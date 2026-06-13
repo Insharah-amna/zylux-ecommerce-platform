@@ -23,7 +23,7 @@ export interface FormModalProps {
 }
 
 export interface InfoModalProps {
-  title: string;
+  title?: string;
   content: ReactNode[];
   isInfoOpen: boolean;
   setIsInfoOpen: () => void;

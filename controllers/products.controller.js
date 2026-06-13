@@ -4,7 +4,10 @@ const ProductsResponses = require("../factories/responses/products");
 const ProductsErrors = require("../factories/errors/products");
 const CloudinaryService = require("../services/cloudinary.service");
 const { GetPaginationSkip } = require("../constants/general");
-const { buildProductQuery } = require("../utils/buildQueryUtils");
+const {
+	buildProductQuery,
+	getSortedDocuments,
+} = require("../utils/buildQueryUtils");
 
 const ProductsController = {
 	createProduct: async (req, res) => {
@@ -33,11 +36,13 @@ const ProductsController = {
 	},
 
 	getAllProducts: async (req, res) => {
-		const { page, limit } = req.query;
+		const { page, limit, sortBy } = req.query;
 
 		const { skip } = GetPaginationSkip({ page, limit });
 
 		const query = buildProductQuery({ queryData: req.query });
+
+		const sortOption = getSortedDocuments({ sortBy });
 
 		const { count } = await GeneralServices.countDocuments({
 			model: ProductsModel,
@@ -52,7 +57,7 @@ const ProductsController = {
 				queryProperties: {
 					limit,
 					skip,
-					sort: { createdAt: -1 },
+					sort: sortOption,
 				},
 			},
 		});

@@ -8,6 +8,12 @@ import {clearStore} from './utils';
 import {usersApiSlice} from './slices/users/usersApi';
 import {categoriesApiSlice} from './slices/categories/categoriesApi';
 import {productsApiSlice} from './slices/products/productsApi';
+import {ordersApiSlice} from './slices/orders/ordersApi';
+import {wishlistApiSlice} from './slices/wishlist/wishlistApi';
+import {reviewsApiSlice} from './slices/reviews/reviewsApi';
+import {profileApiSlice} from './slices/profile/profileApi';
+import {messagesApiSlice} from './slices/messages/messagesApi';
+import {notificationsApiSlice} from './slices/notifications/notificationsApi';
 
 interface NoopStorage {
   getItem: () => Promise<string | null>;
@@ -43,6 +49,7 @@ const userPersistConfig: PersistConfig<any> = {
   key: 'users',
   storage,
   keyPrefix: 'redux-',
+  blacklist: ['wishlist'],
 };
 
 const categoriesPersistConfig: PersistConfig<any> = {
@@ -58,6 +65,12 @@ const reduxAppReducer = combineReducers({
   [usersApiSlice.reducerPath]: usersApiSlice.reducer,
   [categoriesApiSlice.reducerPath]: categoriesApiSlice.reducer,
   [productsApiSlice.reducerPath]: productsApiSlice.reducer,
+  [ordersApiSlice.reducerPath]: ordersApiSlice.reducer,
+  [wishlistApiSlice.reducerPath]: wishlistApiSlice.reducer,
+  [reviewsApiSlice.reducerPath]: reviewsApiSlice.reducer,
+  [profileApiSlice.reducerPath]: profileApiSlice.reducer,
+  [messagesApiSlice.reducerPath]: messagesApiSlice.reducer,
+  [notificationsApiSlice.reducerPath]: notificationsApiSlice.reducer,
 });
 
 const rootReducer: Reducer<any> = (state, action) => {
