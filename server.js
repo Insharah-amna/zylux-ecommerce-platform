@@ -8,7 +8,7 @@ const socket = require("./socket");
 const app = express();
 const server = http.createServer(app);
 const io = socket.init(server);
-const port = process.env.PORT;
+const port = process.env.PORT || 3001;
 
 connection();
 
@@ -16,7 +16,7 @@ app.use(
 	cors({
 		origin: process.env.FRONTEND_APP_URL,
 		credentials: true,
-	})
+	}),
 );
 
 app.use("/orders/webhook", express.raw({ type: "application/json" }));
