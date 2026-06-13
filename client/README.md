@@ -1,4 +1,4 @@
-# Ambaz
+# Zylux
 
 A full-stack e-commerce platform where users can browse products, make secure payments, and chat with sellers in real-time, while admins manage orders and inventory through a dedicated dashboard.
 
