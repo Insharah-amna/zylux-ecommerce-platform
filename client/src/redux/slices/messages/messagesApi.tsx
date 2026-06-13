@@ -15,7 +15,7 @@ export const messagesApiSlice = createApi({
       const state = getState() as RootState;
       const user = state.users?.currentUser;
 
-      if (user.loginToken)
+      if (user?.loginToken)
         headers.set('Authorization', `Bearer ${user.loginToken}`);
 
       return headers;
