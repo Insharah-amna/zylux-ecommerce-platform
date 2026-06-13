@@ -51,7 +51,7 @@ const UserMessages = () => {
           </div>
 
           {onlineUsers.length === 0 && (
-            <div className='flex-center h-[80vh] text-gray-500'>
+            <div className='flex-center h-[70vh] text-gray-500'>
               No online users at the moment.
             </div>
           )}
@@ -94,3 +94,4 @@ const UserMessages = () => {
 };
 
 export default UserMessages;
+>>>>>>> product-notification
