@@ -11,6 +11,8 @@ import ProductNotFound from './ProductNotFound';
 import {getCurrencyConversion} from '@/utils/currencyUtils';
 import {getDiscountedPrice} from '@/utils/discountedPrice';
 import RatingStar from '@/components/shared/rating';
+import Link from 'next/link';
+import {PUBLIC_ROUTES} from '@/utils/PATHS';
 
 const ProductCardTemp = ({
   productsList,
@@ -24,23 +26,25 @@ const ProductCardTemp = ({
   if (productsList.length === 0) return <ProductNotFound />;
 
   return (
-    <div className={`grid grid-cols-1 ${className} gap-6 my-10`}>
+    <div className={`grid grid-cols-2 ${className} gap-6 my-10`}>
       {productsList?.map((product: Product) => (
         <div className='flex flex-col gap-2 relative' key={product._id}>
-          <Card
-            key={product._id}
-            className='p-0 rounded-md overflow-hidden cursor-pointer relative group transition-all duration-500'
-          >
-            <Image
-              src={product.imageUrls[0]}
-              alt={`${product.name}`}
-              width={400}
-              height={400}
-              className='h-[400px] w-full bg-cover rounded-md transition-all transform hover:scale-[1.5]'
-            />
+          <Link href={PUBLIC_ROUTES.singleProduct({_id: product._id})}>
+            <Card
+              key={product._id}
+              className='p-0 rounded-md overflow-hidden cursor-pointer relative group transition-all duration-500'
+            >
+              <Image
+                src={product.imageUrls[0]}
+                alt={`${product.name}`}
+                width={400}
+                height={400}
+                className='h-[400px] w-full bg-cover rounded-md transition-all transform hover:scale-[1.5]'
+              />
 
-            <HoverIcons product={product} />
-          </Card>
+              <HoverIcons product={product} />
+            </Card>
+          </Link>
 
           <CardTitle className='capitalize'>{product.name}</CardTitle>
 
