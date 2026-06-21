@@ -49,10 +49,12 @@ const ReviewForm = ({productId}: ProductPreviewIdProps) => {
         onSubmit={handleSubmit(onSubmit)}
         className='w-full md:w-[50%] flex flex-col gap-4 mt-8'
       >
-        <h1 className='text-2xl sm:text-3xl text-primary font-semibold'>
+        <h1 className='text-xl sm:text-3xl text-primary font-semibold'>
           Review Product
         </h1>
-        <RatingStar control={control} />
+        <div className='w-[125px] sm:w-[180px]'>
+          <RatingStar control={control} />
+        </div>
 
         <TextInput
           control={control}

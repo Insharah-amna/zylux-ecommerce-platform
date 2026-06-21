@@ -17,6 +17,8 @@ import {
 import {createWishlistItem} from '@/utils/general';
 import {User} from '@/types/redux';
 import ClipBtnLoader from '../shared/loaders/ClipLoader';
+import Link from 'next/link';
+import {FOOTER_URLS, PUBLIC_ROUTES} from '@/utils/PATHS';
 
 const ProductButtons = ({product, quantity}: ProductButtonProps) => {
   const user = useSelector(getCurrentUser);
@@ -68,10 +70,13 @@ const ProductButtons = ({product, quantity}: ProductButtonProps) => {
         handleClick={() => handleCartItem({product})}
       />
 
-      <PrimaryButton
-        buttonText='Buy Now'
-        className='w-full rounded-3xl py-6 hover:bg-accent'
-      />
+      <Link href={FOOTER_URLS.companyOptions.cart}>
+        <PrimaryButton
+          buttonText='Buy Now'
+          className='w-full rounded-3xl py-6 hover:bg-accent'
+          handleClick={() => handleCartItem({product})}
+        />
+      </Link>
 
       <PrimaryButton
         buttonText={

@@ -32,24 +32,26 @@ const ProductCardTemp = ({
           <Link href={PUBLIC_ROUTES.singleProduct({_id: product._id})}>
             <Card
               key={product._id}
-              className='p-0 rounded-md overflow-hidden cursor-pointer relative group transition-all duration-500'
+              className='p-0 rounded-md h-[180px] sm:h-[400px] overflow-hidden cursor-pointer relative group transition-all duration-500'
             >
               <Image
                 src={product.imageUrls[0]}
                 alt={`${product.name}`}
-                width={400}
-                height={400}
-                className='h-[400px] w-full bg-cover rounded-md transition-all transform hover:scale-[1.5]'
+                fill
+                sizes='(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw'
+                className=' bg-cover rounded-md transition-all transform hover:scale-[1.5]'
               />
 
               <HoverIcons product={product} />
             </Card>
           </Link>
 
-          <CardTitle className='capitalize'>{product.name}</CardTitle>
+          <CardTitle className='capitalize text-xs sm:text-sm md:text-lg line-clamp-2'>
+            {product.name}
+          </CardTitle>
 
           {product.discount > 0 ? (
-            <CardDescription className='text-primary font-semibold'>
+            <CardDescription className='text-primary font-semibold text-xs sm:text-sm md:text-lg'>
               {`${currency.symbol} `}
 
               <span className='line-through text-accent'>
@@ -72,7 +74,7 @@ const ProductCardTemp = ({
               </span>
             </CardDescription>
           ) : (
-            <CardDescription className='text-primary font-semibold'>{`${currency.symbol} ${Number(
+            <CardDescription className='text-primary font-semibold text-xs sm:text-sm md:text-lg'>{`${currency.symbol} ${Number(
               getCurrencyConversion({
                 price: product.price,
                 currency: currency.label,
@@ -83,11 +85,13 @@ const ProductCardTemp = ({
           <ColorsPreview colorVariants={product.colorVariants} />
 
           <div className='flex-center'>
-            <RatingStar
-              readOnly={true}
-              rating={product.averageRating}
-              width={100}
-            />
+            <div className='w-[70px] sm:w-[100px]'>
+              <RatingStar
+                readOnly={true}
+                rating={product.averageRating}
+                width={100}
+              />
+            </div>
           </div>
         </div>
       ))}

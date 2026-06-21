@@ -9,7 +9,7 @@ const ProductImage = ({
   setShowProductImage,
 }: ProductImageProps) => {
   return (
-    <div className='w-full md:w-1/2 flex-end md:sticky top-8 flex flex-col gap-5'>
+    <div className='w-full md:w-1/2 flex-end md:sticky flex flex-col gap-5'>
       <div className='h-[300px] sm:h-[500px] overflow-hidden flex-center w-full'>
         {showProductImage && (
           <Image
@@ -35,7 +35,7 @@ const ProductImage = ({
         {product.imageUrls.map((url) => (
           <SwiperSlide style={{width: '100px'}} key={url}>
             <div
-              className={`overflow-hidden w-[100px] h-[100px] flex-center border rounded-md cursor-pointer ${
+              className={`relative overflow-hidden w-[60px] sm:w-[100px] h-[60px] sm:h-[100px] flex-center border rounded-md cursor-pointer ${
                 showProductImage === url ? 'border-2 border-accent' : ''
               }`}
             >
@@ -43,8 +43,8 @@ const ProductImage = ({
                 <Image
                   src={url}
                   alt={product.name}
-                  height={400}
-                  width={400}
+                  fill
+                  sizes='(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw'
                   className='w-full h-auto object-cover cursor-pointer'
                 />
               </button>

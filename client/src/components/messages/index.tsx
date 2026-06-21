@@ -9,7 +9,9 @@ const ChatWithSeller = () => {
 
   if (!user) {
     return (
-      <div className='text-accent text-sm flex-end'>User is not logged in</div>
+      <div className='text-accent text-sm flex-end mt-4'>
+        Log in to chat with Seller
+      </div>
     );
   }
 

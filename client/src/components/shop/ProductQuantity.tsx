@@ -11,7 +11,7 @@ const ProductQuantity = ({
         Quantity
       </label>
 
-      <div className='flex border-1 border-gray-300 rounded-3xl w-[100px] py-1'>
+      <div className='flex border-1 border-gray-300 rounded-3xl w-[100px] py-0 sm:py-1'>
         <button
           name='minus'
           className='p-2 w-1/3 cursor-pointer'
