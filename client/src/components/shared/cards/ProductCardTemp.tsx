@@ -29,11 +29,11 @@ const ProductCardTemp = ({
     <div className={`grid grid-cols-2 ${className} gap-6 my-10`}>
       {productsList?.map((product: Product) => (
         <div className='flex flex-col gap-2 relative' key={product._id}>
-          <Link href={PUBLIC_ROUTES.singleProduct({_id: product._id})}>
-            <Card
-              key={product._id}
-              className='p-0 rounded-md h-[180px] sm:h-[400px] overflow-hidden cursor-pointer relative group transition-all duration-500'
-            >
+          <Card
+            key={product._id}
+            className='p-0 rounded-md h-[180px] sm:h-[400px] overflow-hidden cursor-pointer relative group transition-all duration-500'
+          >
+            <Link href={PUBLIC_ROUTES.singleProduct({_id: product._id})}>
               <Image
                 src={product.imageUrls[0]}
                 alt={`${product.name}`}
@@ -41,10 +41,10 @@ const ProductCardTemp = ({
                 sizes='(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw'
                 className=' bg-cover rounded-md transition-all transform hover:scale-[1.5]'
               />
+            </Link>
 
-              <HoverIcons product={product} />
-            </Card>
-          </Link>
+            <HoverIcons product={product} />
+          </Card>
 
           <CardTitle className='capitalize text-xs sm:text-sm md:text-lg line-clamp-2'>
             {product.name}

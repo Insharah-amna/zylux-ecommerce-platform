@@ -12,6 +12,9 @@ import PriceFilter from '@/layout/sidebar/filterSidebar/PriceFilter';
 import PrimaryButton from '@/components/shared/buttons/PrimaryButton';
 import ProductCardTemp from '@/components/shared/cards/ProductCardTemp';
 import RatingFilter from '@/layout/sidebar/filterSidebar/RatingFilter';
+import {Sheet, SheetContent, SheetTitle, SheetTrigger} from '../ui/sheet';
+import FiltersContent from '../shared/sheets/FiltersContent';
+import {Button} from '../ui/button';
 
 const ShopPage = () => {
   const [categories, setCategories] = useState<string[]>([]);
@@ -60,6 +63,24 @@ const ShopPage = () => {
   const isResetButtonShown =
     !!search || categories.length > 0 || price[0] !== 0 || ratings.length > 0;
 
+  const filterProps = {
+    isResetButtonShown,
+    resetAllFilters,
+    setCategories,
+    setPrice,
+    setRatings,
+    search,
+    setSearch,
+    handleSearch,
+    price,
+    categoryList,
+    isCategoriesLoading,
+    categories,
+    handleCheckboxChange,
+    ratings,
+    handleRatingChange,
+  };
+
   useEffect(() => {
     setFilters({
       category: categories,
@@ -74,7 +95,8 @@ const ShopPage = () => {
       <div className='flex-center w-full'>
         <Container>
           <div className='my-6 flex gap-6'>
-            <div className='w-[290px]'>
+            {/* Desktop sidebar */}
+            <div className='hidden md:block w-[290px]'>
               <div className='flex flex-col gap-4 p-4 rounded-xl bg-gray-50 sticky top-7'>
                 <h3 className='font-semibold text-gray-800'>Filter:</h3>
 
@@ -123,11 +145,30 @@ const ShopPage = () => {
               </div>
             </div>
 
-            <ProductCardTemp
-              productsList={productsList}
-              isProductsLoading={isProductsLoading}
-              className={'md:grid-cols-3'}
-            />
+            <div className='flex-1'>
+              {/* Mobile trigger */}
+              <div className='md:hidden mb-4'>
+                <Sheet>
+                  <SheetTrigger asChild>
+                    <Button variant='outline' className='gap-2'>
+                      Filters
+                    </Button>
+                  </SheetTrigger>
+                  <SheetContent
+                    side='left'
+                    className='w-[280px] overflow-y-auto'
+                  >
+                    <FiltersContent {...filterProps} />
+                  </SheetContent>
+                </Sheet>
+              </div>
+
+              <ProductCardTemp
+                productsList={productsList}
+                isProductsLoading={isProductsLoading}
+                className={'md:grid-cols-3'}
+              />
+            </div>
           </div>
         </Container>
       </div>
