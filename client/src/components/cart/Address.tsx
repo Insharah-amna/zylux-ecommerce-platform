@@ -8,7 +8,7 @@ const Address = ({handleSubmit, onSubmit, control}: AddressProps) => {
     <div className='w-full'>
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className='w-full md:w-[90%] flex flex-col gap-3'
+        className='w-full md:w-[90%] flex flex-col gap-2 sm:gap-3'
       >
         <TextareaField
           control={control}

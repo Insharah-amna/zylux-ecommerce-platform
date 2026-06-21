@@ -20,11 +20,10 @@ const ItemDetails = ({product, handleRemove}: CartItemDetailProps) => {
         />
       </div>
 
-      <div className='flex flex-col gap-3 sm:gap-2'>
-        <h3 className='text-lg capitalize'>{product.name}</h3>
+      <div className='flex flex-col gap-1 sm:gap-2'>
+        <h3 className='text-xs sm:text-lg capitalize'>{product.name}</h3>
         <div className='flex gap-2 h-[20px] items-center'>
-          <h4 className='text-gray-600 text-sm sm:text-md'>Price:</h4>
-          <h4 className='text-gray-600 text-sm sm:text-md'>{`${currency.symbol}${Number(
+          <h4 className='text-gray-600 text-xs sm:text-sm font-semibold'>{`${currency.symbol} ${Number(
             getDiscountedPrice({
               unitPrice: product.price,
               discount: product.discount,
@@ -36,7 +35,7 @@ const ItemDetails = ({product, handleRemove}: CartItemDetailProps) => {
         <PrimaryButton
           buttonText={'Remove'}
           variant={'link'}
-          className='w-[60px] h-[30px] text-md underline'
+          className='w-[60px] h-[30px] text-xs sm:text-sm underline'
           handleClick={() => {
             handleRemove({_id: product._id});
           }}

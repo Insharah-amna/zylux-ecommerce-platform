@@ -6,7 +6,7 @@ const Cart = () => {
     <div className='w-full flex-center'>
       <Container>
         <div>
-          <h1 className='text-3xl text-primary font-semibold my-8'>
+          <h1 className='text-lg sm:text-3xl text-primary font-semibold my-5 sm:my-8'>
             Your Shopping Cart
           </h1>
 

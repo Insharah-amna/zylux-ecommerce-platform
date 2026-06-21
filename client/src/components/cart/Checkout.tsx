@@ -62,19 +62,19 @@ const Checkout = () => {
         />
       </div>
 
-      <div className='w-full sm:w-1/2 flex items-end justify-end flex-col gap-5'>
+      <div className='w-full sm:w-1/2 flex items-end justify-end flex-col gap-1 sm:gap-5'>
         <div className='flex gap-2'>
-          <h4 className='text-lg font-semibold'>Subtotal</h4>
-          <h5 className='text-xl text-gray-600'>{`${currency.symbol} ${Number(subtotal).toLocaleString('en-IN')}`}</h5>
+          <h4 className='text-sm sm:text-lg'>Subtotal</h4>
+          <h5 className='text-md sm:text-xl text-accent font-semibold'>{`${currency.symbol} ${Number(subtotal).toLocaleString('en-IN')}`}</h5>
         </div>
 
-        <p className='text-gray-600 text-right'>
+        <p className='text-gray-600 text-right text-xs sm:text-md'>
           Taxes and shipping calculated at checkout
         </p>
 
         <PrimaryButton
           buttonText='Check out'
-          className='w-[50%] h-[45px] text-lg mt-2 rounded-full'
+          className='w-[45%] sm:w-[50%] h-[40px] sm:h-[45px] text-md sm:text-lg mt-2 rounded-full'
           isLoading={isLoading}
           handleClick={handleCheckout}
         />

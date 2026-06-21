@@ -17,17 +17,18 @@ const UserProfile = () => {
   return (
     <div className='flex-center w-full'>
       <Container>
-        <div className='my-6 flex gap-10'>
-          <div className='w-[20%]'>
+        <div className='my-6 flex flex-col md:flex-row gap-6 md:gap-10'>
+          {/* Desktop sidebar */}
+          <div className='hidden md:block md:w-[20%]'>
             <div className='flex flex-col gap-4 px-6 py-3 rounded-md bg-gray-50 sticky top-8 shadow-sm'>
               <div className='flex flex-col'>
-                {(Object.keys(PROFILE_TABS) as TabKey[]).map((tab) => {
-                  const {icon: Icon, label} = PROFILE_TABS[tab];
+                {(Object.keys(PROFILE_TABS) as TabKey[]).map((tabKey) => {
+                  const {icon: Icon, label} = PROFILE_TABS[tabKey];
                   return (
                     <div
-                      className={`border-b border-gray-200 last:border-b-0 py-4 items-center hover:text-accent/90 transform duration-150 ${tab === activeTab ? 'text-accent' : 'text-primary'} cursor-pointer`}
-                      onClick={() => setActiveTab(tab)}
-                      key={tab}
+                      className={`border-b border-gray-200 last:border-b-0 py-4 items-center hover:text-accent/90 transform duration-150 ${tabKey === activeTab ? 'text-accent' : 'text-primary'} cursor-pointer`}
+                      onClick={() => setActiveTab(tabKey)}
+                      key={tabKey}
                     >
                       <h2 className='flex gap-3 items-center'>
                         <span>
@@ -41,7 +42,30 @@ const UserProfile = () => {
               </div>
             </div>
           </div>
-          <div className='w-[80%]'>{<ActiveComponent />}</div>
+
+          {/* Mobile horizontal tabs */}
+          <div className='md:hidden flex gap-2 overflow-x-auto pb-2 -mx-4 px-4'>
+            {(Object.keys(PROFILE_TABS) as TabKey[]).map((tabKey) => {
+              const {icon: Icon, label} = PROFILE_TABS[tabKey];
+              return (
+                <div
+                  className={`shrink-0 flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium whitespace-nowrap cursor-pointer transition-colors ${
+                    tabKey === activeTab
+                      ? 'bg-accent text-white'
+                      : 'bg-gray-100 text-gray-600'
+                  }`}
+                  onClick={() => setActiveTab(tabKey)}
+                  key={tabKey}
+                >
+                  <Icon className='text-sm' />
+                  {label}
+                </div>
+              );
+            })}
+          </div>
+
+          {/* Active tab content */}
+          <div className='w-full md:w-[80%]'>{<ActiveComponent />}</div>
         </div>
       </Container>
     </div>
